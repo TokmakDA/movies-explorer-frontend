@@ -1,0 +1,9 @@
+.about-project__description-container {
+  margin: 70px auto 0;
+  display: grid;
+  column-gap: 40px;
+  row-gap: 26px;
+  grid-auto-flow: column dense;
+  grid-template-rows: auto auto;
+  grid-template-columns: 1fr 1fr;
+}

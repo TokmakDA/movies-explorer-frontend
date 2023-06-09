@@ -1,0 +1,9 @@
+.about-project__timeline-container {
+  margin: 110px auto 0;
+  display: grid;
+  column-gap: 0;
+  row-gap: 14px;
+  grid-auto-flow: column dense;
+  grid-template-rows: auto auto;
+  grid-template-columns: 1fr 4fr;
+}
