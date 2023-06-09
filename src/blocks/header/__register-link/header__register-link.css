@@ -1,0 +1,12 @@
+.header__register-link {
+  display: flex;
+  align-items: center;
+  text-align: right;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  text-decoration: none;
+}

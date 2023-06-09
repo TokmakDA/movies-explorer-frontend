@@ -1,52 +1,7 @@
-.footer {
-  padding: 79px 70px 20px;
-  margin: 0;
-  background: #fafafa;
-}
-.footer__info {
-  margin: 0;
-  padding: 0;
-  font-weight: 400;
-  font-size: 13px;
-  line-height: 16px;
-  text-align: center;
-  color: #a0a0a0;
-}
-.footer__line {
-  margin: 20px 0;
-  border: 1px solid #e8e8e8;
-}
-.footer__wrapper {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-.footer__copyright {
-  margin: 0;
-  padding: 0;
-  font-weight: 400;
-  font-size: 13px;
-  line-height: 16px;
-  color: #000;
-}
-.footer__links {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-direction: row;
-  column-gap: 20px;
-}
-.footer__link {
-  margin: 0;
-  padding: 0;
-  font-weight: 400;
-  font-size: 13px;
-  line-height: 16px;
-  text-align: right;
-  color: #000000;
-  text-decoration: none;
-}
+@import url(../../blocks/footer/footer.css);
+@import url(../../blocks/footer/__info/footer__info.css);
+@import url(../../blocks/footer/__line/footer__line.css);
+@import url(../../blocks/footer/__wrapper/footer__wrapper.css);
+@import url(../../blocks/footer/__copyright/footer__copyright.css);
+@import url(../../blocks/footer/__links/footer__links.css);
+@import url(../../blocks/footer/__link/footer__link.css);

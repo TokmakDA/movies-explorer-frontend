@@ -1,90 +1,9 @@
-.header {
-  /* background-color: #5c5c5c; */
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  margin: 0 auto;
-  min-height: 74px;
-  padding: 0 70px;
-  align-items: center;
-  justify-items: stretch;
-  justify-content: space-between;
-}
-
-.header_color_white {
-  background: #fff;
-}
-
-.header_color_gray {
-  background: #5c5c5c;
-}
-
-.header__logo {
-  justify-self: start;
-  background: center url(../../images/logo.svg);
-  width: 38px;
-  height: 38px;
-}
-
-.header__login-container {
-  grid-column-start: 3;
-  justify-self: end;
-
-  display: flex;
-  column-gap: 30px;
-}
-
-.header__register-link {
-  display: flex;
-  align-items: center;
-  text-align: right;
-  margin: 0;
-  padding: 0;
-  color: #fff;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 16px;
-  text-decoration: none;
-}
-
-.header__login-button {
-  height: 32px;
-  width: 76px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  padding: 0;
-  background: #2be080;
-  border-radius: 3px;
-  color: #000;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 16px;
-  text-decoration: none;
-}
-
-.header__account-button {
-  justify-self: end;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  column-gap: 7px;
-  width: 100px;
-  height: 32px;
-  border: 2px solid rgba(170, 170, 170, 0.2);
-  border-radius: 50px;
-  box-sizing: border-box;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 16px;
-  color: #000;
-  text-decoration: none;
-}
-
-.header__button-icon {
-  background: center no-repeat url(../../images/icon-main-account.svg);
-  background-size: 14px 12px;
-  height: 12px;
-  width: 14px;
-}
+@import url(../../blocks/header/header.css);
+@import url(../../blocks/header/_color/header_color_white.css);
+@import url(../../blocks/header/_color/header_color_gray.css);
+@import url(../../blocks/header/__logo/header__logo.css);
+@import url(../../blocks/header/__login-container/header__login-container.css);
+@import url(../../blocks/header/__register-link/header__register-link.css);
+@import url(../../blocks/header/__login-button/header__login-button.css);
+@import url(../../blocks/header/__account-button/header__account-button.css);
+@import url(../../blocks/header/__button-icon/header__button-icon.css);

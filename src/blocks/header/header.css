@@ -1,0 +1,10 @@
+.header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 0 auto;
+  min-height: 74px;
+  padding: 0 70px;
+  align-items: center;
+  justify-items: stretch;
+  justify-content: space-between;
+}

@@ -1,0 +1,6 @@
+.header__login-container {
+  grid-column-start: 3;
+  justify-self: end;
+  display: flex;
+  column-gap: 30px;
+}
