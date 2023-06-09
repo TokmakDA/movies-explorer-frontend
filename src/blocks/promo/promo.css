@@ -1,0 +1,11 @@
+.promo {
+  box-sizing: border-box;
+  background: #5c5c5c center 82px no-repeat url(../../images/landing-logo.svg);
+  background-size: 320px;
+  margin: 0 auto;
+  padding: 0 70px 40px;
+  display: flex;
+  height: 524px;
+  align-items: center;
+  justify-content: center;
+}
