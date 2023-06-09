@@ -1,16 +1,5 @@
-.student {
-  background: #ffffff;
-  margin: 0;
-  padding: 110px 70px 125px;
-}
+@import url(../../blocks/content/__section/content__section.css);
+@import url(../../blocks/content/__title/content__title.css);
+@import url(../../blocks/content/__title-line/content__title-line.css);
+@import url(../../blocks/student/student.css);
 
-.student__title {
-  margin: 0;
-  padding: 0 0 23px;
-  font-weight: 400;
-  font-size: 22px;
-  line-height: 27px;
-  letter-spacing: -0.04em;
-  color: #000;
-  border-bottom: #000 solid 1px;
-}

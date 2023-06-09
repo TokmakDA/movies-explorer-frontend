@@ -5,8 +5,9 @@ import Portfolio from '../Portfolio/Portfolio';
 
 function Student() {
   return (
-    <section className="student">
-      <h2 className="student__title">Студент</h2>
+    <section className="content student">
+      <h2 className="content__title">Студент</h2>
+      <hr className="content__title-line" />
       <AboutMe></AboutMe>
       <Portfolio></Portfolio>
     </section>
