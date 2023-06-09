@@ -8,7 +8,7 @@ import Student from '../Student/Student';
 
 function Main() {
   return (
-    <main className='content'>
+    <main className="content">
       <Promo></Promo>
       <NavTab></NavTab>
       <AboutProject></AboutProject>
