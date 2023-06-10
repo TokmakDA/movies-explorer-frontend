@@ -8,3 +8,17 @@
   letter-spacing: -0.04em;
   color: #000000;
 }
+
+@media screen and (max-width: 992px) {
+  .portfolio__name-link {
+    font-size: 28px;
+    line-height: 50px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .portfolio__name-link {
+    font-size: 18px;
+    line-height: 28px;
+  }
+}
