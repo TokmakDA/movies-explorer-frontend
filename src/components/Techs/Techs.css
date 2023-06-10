@@ -2,7 +2,7 @@
 @import url(../../blocks/content/__title/content__title.css);
 @import url(../../blocks/content/__title-line/content__title-line.css);
 @import url(../../blocks/techs/techs.css);
-@import url(../../blocks/techs/__container/techs__container.css);
+@import url(../../blocks/techs/__wrapper/techs__wrapper.css);
 @import url(../../blocks/techs/__subtitle/techs__subtitle.css);
 @import url(../../blocks/techs/__description/techs__description.css);
 @import url(../../blocks/techs/__list/techs__list.css);
