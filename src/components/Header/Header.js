@@ -2,8 +2,12 @@ import React from 'react';
 import './Header.css';
 import { Link } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation';
+import { useResize } from '../../hooks/useResize';
 
 function Header() {
+  const { isScreenLg } = useResize();
+  // const [isUserBarOpen, setUserBarOpen] = useState(false);
+
   const isLoading = false;
 
   const loginContainer = (
@@ -12,7 +16,8 @@ function Header() {
       <Link className="header__login-button">Войти</Link>
     </nav>
   );
-
+  
+  //  перенести в Navigation блок настроить на 2 ячейки грида
   const accountButton = (
     <Link className="header__account-button">
       <span className="header__button-icon" />
@@ -20,13 +25,20 @@ function Header() {
     </Link>
   );
 
+  const burger = <Link className="header__burger"></Link>;
+
   return (
-    <header className={`header header_color_${isLoading ? "white" : "gray"}`}>
+    <header className={`header header_color_${isLoading ? 'white' : 'gray'}`}>
       <Link className="header__logo" />
       {isLoading ? (
-        <>
-          <Navigation /> {accountButton}
-        </>
+        isScreenLg ? (
+          <>
+            <Navigation />
+            {accountButton}
+          </>
+        ) : (
+          burger
+        )
       ) : (
         loginContainer
       )}

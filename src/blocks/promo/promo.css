@@ -1,11 +1,25 @@
 .promo {
   box-sizing: border-box;
-  background: #5c5c5c center 82px no-repeat url(../../images/landing-logo.svg);
-  background-size: 320px;
+  background: #5c5c5c;
   margin: 0 auto;
-  padding: 0 70px 40px;
+  padding: 0 70px;
   display: flex;
-  height: 524px;
+  min-height: 524px;
   align-items: center;
   justify-content: center;
+}
+
+@media screen and (max-width: 992px) {
+  .promo {
+    min-height: 784px;
+    padding-right: 19px;
+    padding-left: 19px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .promo {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
 }

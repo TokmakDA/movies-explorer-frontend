@@ -10,3 +10,9 @@
   line-height: 16px;
   text-decoration: none;
 }
+
+@media screen and (max-width: 576px) {
+  .header__register-link {
+    font-size: 10px;
+  }
+}

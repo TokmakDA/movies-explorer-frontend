@@ -8,3 +8,19 @@
   justify-items: stretch;
   justify-content: space-between;
 }
+
+
+@media screen and (max-width: 992px) {
+  .header {
+    padding-right: 30px;
+    padding-left: 30px;
+    grid-template-columns: auto;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .header {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+}

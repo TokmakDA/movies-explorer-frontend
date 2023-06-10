@@ -4,3 +4,15 @@
   display: flex;
   column-gap: 30px;
 }
+
+@media screen and (max-width: 992px) {
+  .header__login-container {
+    grid-column-start: 2;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .header__login-container {
+    column-gap: 14px;
+  }
+}
