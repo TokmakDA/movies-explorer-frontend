@@ -7,3 +7,10 @@
   letter-spacing: -0.04em;
   color: #000;
 }
+
+@media screen and (max-width: 576px) {
+  .about-project__subtitle {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}

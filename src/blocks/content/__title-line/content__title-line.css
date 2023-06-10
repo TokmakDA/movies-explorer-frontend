@@ -2,3 +2,9 @@
   margin: 23px 0 0;
   border-bottom: #000 solid 1px;
 }
+
+@media screen and (max-width: 576px) {
+  .content__title-line {
+    margin-top: 28px;
+  }
+}

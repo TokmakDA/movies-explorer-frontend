@@ -1,11 +1,19 @@
 .about-project__timeline {
   display: flex;
-  height: 36px;
+  min-height: 36px;
   justify-content: center;
   align-items: center;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
   text-align: center;
-  color: #000000;
+  color: #000;
+}
+
+@media screen and (max-width: 576px) {
+  .about-project__timeline {
+    min-height: 35px;
+    font-size: 11px;
+    line-height: 13px;
+  }
 }

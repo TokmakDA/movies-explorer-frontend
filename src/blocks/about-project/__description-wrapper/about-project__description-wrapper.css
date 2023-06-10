@@ -1,0 +1,22 @@
+.about-project__description-wrapper {
+  margin: 70px 0 110px;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  column-gap: 40px;
+}
+
+@media screen and (max-width: 992px) {
+  .about-project__description-wrapper {
+    margin-bottom: 93px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .about-project__description-wrapper {
+    margin-top: 60px;
+    margin-bottom: 60px;
+    flex-direction: column;
+    row-gap: 56px;
+  }
+}
