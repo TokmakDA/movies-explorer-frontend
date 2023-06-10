@@ -8,3 +8,11 @@
   color: #000;
   text-decoration: none;
 }
+
+@media screen and (max-width: 576px) {
+  .footer__link {
+    font-size: 12px;
+    line-height: 15px;
+    text-align: center;
+  }
+}

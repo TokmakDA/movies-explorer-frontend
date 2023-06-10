@@ -3,3 +3,16 @@
   margin: 0;
   background: #fafafa;
 }
+
+@media screen and (max-width: 992px) {
+  .footer {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+@media screen and (max-width: 576px) {
+  .footer {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
