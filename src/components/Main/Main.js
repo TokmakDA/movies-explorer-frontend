@@ -1,5 +1,5 @@
-import './Main.css';
 import React from 'react';
+import './Main.css';
 import Promo from '../Promo/Promo';
 import NavTab from '../NavTab/NavTab';
 import AboutProject from '../AboutProject/AboutProject';
@@ -9,11 +9,11 @@ import Student from '../Student/Student';
 function Main() {
   return (
     <main className="content">
-      <Promo></Promo>
-      <NavTab></NavTab>
-      <AboutProject></AboutProject>
-      <Techs></Techs>
-      <Student></Student>
+      <Promo />
+      <NavTab />
+      <AboutProject />
+      <Techs />
+      <Student />
     </main>
   );
 }

@@ -1,4 +1,6 @@
 .portfolio {
+    box-sizing: border-box;
+
   margin: 100px 0 15px;
   padding: 0;
 }

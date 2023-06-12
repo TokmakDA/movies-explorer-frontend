@@ -2,13 +2,15 @@ import React from 'react';
 import Main from '../Main/Main';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import Movies from '../Movies/Movies';
 
 function App() {
   return (
     <>
-      <Header></Header>
-      <Main></Main>
-      <Footer></Footer>
+      <Header/>
+      {/* <Main></Main> */}
+      <Movies/>
+      <Footer/>
     </>
   );
 }

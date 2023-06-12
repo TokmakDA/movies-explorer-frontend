@@ -5,7 +5,7 @@ import Portfolio from '../Portfolio/Portfolio';
 
 function Student() {
   return (
-    <section className="content student">
+    <section className="content__section student">
       <h2 className="content__title">Студент</h2>
       <hr className="content__title-line" />
       <AboutMe></AboutMe>

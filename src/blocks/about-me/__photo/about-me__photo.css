@@ -20,7 +20,7 @@
 
 @media screen and (max-width: 576px) {
   .about-me__photo {
-    width: 292px;
+    max-width: 292px;
     height: 352px;
     grid-column-start: 1;
     grid-row-end: 2;

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 function Portfolio() {
   return (
-    <div className="student__portfolio portfolio__container">
+    <div className="student__portfolio portfolio">
       <h3 className="portfolio__title">Портфолио</h3>
       <ul className="portfolio__list">
         <li>

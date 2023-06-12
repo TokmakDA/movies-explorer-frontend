@@ -1,0 +1,68 @@
+@import url(../../blocks/search/__checkbox/search__checkbox.css);
+
+.search__form {
+  display: flex;
+  align-items: center;
+  justify-content: stretch;
+  padding: 70px 70px;
+}
+.search__fieldset {
+  margin: 0;
+  padding: 0 19px;
+  height: 72px;
+  display: flex;
+  justify-content: stretch;
+  align-items: center;
+  flex-direction: row;
+  gap: 19px;
+  background: #f9f9f9;
+  border-radius: 9px;
+  border: none;
+  width: 100%;
+}
+.search__find {
+  background: right no-repeat url(../../images/find.svg);
+  background-size: 34px;
+  height: 34px;
+  min-width: 80px;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+.search__input::before {
+  background: 0% 50% no-repeat url(../../images/icon-find.svg);
+  background-size: 22px;
+}
+.search__input {
+  width: 100%;
+  border: none;
+  background: none;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #000;
+  min-height: 34px;
+}
+.search__input::placeholder {
+  color: #a0a0a0;
+  padding-left: 44px;
+  background: 0% 50% no-repeat url(../../images/icon-search.svg);
+  background-size: 34px;
+}
+.search__label-checkbox {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  gap: 14px;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  color: #000000;
+}
+.search__line {
+  margin: 0;
+  padding: 0;
+  border: 1px solid #cbcbcb;
+  height: 40px;
+}
