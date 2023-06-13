@@ -1,4 +1,6 @@
 .portfolio__line {
   margin: 19px 0 20px;
+  box-sizing: border-box;
   border: 1px solid #e8e8e8;
+  border-bottom: none;
 }

@@ -7,12 +7,11 @@
   border-radius: 10px;
   cursor: pointer;
   background: #ebebeb;
-  opacity: 1;
-  transition: background 0.5s, box-shadow 0.5s, opacity 0.5s;
+  transition: background 0.5s, box-shadow 0.5s;
 }
 .search__checkbox:checked {
   background: #2be080;
-  transition: background 0.5s, box-shadow 0.5s, opacity 0.5s;
+  transition: background 0.5s, box-shadow 0.5s;
 }
 .search__checkbox::after {
   content: '';
@@ -29,9 +28,4 @@
   background: #f5f5f5;
   transform: translate(8px, 0%);
   transition: transform 0.5s, background 0.5s;
-}
-.search__checkbox:hover {
-  opacity: 0.8;
-  box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.15);
-  transition: all 0.5s;
 }
