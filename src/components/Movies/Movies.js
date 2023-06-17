@@ -21,7 +21,6 @@ function Movies() {
   return (
     <section className="content movies">
       <SearchForm />
-      {/* <Preloader/> */}
       <MoviesCardList quantity={isQuantity} />
       <button
         className="cards__more"

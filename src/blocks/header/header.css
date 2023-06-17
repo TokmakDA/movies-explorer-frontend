@@ -14,7 +14,7 @@
   .header {
     padding-right: 30px;
     padding-left: 30px;
-    grid-template-columns: auto;
+    grid-template-columns: auto auto;
   }
 }
 

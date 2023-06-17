@@ -8,7 +8,7 @@ function Header() {
   const { isScreenLg } = useResize();
   // const [isUserBarOpen, setUserBarOpen] = useState(false);
 
-  const isLoading = false;
+  const isLoading = true;
 
   const loginContainer = (
     <nav className="header__login-container">
