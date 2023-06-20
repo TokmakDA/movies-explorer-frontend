@@ -4,7 +4,7 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 import { NewMovies } from '../../data/NewMovies';
 import { useCallback } from 'react';
 
-const MoviesCardList = ({ quantity }) => {
+const MoviesCardList = ({ quantity, insideMovies, isMy }) => {
   const firstRender = useCallback(
     (movies) => {
       return movies.slice(0, quantity).map((card) => {
@@ -12,6 +12,8 @@ const MoviesCardList = ({ quantity }) => {
           <MoviesCard
             key={card.id}
             card={card}
+            isMy={isMy}
+            insideMovies={insideMovies}
           />
         );
       });

@@ -5,6 +5,7 @@ import Preloader from '../Preloader/Preloader';
 import SearchForm from '../SearchForm/SearchForm';
 import './Movies.css';
 import { useResize } from '../../hooks/useResize';
+import More from '../More/More';
 
 function Movies() {
   const [isQuantity, setQuantity] = useState(null);
@@ -19,15 +20,10 @@ function Movies() {
   };
 
   return (
-    <section className="content movies">
+    <section className="content__movies movies">
       <SearchForm />
-      <MoviesCardList quantity={isQuantity} />
-      <button
-        className="cards__more"
-        onClick={(e) => handleClick(e, isQuantity)}
-      >
-        Еще
-      </button>
+      <MoviesCardList quantity={isQuantity} insideMovies={true}/>
+      <More onClick={(e) => handleClick(e, isQuantity)} />
     </section>
   );
 }

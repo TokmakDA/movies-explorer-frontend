@@ -8,6 +8,7 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import NotFound from '../NotFound/NotFound';
 import Menu from '../Menu/Menu';
+import SavedMovies from '../SavedMovies/SavedMovies';
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
       <Header />
       {/* <Profile/> */}
       {/* <Main></Main> */}
-      <Movies />
+      {/* <Movies /> */}
+      <SavedMovies/>
       {/* <Footer/> */}
       {/* <Login /> */}
       {/* <Register /> */}

@@ -57,11 +57,16 @@
   grid-column-start: 2;
   grid-column-end: 3;
   width: 24px;
-  background: center no-repeat url(../../images/save1.svg);
+  background: center no-repeat url(../../images/save1d.svg);
   border: none;
   background-size: 24px 24px;
 }
-
+.card__like_active{
+  background: center no-repeat url(../../images/save1.svg);
+}
+.card__like_delete{
+  background: center no-repeat url(../../images/d1.svg);
+}
 .card__time {
   margin: 0;
   padding: 6px 0 0;
