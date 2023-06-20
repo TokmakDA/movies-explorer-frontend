@@ -8,10 +8,10 @@ import { useResize } from '../../hooks/useResize';
 
 function Movies() {
   const [isQuantity, setQuantity] = useState(null);
-  const { isScreenLg, isScreenXl } = useResize();
+  const { isScreenLg, isScreenSm } = useResize();
   useEffect(() => {
-    isScreenXl ? setQuantity(16) : isScreenLg ? setQuantity(8) : setQuantity(4);
-  }, []);
+    isScreenLg ? setQuantity(16) : isScreenSm ? setQuantity(8) : setQuantity(4);
+  }, [isScreenLg, isScreenSm]);
 
   const handleClick = (e, isQuantity) => {
     e.preventDefault();

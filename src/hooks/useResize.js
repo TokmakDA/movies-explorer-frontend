@@ -6,7 +6,7 @@ import {
   SCREEN_LG,
   SCREEN_XL,
   SCREEN_XXL,
-} from '../data/breakpoints';
+} from '../contexts/breakpoints';
 
 
 export const useResize = () => {

@@ -16,14 +16,14 @@ function Header() {
       <Link className="header__login-button">Войти</Link>
     </nav>
   );
-  
+
   //  перенести в Navigation блок настроить на 2 ячейки грида
-  const accountButton = (
-    <Link className="header__account-button">
-      <span className="header__button-icon" />
-      Аккаунт
-    </Link>
-  );
+  // const accountButton = (
+  //   <Link className="header__account-button">
+  //     <span className="header__button-icon" />
+  //     Аккаунт
+  //   </Link>
+  // );
 
   const burger = <Link className="header__burger"></Link>;
 
@@ -34,7 +34,7 @@ function Header() {
         isScreenLg ? (
           <>
             <Navigation />
-            {accountButton}
+            {/* {accountButton} */}
           </>
         ) : (
           burger

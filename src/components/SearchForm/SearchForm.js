@@ -20,7 +20,7 @@ function SearchForm() {
               placeholder="Искать"
               name="searchMovie"
             ></button>
-            <hr className="search__line"></hr>
+            <hr className="search__stick"></hr>
           </div>
           <label className="search__label-checkbox content__button">
             <input
@@ -31,6 +31,7 @@ function SearchForm() {
           </label>
         </fieldset>
       </form>
+      <hr className="search__line" />
     </div>
   );
 }

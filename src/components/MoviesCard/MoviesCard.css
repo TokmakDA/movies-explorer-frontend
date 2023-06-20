@@ -5,9 +5,12 @@
   grid-template-columns: auto;
   grid-template-rows: auto;
   column-gap: 20px;
-  max-width: 350px;
-  min-width: 270px;
+  max-width: 360px;
+  min-width: 260px;
   justify-content: space-between;
+
+  max-width: 100%;
+  box-sizing: border-box;
 }
 .card__img-wrapper {
   position: relative;
@@ -24,7 +27,6 @@
 }
 .card__img {
   position: absolute;
-  
   left: 0;
   top: 0;
   width: 100%;
@@ -41,7 +43,7 @@
   line-height: 16px;
   text-align: start;
   color: #000000;
-  white-space: pre-wrap; 
+  white-space: pre-wrap;
   overflow: hidden;
   min-height: 32px;
   display: -webkit-box;

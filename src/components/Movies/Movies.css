@@ -6,9 +6,22 @@
   flex-direction: column;
   justify-content: center;
 }
+@media screen and (max-width: 992px) {
+  .movies {
+    padding-top: 80px;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+@media screen and (max-width: 576px) {
+  .movies {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
 
 .cards__more {
-  margin: 50px 0 10px;
+  margin: 50px 0 0;
   width: 320px;
   height: 36px;
   font-weight: 500;
@@ -18,5 +31,11 @@
   color: #000000;
   border: 1px solid #e8e8e8;
   border-radius: 6px;
-  background: none;
+  background: #fff;
+}
+
+@media screen and (max-width: 576px) {
+  .cards__more {
+    width: 240px;
+  }
 }

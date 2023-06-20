@@ -39,7 +39,7 @@ const MoviesCard = ({ card }) => {
         ></img>
       </div>
 
-      <p className="card__name">{card.description}</p>
+      <p className="card__name">{card.nameRU}</p>
       <button className="card__like"></button>
       <p className="card__time">{returnDuration(card.duration)}</p>
     </li>
