@@ -4,7 +4,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 import SearchForm from '../SearchForm/SearchForm';
 import './Movies.css';
-import { useResize } from '../../hooks/useResize';
+import { useResize } from '../../hooks/useResize'; 
 import More from '../More/More';
 
 function Movies() {

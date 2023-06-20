@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import './MoviesCard.css';
 
-const MoviesCard = ({ card, insideMovies, isMy }) => {
-  const [isMyMovies, setMyMovies] = useState(true);
+const MoviesCard = ({ card, insideMovies }) => {
   const returnDuration = (duration) => {
     const minutes = duration % 60;
     const hours = Math.floor(duration / 60);
@@ -10,9 +9,20 @@ const MoviesCard = ({ card, insideMovies, isMy }) => {
       minutes > 0 ? `${minutes}м` : ''
     }`;
   };
+  const [isLike, setLike] = useState(false);
 
-  console.log(returnDuration('105'));
-  const handleClick = () => {};
+  const handleClick = () => {
+    if (insideMovies) {
+      if (!isLike) {
+        const cards = JSON.parse(localStorage.getItem('myMovies'));
+        localStorage.setItem('myMovies', JSON.stringify([...cards, card]));
+      }
+      return setLike(!isLike);
+    } else {
+      console.log('Будем удалять');
+    }
+  };
+
   return (
     <li className="card">
       <div className="card__img-wrapper">
@@ -27,8 +37,9 @@ const MoviesCard = ({ card, insideMovies, isMy }) => {
       <p className="card__name">{card.nameRU}</p>
       <button
         className={`card__like ${
-          insideMovies ? isMy && 'card__like_active' : 'card__like_delete'
+          insideMovies ? isLike && 'card__like_active' : 'card__like_delete'
         }`}
+        onClick={handleClick}
       ></button>
       <p className="card__time">{returnDuration(card.duration)}</p>
     </li>

@@ -6,9 +6,9 @@ import SavedDevider from '../SavedDevider/SavedDevider';
 
 function SavedMovies() {
   return (
-    <section className="">
+    <section className="movies">
       <SearchForm />
-      <MoviesCardList isMy={true} />
+      <MoviesCardList />
       <SavedDevider />
     </section>
   );

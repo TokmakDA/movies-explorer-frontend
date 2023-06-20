@@ -27,6 +27,7 @@
 }
 .card__img {
   position: absolute;
+  object-fit: cover;
   left: 0;
   top: 0;
   width: 100%;
