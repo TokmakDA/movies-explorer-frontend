@@ -2,7 +2,7 @@ import React from 'react';
 import './Portfolio.css';
 import { Link } from 'react-router-dom';
 
-function Portfolio() {
+export const Portfolio = () => {
   return (
     <div className="student__portfolio portfolio">
       <h3 className="portfolio__title">Портфолио</h3>
@@ -30,6 +30,4 @@ function Portfolio() {
       </ul>
     </div>
   );
-}
-
-export default Portfolio;
+};

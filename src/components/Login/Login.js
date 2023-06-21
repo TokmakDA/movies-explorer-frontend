@@ -1,9 +1,10 @@
 import React from 'react';
 import './Login.css';
 import { Link } from 'react-router-dom';
-import AuthForm from '../AuthForm/AuthForm';
 
-function Login({ isLoggedIn, onLogin, isLoading }) {
+import { AuthForm } from '../AuthForm/AuthForm';
+
+export const Login = ({ isLoggedIn, onLogin, isLoading }) => {
   const form = {
     name: 'login',
     greeting: 'Рады видеть!',
@@ -29,6 +30,4 @@ function Login({ isLoggedIn, onLogin, isLoading }) {
       </div>
     </AuthForm>
   );
-}
-
-export default Login;
+};

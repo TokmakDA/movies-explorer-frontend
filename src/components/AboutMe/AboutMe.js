@@ -3,7 +3,7 @@ import './AboutMe.css';
 import myPhoto from '../../images/MyPhoto.jpg';
 import { Link } from 'react-router-dom';
 
-function AboutMe() {
+export const AboutMe = () => {
   return (
     <div className="student__about-me about-me">
       <img
@@ -25,6 +25,4 @@ function AboutMe() {
       <Link className="about-me__link">Github</Link>
     </div>
   );
-}
-
-export default AboutMe;
+};

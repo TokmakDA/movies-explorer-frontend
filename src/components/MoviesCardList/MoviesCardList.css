@@ -1,4 +1,4 @@
-.cards{
+.cards {
   margin: 0;
   padding: 70px 0 10px;
   width: 100%;
@@ -7,7 +7,7 @@
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   column-gap: 20px;
   row-gap: 38px;
   width: 100%;

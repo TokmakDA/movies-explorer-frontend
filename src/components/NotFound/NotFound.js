@@ -2,7 +2,7 @@ import React from 'react';
 import './NotFound.css';
 import { Link } from 'react-router-dom';
 
-function NotFound() {
+export const NotFound = () => {
   return (
     <section className="content__not-found not-found">
       <div className="not-found__wrapper">
@@ -17,6 +17,4 @@ function NotFound() {
       </Link>
     </section>
   );
-}
-
-export default NotFound;
+};

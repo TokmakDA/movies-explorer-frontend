@@ -1,10 +1,10 @@
 import React from 'react';
 import './SavedMovies.css';
-import SearchForm from '../SearchForm/SearchForm';
-import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import SavedDevider from '../SavedDevider/SavedDevider';
+import { SearchForm } from '../SearchForm/SearchForm';
+import { MoviesCardList } from '../MoviesCardList/MoviesCardList';
+import { SavedDevider } from '../SavedDevider/SavedDevider';
 
-function SavedMovies() {
+export const SavedMovies = () => {
   return (
     <section className="movies">
       <SearchForm />
@@ -12,6 +12,4 @@ function SavedMovies() {
       <SavedDevider />
     </section>
   );
-}
-
-export default SavedMovies;
+};

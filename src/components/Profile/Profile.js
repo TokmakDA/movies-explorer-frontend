@@ -2,13 +2,13 @@ import React from 'react';
 import './Profile.css';
 import { Link } from 'react-router-dom';
 
-function Profile() {
+export const Profile = () => {
   const user = { name: 'Петруха', email: 'petrucha@mail.ru' };
   return (
     <div className="profile">
       <p className="profile__greeting">{`Привет, ${user.name}!`}</p>
       <ul className="profile__data">
-      <li className="profile__wrapper">
+        <li className="profile__wrapper">
           <p className="profile__column-name">Имя</p>
           <p className="profile__column-data">{user.name}</p>
         </li>
@@ -28,6 +28,4 @@ function Profile() {
       </ul>
     </div>
   );
-}
-
-export default Profile;
+};

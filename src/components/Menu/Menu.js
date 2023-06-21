@@ -1,9 +1,9 @@
 import React from 'react';
 import './Menu.css';
 import { Link } from 'react-router-dom';
-import Navigation from '../Navigation/Navigation';
+import { Navigation } from '../Navigation/Navigation';
 
-function Menu({ isOpen }) {
+export const Menu = ({ isOpen }) => {
   return (
     <section className={`content__menu menu ${isOpen && 'menu_is-opened'}`}>
       <div className="menu__container">
@@ -12,6 +12,4 @@ function Menu({ isOpen }) {
       </div>
     </section>
   );
-}
-
-export default Menu;
+};

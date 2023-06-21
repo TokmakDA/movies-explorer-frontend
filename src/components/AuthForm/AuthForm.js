@@ -3,14 +3,14 @@ import './AuthForm.css';
 import { Link, Navigate } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
 
-function AuthForm({
+export const AuthForm = ({
   isLoggedIn,
   onSubmit,
   form,
   errMessage,
   isLoading,
   children,
-}) {
+}) => {
   const [currentButton, setButton] = useState(form.button);
   useEffect(
     () => (isLoading ? setButton(form.loadingButton) : setButton(form.button)),
@@ -96,6 +96,4 @@ function AuthForm({
       {children}
     </div>
   );
-}
-
-export default AuthForm;
+};

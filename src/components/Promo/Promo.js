@@ -1,7 +1,7 @@
 import React from 'react';
 import './Promo.css';
 
-function Promo() {
+export const Promo = () => {
   return (
     <section className="content__promo promo">
       <div className="promo__wrapper">
@@ -11,6 +11,4 @@ function Promo() {
       </div>
     </section>
   );
-}
-
-export default Promo;
+};

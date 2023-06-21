@@ -1,10 +1,13 @@
 import React from 'react';
 import './SearchForm.css';
 
-function SearchForm() {
+export const SearchForm = ({ onSubmit }) => {
   return (
     <div className="search">
-      <form className="search__form">
+      <form
+        className="search__form"
+        onSubmit={onSubmit}
+      >
         <fieldset className="search__fieldset">
           <div className="search__wrapper">
             <input
@@ -15,7 +18,7 @@ function SearchForm() {
               name="searchMovie"
             ></input>
             <button
-              type="image"
+              type="submit"
               className="search__find content__button"
               placeholder="Искать"
               name="searchMovie"
@@ -34,6 +37,4 @@ function SearchForm() {
       <hr className="search__line" />
     </div>
   );
-}
-
-export default SearchForm;
+};

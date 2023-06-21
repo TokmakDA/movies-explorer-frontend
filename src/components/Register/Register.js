@@ -1,9 +1,9 @@
 import React from 'react';
 import './Register.css';
 import { Link } from 'react-router-dom';
-import AuthForm from '../AuthForm/AuthForm';
+import { AuthForm } from '../AuthForm/AuthForm';
 
-function Register({ isLoggedIn, onLogin, isLoading }) {
+export const Register = ({ isLoggedIn, onLogin, isLoading }) => {
   const form = {
     name: 'register',
     greeting: 'Добро пожаловать!',
@@ -29,6 +29,4 @@ function Register({ isLoggedIn, onLogin, isLoading }) {
       </div>
     </AuthForm>
   );
-}
-
-export default Register;
+};

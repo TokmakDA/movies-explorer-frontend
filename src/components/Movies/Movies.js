@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import MoviesCard from '../MoviesCard/MoviesCard';
-import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import Preloader from '../Preloader/Preloader';
-import SearchForm from '../SearchForm/SearchForm';
+import { useResize } from '../../hooks/useResize';
 import './Movies.css';
-import { useResize } from '../../hooks/useResize'; 
-import More from '../More/More';
 
-function Movies() {
+import { MoviesCardList } from '../MoviesCardList/MoviesCardList';
+import { SearchForm } from '../SearchForm/SearchForm';
+import { More } from '../More/More';
+
+export const Movies = ({ findMovies }) => {
   const [isQuantity, setQuantity] = useState(null);
   const { isScreenLg, isScreenSm } = useResize();
   useEffect(() => {
@@ -21,11 +20,12 @@ function Movies() {
 
   return (
     <section className="content__movies movies">
-      <SearchForm />
-      <MoviesCardList quantity={isQuantity} insideMovies={true}/>
+      <SearchForm onSubmit={findMovies} />
+      <MoviesCardList
+        quantity={isQuantity}
+        insideMovies={true}
+      />
       <More onClick={(e) => handleClick(e, isQuantity)} />
     </section>
   );
-}
-
-export default Movies;
+};

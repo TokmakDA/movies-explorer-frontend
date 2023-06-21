@@ -1,10 +1,11 @@
 import React from 'react';
-import './Header.css';
 import { Link } from 'react-router-dom';
-import Navigation from '../Navigation/Navigation';
 import { useResize } from '../../hooks/useResize';
+import './Header.css';
 
-function Header() {
+import { Navigation } from '../Navigation/Navigation';
+
+export const Header = () => {
   const { isScreenLg } = useResize();
   // const [isUserBarOpen, setUserBarOpen] = useState(false);
 
@@ -17,14 +18,6 @@ function Header() {
     </nav>
   );
 
-  //  перенести в Navigation блок настроить на 2 ячейки грида
-  // const accountButton = (
-  //   <Link className="header__account-button">
-  //     <span className="header__button-icon" />
-  //     Аккаунт
-  //   </Link>
-  // );
-
   const burger = <Link className="header__burger"></Link>;
 
   return (
@@ -34,7 +27,6 @@ function Header() {
         isScreenLg ? (
           <>
             <Navigation />
-            {/* {accountButton} */}
           </>
         ) : (
           burger
@@ -44,6 +36,4 @@ function Header() {
       )}
     </header>
   );
-}
-
-export default Header;
+};

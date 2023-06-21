@@ -1,9 +1,10 @@
 import React from 'react';
 import './Student.css';
-import AboutMe from '../AboutMe/AboutMe';
-import Portfolio from '../Portfolio/Portfolio';
 
-function Student() {
+import { AboutMe } from '../AboutMe/AboutMe';
+import { Portfolio } from '../Portfolio/Portfolio';
+
+export const Student = () => {
   return (
     <section className="content__section student">
       <h2 className="content__title">Студент</h2>
@@ -12,6 +13,4 @@ function Student() {
       <Portfolio></Portfolio>
     </section>
   );
-}
-
-export default Student;
+};

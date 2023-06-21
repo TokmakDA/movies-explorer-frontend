@@ -3,7 +3,7 @@ import './Navigation.css';
 import { Link } from 'react-router-dom';
 import { useResize } from '../../hooks/useResize';
 
-function Navigation() {
+export const Navigation = () => {
   const { isScreenLg } = useResize();
 
   return (
@@ -29,6 +29,4 @@ function Navigation() {
       </Link>
     </nav>
   );
-}
-
-export default Navigation;
+};

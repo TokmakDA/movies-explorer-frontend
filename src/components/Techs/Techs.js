@@ -1,7 +1,7 @@
 import React from 'react';
 import './Techs.css';
 
-function Techs() {
+export const Techs = () => {
   return (
     <section className="content__section techs">
       <h2 className="content__title">Технологии</h2>
@@ -24,6 +24,4 @@ function Techs() {
       </div>
     </section>
   );
-}
-
-export default Techs;
+};
