@@ -21,7 +21,6 @@ export const SearchForm = ({ onSubmit }) => {
               type="submit"
               className="search__find content__button"
               placeholder="Искать"
-              name="searchMovie"
             ></button>
             <hr className="search__stick"></hr>
           </div>

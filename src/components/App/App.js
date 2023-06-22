@@ -25,15 +25,15 @@ export const App = () => {
     <>
       <Routes></Routes>
       <Header />
-      <Main />
+      {/* <Main />
       <Movies findMovies={findMovies} />
       <SavedMovies />
       <Footer />
       <Login />
-      <Register />
+      <Register /> */}
       <Profile />
-      <NotFound />
-      <Menu />
+      {/* <NotFound />
+      <Menu /> */}
     </>
   );
 };

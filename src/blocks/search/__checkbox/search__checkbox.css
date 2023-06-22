@@ -19,7 +19,7 @@
   width: 16px;
   height: 16px;
   align-self: center;
-  background: #fff;
+  background: rgba(255, 255, 255, 1);
   border-radius: 50%;
   transform: translate(-8px, 0%);
   transition: transform 0.5s, background 0.5s;

@@ -5,7 +5,7 @@
   font-size: 22px;
   line-height: 27px;
   letter-spacing: -0.04em;
-  color: #000;
+  color: rgba(0, 0, 0, 1);
 }
 
 @media screen and (max-width: 576px) {

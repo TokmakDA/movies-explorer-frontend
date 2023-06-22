@@ -1,7 +1,7 @@
 .content__title-line {
   margin: 23px 0 0;
   box-sizing: border-box;
-  border: 1px solid #000;
+  border: 1px solid rgba(0, 0, 0, 1);
   border-bottom: none;
 }
 

@@ -9,7 +9,7 @@
   color: #000000;
   border: 1px solid #e8e8e8;
   border-radius: 6px;
-  background: #fff;
+  background: rgba(255, 255, 255, 1);
 }
 
 @media screen and (max-width: 576px) {
