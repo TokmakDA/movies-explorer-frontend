@@ -1,0 +1,14 @@
+.profile__input {
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 14px;
+  text-align: right;
+  color: rgba(0, 0, 0, 1);
+  border: none;
+  background: none;
+}
+.profile__input:invalid {
+  color: rgba(238, 52, 101, 1);
+}

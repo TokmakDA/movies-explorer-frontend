@@ -1,0 +1,21 @@
+.profile {
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 70px;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: max-content 1fr;
+  max-width: 550px;
+  height: calc(100vh - 74px);
+}
+@media screen and (max-width: 992px) {
+  .profile {
+    padding-top: clamp(70px, calc(100vh - 792px), 232px);
+    padding-bottom: clamp(70px, calc(100vh - 755px), 269px);
+  }
+}
+@media screen and (max-width: 576px) {
+  .profile {
+    padding: 70px 30px 40px;
+  }
+}

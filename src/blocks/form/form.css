@@ -1,0 +1,21 @@
+.form {
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 70px;
+  max-width: 536px;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: max-content 1fr;
+}
+@media screen and (max-width: 992px) {
+  .form {
+    padding-top: clamp(70px, calc(100vh - 792px), 232px);
+    padding-bottom: clamp(70px, calc(100vh - 792px), 232px);
+  }
+}
+@media screen and (max-width: 576px) {
+  .form {
+    padding: 56px 30px 40px;
+  }
+}

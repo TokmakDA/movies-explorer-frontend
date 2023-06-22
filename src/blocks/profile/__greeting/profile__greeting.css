@@ -1,0 +1,21 @@
+.profile__greeting {
+  margin: 4px 0 123px;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  text-align: center;
+  color: rgba(0, 0, 0, 1);
+  width: 100%;
+}
+
+@media screen and (max-width: 992px) {
+  .profile__greeting {
+    margin-bottom: 96px;
+  }
+}
+@media screen and (max-width: 576px) {
+  .profile__greeting {
+    margin-top: 0;
+    margin-bottom: 80px;
+  }
+}

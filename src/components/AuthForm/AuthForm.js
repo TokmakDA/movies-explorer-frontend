@@ -29,71 +29,71 @@ export const AuthForm = ({
   };
 
   return (
-    <div className="form">
+    <form
+      className="form"
+      name={`${form.name}-form`}
+      onSubmit={handleSubmit}
+    >
       <div className="form__top">
-        <Link className="logo" />
-        <p className="form__greeting">{form.greeting}</p>
+        <Link className="form__logo" />
+        <h1 className="form__greeting">{form.greeting}</h1>
       </div>
-      <form
-        className="form__wrapper"
-        name={`${form.name}-form`}
-        onSubmit={handleSubmit}
-      >
-        <fieldset className="form__inputs">
-          {form.name === 'register' && (
-            <label className="form__lebel">
-              Имя
-              <input
-                autoComplete="nickname"
-                type="text"
-                className="form__input"
-                id="name"
-                value={values?.name || ''}
-                onChange={handleChange}
-                name="name"
-                required
-                maxLength="100"
-              ></input>
-            </label>
-          )}
+      <fieldset className="form__inputs">
+        {form.name === 'register' && (
           <label className="form__lebel">
-            E-mail
+            Имя
             <input
-              autoComplete="email"
-              type="email"
+              autoComplete="nickname"
+              type="text"
               className="form__input"
-              id="email"
-              value={values?.email || ''}
+              id="name"
+              value={values?.name || ''}
               onChange={handleChange}
-              name="email"
+              name="name"
               required
               maxLength="100"
             ></input>
           </label>
-          <label className="form__lebel">
-            Пароль
-            <input
-              autoComplete="current-password"
-              type="password"
-              className="form__input"
-              id="password"
-              value={values?.password || ''}
-              onChange={handleChange}
-              name="password"
-              required
-              maxLength="100"
-            ></input>
-          </label>
-          <span className="form__error">{errMessage}</span>
-        </fieldset>
+        )}
+        <label className="form__lebel">
+          E-mail
+          <input
+            autoComplete="email"
+            type="email"
+            className="form__input"
+            id="email"
+            value={values?.email || ''}
+            onChange={handleChange}
+            name="email"
+            required
+            maxLength="100"
+          ></input>
+        </label>
+        <label className="form__lebel">
+          Пароль
+          <input
+            autoComplete="current-password"
+            type="password"
+            className="form__input"
+            id="password"
+            value={values?.password || ''}
+            onChange={handleChange}
+            name="password"
+            required
+            maxLength="100"
+          ></input>
+        </label>
+        <span className="form__error">{errMessage}</span>
+      </fieldset>
+      <div className="form__buttons">
         <button
           type="submit"
           className="form__button"
         >
           {currentButton}
         </button>
-      </form>
-      {children}
-    </div>
+        {children}
+      </div>
+    </form>
   );
 };

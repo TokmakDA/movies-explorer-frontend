@@ -1,0 +1,17 @@
+.profile__button {
+  margin: 0;
+  padding: 0;
+  align-self: center;
+  text-decoration: none;
+  border: none;
+  background: none;
+  font-size: 13px;
+  line-height: 16px;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+.profile__button:hover {
+  opacity: 0.8;
+  transition: opacity 0.5s;
+}
