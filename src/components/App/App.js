@@ -30,10 +30,10 @@ export const App = () => {
       <SavedMovies />
       <Footer /> */}
       {/* <Login /> */}
-      <Register />
+      {/* <Register /> */}
       {/* <Profile /> */}
-      {/* <NotFound />
-      <Menu /> */}
+      <NotFound />
+      {/* <Menu /> */}
     </>
   );
 };

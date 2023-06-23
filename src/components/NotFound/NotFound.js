@@ -10,7 +10,7 @@ export const NotFound = () => {
         <p className="not-found__message">Страница не найдена</p>
       </div>
       <Link
-        className="not-found__link"
+        className="not-found__back"
         to="/"
       >
         Назад

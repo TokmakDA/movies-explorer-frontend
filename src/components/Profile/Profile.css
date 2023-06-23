@@ -11,7 +11,6 @@
 @import url(../../blocks/profile/__submit-button/profile__submit-button.css);
 @import url(../../blocks/profile/__error/profile__error.css);
 
-
 /* .profile {
   box-sizing: border-box;
   margin: 0 auto;
@@ -131,7 +130,7 @@
   outline: 0.5px solid rgba(232, 232, 232, 1);
 } */
 /* .profile__submit-button {
-    margin: 0;
+  margin: 0;
   padding: 0;
   box-sizing: border-box;
   min-height: 45px;
