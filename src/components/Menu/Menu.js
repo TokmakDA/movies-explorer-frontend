@@ -5,7 +5,7 @@ import { Navigation } from '../Navigation/Navigation';
 
 export const Menu = ({ isOpen }) => {
   return (
-    <section className={`content__menu menu ${isOpen && 'menu_is-opened'}`}>
+    <section className={`content__menu menu ${!isOpen && 'menu_is-opened'}`}>
       <div className="menu__container">
         <Link className="menu__exit" />
         <Navigation />

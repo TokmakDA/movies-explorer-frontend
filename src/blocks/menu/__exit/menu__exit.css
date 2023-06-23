@@ -1,0 +1,13 @@
+.menu__exit {
+  margin: 22px;
+  background: center no-repeat url(../../../images/icon-close.svg);
+  align-self: end;
+  background-size: 32px 32px;
+  height: 32px;
+  width: 32px;
+}
+@media screen and (max-width: 576px) {
+  .menu__exit {
+    margin: 14px;
+  }
+}
