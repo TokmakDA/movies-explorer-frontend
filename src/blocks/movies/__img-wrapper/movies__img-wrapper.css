@@ -1,0 +1,13 @@
+.movies__img-wrapper {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+.movies__img-wrapper::after {
+  display: block;
+  content: '';
+  padding-top: 56.25%;
+}

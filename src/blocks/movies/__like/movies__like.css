@@ -1,0 +1,17 @@
+.movies__like {
+  margin: 10px 0;
+  height: 24px;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  width: 24px;
+  background: center no-repeat url(../../../images/save1d.svg);
+  border: none;
+  background-size: 24px 24px;
+  opacity: 1;
+  cursor: pointer;
+  transition: opacity 0.5s;
+}
+.movies__like:hover {
+  opacity: 0.8;
+  transition: all 0.5s;
+}

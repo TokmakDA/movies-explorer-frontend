@@ -1,18 +1,24 @@
-.card {
+@import url(../../blocks/movies/__card/movies__card.css);
+@import url(../../blocks/movies/__img-wrapper/movies__img-wrapper.css);
+@import url(../../blocks/movies/__img/movies__img.css);
+@import url(../../blocks/movies/__name/movies__name.css);
+@import url(../../blocks/movies/__like/movies__like.css);
+@import url(../../blocks/movies/__like/_active/movies__like_active.css);
+@import url(../../blocks/movies/__like/_delete/movies__like_delete.css);
+@import url(../../blocks/movies/__time/movies__time.css);
+
+/* .movies__card {
   margin: 0;
   padding: 0;
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: auto;
   column-gap: 20px;
-  max-width: 360px;
+  max-width: 100%;
   min-width: 260px;
   justify-content: space-between;
-
-  max-width: 100%;
-  box-sizing: border-box;
-}
-.card__img-wrapper {
+} */
+/* .movies__img-wrapper {
   position: relative;
   margin: 0;
   padding: 0;
@@ -20,21 +26,20 @@
   grid-column-start: 1;
   grid-column-end: 3;
 }
-.card__img-wrapper::after {
+.movies__img-wrapper::after {
   display: block;
   content: '';
   padding-top: 56.25%;
-}
-.card__img {
+} */
+/* .movies__img {
   position: absolute;
   object-fit: cover;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-}
-
-.card__name {
+} */
+/* .movies__name {
   margin: 13px 0;
   grid-column-start: 1;
   grid-column-end: 2;
@@ -50,9 +55,8 @@
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-}
-
-.card__like {
+} */
+/* .movies__like {
   margin: 10px 0;
   height: 24px;
   grid-column-start: 2;
@@ -61,14 +65,21 @@
   background: center no-repeat url(../../images/save1d.svg);
   border: none;
   background-size: 24px 24px;
+  opacity: 1;
+  cursor: pointer;
+  transition: opacity 0.5s;
 }
-.card__like_active{
+.movies__like:hover {
+  opacity: 0.8;
+  transition: all 0.5s;
+} */
+/* .movies__like_active {
   background: center no-repeat url(../../images/save1.svg);
-}
-.card__like_delete{
+} */
+/* .movies__like_delete {
   background: center no-repeat url(../../images/d1.svg);
-}
-.card__time {
+} */
+/* .movies__time {
   margin: 0;
   padding: 6px 0 0;
   grid-column-start: 1;
@@ -78,6 +89,5 @@
   line-height: 13px;
   display: flex;
   align-items: center;
-
-  color: #a0a0a0;
-}
+  color: rgba(160, 160, 160, 1);
+} */

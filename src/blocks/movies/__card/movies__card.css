@@ -1,0 +1,11 @@
+.movies__card {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  column-gap: 20px;
+  max-width: 100%;
+  min-width: 260px;
+  justify-content: space-between;
+}

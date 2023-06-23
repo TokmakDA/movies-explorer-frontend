@@ -53,27 +53,27 @@ export const MoviesCard = ({ card, insideMovies }) => {
       return deleteCard();
     }
   };
-  const cardLikeButtonClassName = `card__like ${
-    insideMovies ? isLiked && 'card__like_active' : 'card__like_delete'
+  const cardLikeButtonClassName = `movies__like ${
+    insideMovies ? isLiked && 'movies__like_active' : 'movies__like_delete'
   }`;
 
   return (
-    <li className="card">
-      <div className="card__img-wrapper">
+    <li className="movies__card">
+      <div className="movies__img-wrapper">
         <img
-          className="card__img"
+          className="movies__img"
           src={card.image}
           alt="Постер"
           onClick={() => handleClick(card)}
         ></img>
       </div>
 
-      <p className="card__name">{card.nameRU}</p>
+      <p className="movies__name">{card.nameRU}</p>
       <button
         className={cardLikeButtonClassName}
         onClick={handleClick}
       ></button>
-      <p className="card__time">{returnDuration(card.duration)}</p>
+      <p className="movies__time">{returnDuration(card.duration)}</p>
     </li>
   );
 };

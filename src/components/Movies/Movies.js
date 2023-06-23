@@ -21,10 +21,10 @@ export const Movies = ({ findMovies }) => {
   return (
     <section className="content__movies movies">
       <SearchForm onSubmit={findMovies} />
-      {/* <MoviesCardList
+      <MoviesCardList
         quantity={isQuantity}
         insideMovies={true}
-      /> */}
+      />
       <More onClick={(e) => handleClick(e, isQuantity)} />
     </section>
   );

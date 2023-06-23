@@ -4,10 +4,6 @@ import './MoviesCardList.css';
 import { MoviesCard } from '../MoviesCard/MoviesCard';
 
 export const MoviesCardList = ({ quantity, insideMovies }) => {
-  // const [myCards, setMyCards] = useState(
-  //   JSON.parse(localStorage.getItem('myMovies'))
-  // );
-
   // Временная конструкция
   const myCards = JSON.parse(localStorage.getItem('myMovies'));
   const searchMovies = JSON.parse(localStorage.getItem('searhMovies'));
@@ -34,8 +30,6 @@ export const MoviesCardList = ({ quantity, insideMovies }) => {
   );
 
   return (
-    <section className="cards">
-      <ul className="cards__list">{renderCard(moviesToRender)}</ul>
-    </section>
+      <ul className="movies__cards">{renderCard(moviesToRender)}</ul>
   );
 };
