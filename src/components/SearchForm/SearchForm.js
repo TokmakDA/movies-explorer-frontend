@@ -19,12 +19,12 @@ export const SearchForm = ({ onSubmit }) => {
             ></input>
             <button
               type="submit"
-              className="search__find content__button"
+              className="search__find"
               placeholder="Искать"
             ></button>
             <hr className="search__stick"></hr>
           </div>
-          <label className="search__label-checkbox content__button">
+          <label className="search__label-checkbox">
             <input
               type="checkbox"
               className="search__checkbox"

@@ -1,6 +1,6 @@
 @import url(../../blocks/nav/nav.css);
 @import url(../../blocks/nav/__links/nav__links.css);
-@import url(../../blocks/nnav/__linkav/nav__link.css);
+@import url(../../blocks/nav/__link/nav__link.css);
 @import url(../../blocks/nav/__link/_active/nav__link_active.css);
 @import url(../../blocks/nav/__link/_unactive/nav__link_unactive.css);
 @import url(../../blocks/nav/__account-button/nav__account-button.css);
