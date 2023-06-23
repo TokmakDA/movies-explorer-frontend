@@ -20,8 +20,6 @@ export const MoviesCardList = ({ quantity, insideMovies }) => {
             key={card.movieId}
             card={card}
             insideMovies={insideMovies}
-            // myCards={myCards}
-            // setMyCards={setMyCards}
           />
         );
       });
@@ -29,7 +27,5 @@ export const MoviesCardList = ({ quantity, insideMovies }) => {
     [quantity, searchMovies],
   );
 
-  return (
-      <ul className="movies__cards">{renderCard(moviesToRender)}</ul>
-  );
+  return <ul className="movies__cards">{renderCard(moviesToRender)}</ul>;
 };
