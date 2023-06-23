@@ -2,9 +2,9 @@
 @import url(../../blocks/header/_color/header_color_white.css);
 @import url(../../blocks/header/_color/header_color_gray.css);
 @import url(../../blocks/header/__logo/header__logo.css);
-@import url(../../blocks/header/__login-container/header__login-container.css);
-@import url(../../blocks/header/__register-link/header__register-link.css);
+@import url(../../blocks/header/__buttons/header__buttons.css);
+@import url(../../blocks/header/__register-button/header__register-button.css);
 @import url(../../blocks/header/__login-button/header__login-button.css);
-/* @import url(../../blocks/header/__account-button/header__account-button.css); */
-/* @import url(../../blocks/header/__button-icon/header__button-icon.css); */
 @import url(../../blocks/header/__burger/header__burger.css);
+
+

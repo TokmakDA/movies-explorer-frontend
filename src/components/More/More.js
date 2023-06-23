@@ -4,7 +4,7 @@ import './More.css';
 export const More = ({ onClick }) => {
   return (
     <button
-      className="more"
+      className="movies__more"
       onClick={onClick}
     >
       Еще

@@ -7,13 +7,12 @@ import { Navigation } from '../Navigation/Navigation';
 
 export const Header = () => {
   const { isScreenLg } = useResize();
-  // const [isUserBarOpen, setUserBarOpen] = useState(false);
 
   const isLoading = true;
 
   const loginContainer = (
-    <nav className="header__login-container">
-      <Link className="header__register-link">Регистрация</Link>
+    <nav className="header__buttons">
+      <Link className="header__register-button">Регистрация</Link>
       <Link className="header__login-button">Войти</Link>
     </nav>
   );
@@ -22,7 +21,7 @@ export const Header = () => {
 
   return (
     <header className={`header header_color_${isLoading ? 'white' : 'gray'}`}>
-      <Link className="header__logo" />
+      <i className="header__logo" />
       {isLoading ? (
         isScreenLg ? (
           <>

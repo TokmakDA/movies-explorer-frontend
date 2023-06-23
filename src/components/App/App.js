@@ -24,9 +24,9 @@ export const App = () => {
   return (
     <>
       <Routes></Routes>
-      {/* <Header /> */}
+      <Header />
       {/* <Main /> */}
-      <Movies findMovies={findMovies} />
+      {/* <Movies findMovies={findMovies} /> */}
       {/* <SavedMovies /> */}
       {/* <Footer /> */}
       {/* <Login /> */}
