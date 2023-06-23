@@ -1,6 +1,6 @@
 .promo {
   box-sizing: border-box;
-  background: #5c5c5c;
+  background: rgba(92, 92, 92, 1);
   margin: 0;
   padding: 0 70px;
   display: flex;

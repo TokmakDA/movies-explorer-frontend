@@ -1,14 +1,10 @@
-.header__login-button {
-  height: 32px;
-  width: 76px;
+.header__register-button {
   display: flex;
   align-items: center;
-  justify-content: center;
+  text-align: right;
   margin: 0;
   padding: 0;
-  background: rgba(43, 224, 128, 1);
-  border-radius: 3px;
-  color: rgba(0, 0, 0, 1);
+  color: rgba(255, 255, 255, 1);
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
@@ -17,13 +13,14 @@
   opacity: 1;
   transition: opacity 0.5s;
 }
-.header__login-button:hover {
+.header__register-button:hover {
   opacity: 0.8;
   transition: opacity 0.5s;
 }
 
 @media screen and (max-width: 576px) {
-  .header__login-button {
+  .header__register-button {
     font-size: 10px;
   }
 }
+

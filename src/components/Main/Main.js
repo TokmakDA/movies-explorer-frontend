@@ -6,6 +6,7 @@ import { NavTab } from '../NavTab/NavTab';
 import { AboutProject } from '../AboutProject/AboutProject';
 import { Techs } from '../Techs/Techs';
 import { Student } from '../Student/Student';
+import { Outlet } from 'react-router-dom';
 
 export const Main = () => {
   return (
@@ -15,6 +16,7 @@ export const Main = () => {
       <AboutProject />
       <Techs />
       <Student />
+      <Outlet/>
     </main>
   );
 };

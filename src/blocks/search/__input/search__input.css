@@ -11,7 +11,7 @@
   min-height: 22px;
 }
 .search__input::placeholder {
-  color: #a0a0a0;
+  color: rgba(160, 160, 160, 1);
   padding-left: 38px;
   background: 0 50% no-repeat url(../../../images/icon-find.svg);
   background-size: 22px;

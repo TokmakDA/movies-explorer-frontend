@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Routes } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Outlet, Route, Routes } from 'react-router-dom';
 
 import { Main } from '../Main/Main';
 import { Header } from '../Header/Header';
@@ -9,12 +9,12 @@ import { Profile } from '../Profile/Profile';
 import { Login } from '../Login/Login';
 import { Register } from '../Register/Register';
 import { NotFound } from '../NotFound/NotFound';
-import { Menu } from '../Menu/Menu';
 import { SavedMovies } from '../SavedMovies/SavedMovies';
-import { Preloader } from '../Preloader/Preloader';
 import { NewMovies } from '../../data/NewMovies';
 
 export const App = () => {
+  const [isAuthorized, setIsAuthorized] = useState(false);
+
   const findMovies = (e) => {
     e.preventDefault();
     localStorage.setItem('searhMovies', JSON.stringify(NewMovies));
@@ -23,17 +23,64 @@ export const App = () => {
 
   return (
     <>
-      <Routes></Routes>
-      <Header />
-      {/* <Main /> */}
-      {/* <Movies findMovies={findMovies} /> */}
-      {/* <SavedMovies /> */}
-      {/* <Footer /> */}
-      {/* <Login /> */}
-      {/* <Register /> */}
-      {/* <Profile /> */}
-      {/* <NotFound /> */}
-      {/* <Menu /> */}
+      <Routes>
+        {/* 1 Уровень вложенности */}
+        <Route
+          path="/"
+          element={
+            <>
+              <Header isAuthorized={isAuthorized} />
+              <Outlet />
+            </>
+          }
+        >
+          {/* 2 Уровень вложенности */}
+          <Route
+            element={
+              <>
+                <Outlet />
+                <Footer />
+              </>
+            }
+          >
+            {/* 3 Уровень вложенности */}
+            <Route
+              index
+              element={<Main />}
+            />
+            {/* 3 Уровень вложенности */}
+            <Route
+              path="/movies"
+              element={<Movies findMovies={findMovies} />}
+            />
+            {/* 3 Уровень вложенности */}
+            <Route
+              path="/saved-movies"
+              element={<SavedMovies />}
+            />
+          </Route>
+          {/* 2 Уровень вложенности */}
+          <Route
+            path="/profile"
+            element={<Profile setIsAuthorized={setIsAuthorized} />}
+          />
+        </Route>
+        {/* 1 Уровень вложенности */}
+        <Route
+          path="/signup"
+          element={<Register />}
+        />
+        {/* 1 Уровень вложенности */}
+        <Route
+          path="/signin"
+          element={<Login setIsAuthorized={setIsAuthorized} />}
+        />
+        {/* 1 Уровень вложенности */}
+        <Route
+          path="*"
+          element={<NotFound />}
+        />
+      </Routes>
     </>
   );
 };

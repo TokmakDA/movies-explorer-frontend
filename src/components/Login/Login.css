@@ -55,7 +55,7 @@
   font-weight: 400;
   font-size: 10px;
   line-height: 12px;
-  color: #a0a0a0;
+  color: rgba(160, 160, 160, 1);
 }
 .form__lebel:first-child {
   margin-top: 0;
@@ -65,7 +65,7 @@
   margin: 0;
   padding: 15px;
   min-height: 46px;
-  background: #f9f9f9;
+  background: rgba(249, 249, 249, 1);
   border-radius: 8px;
   border: none;
   font-weight: 400;
@@ -82,12 +82,12 @@
   font-weight: 400;
   font-size: 10px;
   line-height: 12px;
-  color: #ee3465;
+  color: rgba(238, 52, 101, 1);
 }
 
 .form__button {
   min-height: 45px;
-  background: #2be080;
+  background: rgba(43, 224, 128, 1);
   border: none;
   border-radius: 3px;
   font-weight: 500;
@@ -113,7 +113,7 @@
   font-size: 14px;
   line-height: 17px;
   text-align: center;
-  color: #a0a0a0;
+  color: rgba(160, 160, 160, 1);
 }
 
 .login__link {
@@ -123,6 +123,6 @@
   font-size: 14px;
   line-height: 17px;
   text-align: center;
-  color: #2be080;
+  color: rgba(43, 224, 128, 1);
   text-decoration: none;
 }

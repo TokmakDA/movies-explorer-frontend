@@ -48,7 +48,7 @@
   font-size: 13px;
   line-height: 16px;
   text-align: start;
-  color: #000000;
+  color: rgba(0, 0, 0, 1);
   white-space: pre-wrap;
   overflow: hidden;
   min-height: 32px;

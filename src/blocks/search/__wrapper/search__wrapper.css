@@ -10,6 +10,6 @@
 }
 @media screen and (max-width: 576px) {
   .search__wrapper {
-    background: #f9f9f9;
+    background: rgba(249, 249, 249, 1);
   }
 }

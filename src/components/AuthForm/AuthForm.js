@@ -1,27 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './AuthForm.css';
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
 
-export const AuthForm = ({
-  isLoggedIn,
-  onSubmit,
-  form,
-  errMessage,
-  isLoading,
-  children,
-}) => {
+export const AuthForm = ({ onSubmit, form, errMessage, children }) => {
   const [currentButton, setButton] = useState(form.button);
-  useEffect(
-    () => (isLoading ? setButton(form.loadingButton) : setButton(form.button)),
-    [isLoading, form],
-  );
-
   const { values, handleChange } = useForm();
-
-  if (isLoggedIn) {
-    return <Navigate to="/" />;
-  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,7 +19,10 @@ export const AuthForm = ({
       onSubmit={handleSubmit}
     >
       <div className="form__top">
-        <i className="form__logo" />
+        <Link
+          to="/"
+          className="form__logo"
+        />
         <h1 className="form__greeting">{form.greeting}</h1>
       </div>
       <fieldset className="form__inputs">

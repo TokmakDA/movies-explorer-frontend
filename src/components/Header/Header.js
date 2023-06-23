@@ -1,38 +1,69 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { useResize } from '../../hooks/useResize';
 import './Header.css';
 
+import { Menu } from '../Menu/Menu';
 import { Navigation } from '../Navigation/Navigation';
 
-export const Header = () => {
+export const Header = ({ isAuthorized }) => {
   const { isScreenLg } = useResize();
+  const location = useLocation();
+  const themeColor = location.pathname !== '/' ? 'white' : 'gray';
+  const [isOpenMenu, setOpenMenu] = useState(false);
 
-  const isLoading = true;
-
+  const handleBurgerClick = () => {
+    setOpenMenu(true);
+  };
   const loginContainer = (
     <nav className="header__buttons">
-      <Link className="header__register-button">Регистрация</Link>
-      <Link className="header__login-button">Войти</Link>
+      <Link
+        to="/signup"
+        className="header__register-button"
+      >
+        Регистрация
+      </Link>
+      <Link
+        to="/signin"
+        className="header__login-button"
+      >
+        Войти
+      </Link>
     </nav>
   );
 
-  const burger = <Link className="header__burger"></Link>;
+  const burger = (
+    <Link
+      className={`header__burger header__burger_theme_${themeColor}`}
+      onClick={() => handleBurgerClick()}
+    ></Link>
+  );
 
   return (
-    <header className={`header header_color_${isLoading ? 'white' : 'gray'}`}>
-      <i className="header__logo" />
-      {isLoading ? (
-        isScreenLg ? (
-          <>
-            <Navigation />
-          </>
+    <>
+      <header className={`header header_color_${themeColor}`}>
+        <Link
+          to="/"
+          className="header__logo"
+        />
+        {isAuthorized ? (
+          isScreenLg ? (
+            <>
+              <Navigation themeColor={themeColor} />
+            </>
+          ) : (
+            burger
+          )
         ) : (
-          burger
-        )
-      ) : (
-        loginContainer
+          loginContainer
+        )}
+      </header>
+      {!isScreenLg && isOpenMenu && (
+        <Menu
+          isOpen={isOpenMenu}
+          setOpen={setOpenMenu}
+        />
       )}
-    </header>
+    </>
   );
 };

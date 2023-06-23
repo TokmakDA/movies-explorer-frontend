@@ -6,5 +6,24 @@
 @import url(../../blocks/header/__register-button/header__register-button.css);
 @import url(../../blocks/header/__login-button/header__login-button.css);
 @import url(../../blocks/header/__burger/header__burger.css);
+@import url(../../blocks/header/__burger/_theme/header__burger_theme_gray.css);
+@import url(../../blocks/header/__burger/_theme/header__burger_theme_white.css);
 
+/* .header__burger_theme_gray {
+  background-image: url(../../../images/icon-main_768-white.svg);
+}
+@media screen and (max-width: 576px) {
+  .header__burger_theme_gray {
+    background-image: url(../../../images/icon-main_320-white.svg);
+  }
+}
 
+.header__burger_theme_white {
+  background-image: url(../../../images/icon-main_768.svg);
+}
+
+@media screen and (max-width: 576px) {
+  .header__burger_theme_white {
+    background-image: url(../../../images/icon-main_320.svg);
+  }
+} */

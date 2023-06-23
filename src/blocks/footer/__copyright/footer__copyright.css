@@ -11,6 +11,6 @@
   .footer__copyright {
     font-size: 12px;
     line-height: 15px;
-    color: #a0a0a0;
+    color: rgba(160, 160, 160, 1);
   }
 }

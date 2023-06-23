@@ -21,6 +21,6 @@
 
 /*Для Верстки*/
 * {
-  outline: rgba(255, 150, 255, 1) dotted 0.1px;
+  /* outline: rgba(255, 150, 255, 1) dotted 0.1px; */
   /* overflow-y: hidden; */
 }

@@ -1,29 +1,36 @@
 import React from 'react';
 import './Login.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { AuthForm } from '../AuthForm/AuthForm';
+// import { useIsAuthorized } from '../../hooks/useIsAuthorized';
 
-export const Login = ({ isLoggedIn, onLogin, isLoading }) => {
+export const Login = ({ setIsAuthorized }) => {
   const form = {
     name: 'login',
     greeting: 'Рады видеть!',
     button: 'Войти',
   };
 
+  const navigate = useNavigate();
+
+  const handleSubmit = (values) => {
+    setIsAuthorized(true);
+    console.log('Login => handleSubmit => Я тут');
+    navigate('/', { replace: false });
+  };
+
   return (
     <AuthForm
-      isLoggedIn={isLoggedIn}
-      onSubmit={onLogin}
+      onSubmit={handleSubmit}
       form={form}
-      isLoading={isLoading}
       errMessage="Что-то пошло не так..."
     >
       <div className="form__link-wrapper">
         <p className="form__link-preface">Ещё не зарегистрированы?</p>
         <Link
           className="form__link"
-          to="../sign-up"
+          to="/signup"
         >
           Регистрация
         </Link>

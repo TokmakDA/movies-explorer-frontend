@@ -1,15 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Menu.css';
-import { Link } from 'react-router-dom';
 import { Navigation } from '../Navigation/Navigation';
 
-export const Menu = ({ isOpen }) => {
+export const Menu = ({ isOpen, setOpen }) => {
+  // указываем `useEffect` для обработчика `Escape`
+  useEffect(() => {
+    if (!isOpen) return;
+    function handleEscapeKey(e) {
+      if (e.code === 'Escape') {
+        setOpen(false);
+      }
+    }
+    document.addEventListener('keydown', handleEscapeKey);
+    return () => document.removeEventListener('keydown', handleEscapeKey);
+  }, [isOpen, setOpen]);
+
   return (
-    <section className={`content__menu menu ${!isOpen && 'menu_is-opened'}`}>
+    <div className={`menu ${isOpen && 'menu_is-opened'}`}>
       <div className="menu__container">
-        <Link className="menu__exit" />
-        <Navigation />
+        <button
+          className="menu__exit"
+          onClick={() => setOpen(false)}
+        />
+        <Navigation themeColor={'white'} />
       </div>
-    </section>
+    </div>
   );
 };
