@@ -1,0 +1,22 @@
+.search__fieldset {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  background: #f9f9f9;
+  border-radius: 9px;
+  width: 100%;
+  border: none;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+}
+@media screen and (max-width: 576px) {
+  .search__fieldset {
+    flex-wrap: wrap;
+    background: none;
+    border: none;
+    gap: 35px;
+  }
+}

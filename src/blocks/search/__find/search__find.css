@@ -1,0 +1,16 @@
+.search__find {
+  margin: 19px;
+  padding: 0;
+  background: right no-repeat url(../../../images/find.svg);
+  background-size: 34px;
+  height: 34px;
+  min-width: 34px;
+  border: none;
+  opacity: 1;
+  cursor: pointer;
+  transition: opacity 0.5s;
+}
+.search__find:hover {
+  opacity: 0.8;
+  transition: all 0.5s;
+}

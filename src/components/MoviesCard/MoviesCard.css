@@ -73,7 +73,7 @@
   padding: 6px 0 0;
   grid-column-start: 1;
   grid-column-end: 3;
-  border-top: 1px solid #e8e8e8;
+  border-top: 1px solid rgba(232, 232, 232, 1);
   font-size: 11px;
   line-height: 13px;
   display: flex;

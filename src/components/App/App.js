@@ -25,15 +25,15 @@ export const App = () => {
     <>
       <Routes></Routes>
       <Header />
-      {/* <Main />
+      {/* <Main /> */}
       <Movies findMovies={findMovies} />
-      <SavedMovies />
-      <Footer /> */}
+      {/* <SavedMovies /> */}
+      {/* <Footer /> */}
       {/* <Login /> */}
       {/* <Register /> */}
       {/* <Profile /> */}
       {/* <NotFound /> */}
-      <Menu />
+      {/* <Menu /> */}
     </>
   );
 };

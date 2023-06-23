@@ -1,4 +1,5 @@
 .movies {
+  box-sizing: border-box;
   margin: 0;
   padding: 70px;
   display: flex;

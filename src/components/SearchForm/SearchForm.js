@@ -1,5 +1,6 @@
 import React from 'react';
 import './SearchForm.css';
+import { FilterCheckbox } from '../FilterCheckbox/FilterCheckbox';
 
 export const SearchForm = ({ onSubmit }) => {
   return (
@@ -24,13 +25,7 @@ export const SearchForm = ({ onSubmit }) => {
             ></button>
             <hr className="search__stick"></hr>
           </div>
-          <label className="search__label-checkbox">
-            <input
-              type="checkbox"
-              className="search__checkbox"
-            ></input>
-            Короткометражки
-          </label>
+          <FilterCheckbox className="search__checkbox" />
         </fieldset>
       </form>
       <hr className="search__line" />

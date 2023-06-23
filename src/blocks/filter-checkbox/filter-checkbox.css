@@ -1,0 +1,32 @@
+.filter-checkbox {
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 14px;
+  height: 40px;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  color: rgba(0, 0, 0, 1);
+  opacity: 1;
+  cursor: pointer;
+  transition: opacity 0.5s;
+}
+.filter-checkbox:hover {
+  opacity: 0.8;
+  transition: all 0.5s;
+}
+@media screen and (max-width: 992px) {
+  .filter-checkbox {
+    gap: 15px;
+  }
+}
+@media screen and (max-width: 576px) {
+  .filter-checkbox {
+    font-size: 11px;
+    line-height: 18px;
+    gap: 13px;
+  }
+}
