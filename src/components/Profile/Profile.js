@@ -36,8 +36,6 @@ export const Profile = ({ setIsAuthorized }) => {
     <button
       type="submit"
       className="profile__submit-button"
-      placeholder="Искать"
-      name="searchMovie"
       //Временная конструкция
       disabled={errMessage ? true : false}
     >
@@ -49,9 +47,7 @@ export const Profile = ({ setIsAuthorized }) => {
       <button
         type="button"
         className="profile__button profile__button_edit"
-        placeholder="Искать"
-        name="searchMovie"
-        onClick={switchEditProfile}
+               onClick={switchEditProfile}
       >
         Редактировать
       </button>

@@ -22,7 +22,11 @@ export const Menu = ({ isOpen, setOpen }) => {
           className="menu__exit"
           onClick={() => setOpen(false)}
         />
-        <Navigation themeColor={'white'} />
+        <Navigation
+          themeColor={'white'}
+          isOpen={isOpen}
+          setOpen={setOpen}
+        />
       </div>
     </div>
   );

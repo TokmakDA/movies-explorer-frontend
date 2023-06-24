@@ -14,7 +14,7 @@ import { NewMovies } from '../../data/NewMovies';
 
 export const App = () => {
   const [isAuthorized, setIsAuthorized] = useState(false);
-
+  
   const findMovies = (e) => {
     e.preventDefault();
     localStorage.setItem('searhMovies', JSON.stringify(NewMovies));

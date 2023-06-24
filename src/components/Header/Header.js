@@ -49,7 +49,10 @@ export const Header = ({ isAuthorized }) => {
         {isAuthorized ? (
           isScreenLg ? (
             <>
-              <Navigation themeColor={themeColor} />
+              <Navigation
+                themeColor={themeColor}
+                // setOpen={setOpenMenu}
+              />
             </>
           ) : (
             burger

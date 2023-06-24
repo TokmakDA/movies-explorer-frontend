@@ -3,18 +3,26 @@ import './Navigation.css';
 import { Link, useLocation } from 'react-router-dom';
 import { useResize } from '../../hooks/useResize';
 
-export const Navigation = ({ themeColor }) => {
+export const Navigation = ({ themeColor, setOpen }) => {
   const { isScreenLg } = useResize();
   const location = useLocation();
+  const checkLink = (patch) => {
+    return location.pathname === patch ? 'active' : 'unactive';
+  };
 
   return (
-    <nav className="nav">
+    <nav
+      className="nav"
+      onClick={() => setOpen?.(false)}
+    >
       <ul className="nav__links">
         {!isScreenLg && (
           <li>
             <Link
               to="/"
-              className="nav__link nav__link_active"
+              className={`nav__link nav__link_${checkLink(
+                '/',
+              )} nav__link_theme_${themeColor}`}
             >
               Главная
             </Link>
@@ -23,7 +31,9 @@ export const Navigation = ({ themeColor }) => {
         <li>
           <Link
             to="/movies"
-            className={`nav__link nav__link_active nav__link_theme_${themeColor}`}
+            className={`nav__link nav__link_${checkLink(
+              '/movies',
+            )} nav__link_theme_${themeColor}`}
           >
             Фильмы
           </Link>
@@ -31,7 +41,9 @@ export const Navigation = ({ themeColor }) => {
         <li>
           <Link
             to="/saved-movies"
-            className={`nav__link nav__link_active nav__link_theme_${themeColor}`}
+            className={`nav__link nav__link_${checkLink(
+              '/saved-movies',
+            )} nav__link_theme_${themeColor}`}
           >
             Сохранённые фильмы
           </Link>

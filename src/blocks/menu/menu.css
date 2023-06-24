@@ -7,9 +7,9 @@
   justify-content: right;
   align-items: center;
   display: flex;
-  /* visibility: hidden;
-  opacity: 0;
-  transition: 0.7s; */
-  z-index: 2;
   background-color: rgba(0, 0, 0, 0.3);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 2s;
+  z-index: 2;
 }
