@@ -9,6 +9,12 @@
   border: none;
   background: none;
 }
+.profile__input:focus {
+  box-shadow: 0 0 0 5px rgba(253, 253, 253, 0.5);
+  outline: 2px dashed rgba(107, 107, 107, 1);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
 .profile__input:invalid {
   color: rgba(238, 52, 101, 1);
 }

@@ -1,32 +1,38 @@
 import React, { useEffect } from 'react';
 import './Menu.css';
-import { Navigation } from '../Navigation/Navigation';
 
-export const Menu = ({ isOpen, setOpen }) => {
+export const Menu = ({ isOpen, closeMenu, children }) => {
   // указываем `useEffect` для обработчика `Escape`
   useEffect(() => {
     if (!isOpen) return;
     function handleEscapeKey(e) {
       if (e.code === 'Escape') {
-        setOpen(false);
+        closeMenu();
       }
     }
     document.addEventListener('keydown', handleEscapeKey);
     return () => document.removeEventListener('keydown', handleEscapeKey);
-  }, [isOpen, setOpen]);
+  }, [isOpen, closeMenu]);
+  // создаем обработчик клика на оверлей
+  const handleOverlay = (e) => {
+    console.log('e.target ===>', e.target);
+    console.log('e.currentTarget ===>', e.currentTarget);
+    if (e.target === e.currentTarget) {
+      closeMenu();
+    }
+  };
 
   return (
-    <div className={`menu ${isOpen && 'menu_is-opened'}`}>
+    <div
+      className={`menu ${isOpen && 'menu_is-opened'}`}
+      onClick={handleOverlay}
+    >
       <div className="menu__container">
         <button
           className="menu__exit"
-          onClick={() => setOpen(false)}
+          onClick={() => closeMenu()}
         />
-        <Navigation
-          themeColor={'white'}
-          isOpen={isOpen}
-          setOpen={setOpen}
-        />
+        {children}
       </div>
     </div>
   );

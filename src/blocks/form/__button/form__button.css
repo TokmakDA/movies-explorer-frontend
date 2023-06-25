@@ -30,3 +30,8 @@
   background: rgba(248, 248, 248, 1);
   cursor: default;
 }
+.form__button:focus {
+box-shadow: 0 0 0 5px rgba(253, 253, 253, 0.5);
+outline: 2px dashed rgba(107, 107, 107, 1);
+outline-offset: 2px;
+}

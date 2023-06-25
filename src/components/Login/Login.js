@@ -3,7 +3,6 @@ import './Login.css';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { AuthForm } from '../AuthForm/AuthForm';
-// import { useIsAuthorized } from '../../hooks/useIsAuthorized';
 
 export const Login = ({ setIsAuthorized }) => {
   const form = {

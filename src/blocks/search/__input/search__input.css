@@ -16,6 +16,12 @@
   background: 0 50% no-repeat url(../../../images/icon-find.svg);
   background-size: 22px;
 }
+.search__input:focus {
+  box-shadow: 0 0 0 5px rgba(253, 253, 253, 0.5);
+  outline: 2px dashed rgba(107, 107, 107, 1);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
 @media screen and (max-width: 576px) {
   .search__input {
     padding-left: 19px;

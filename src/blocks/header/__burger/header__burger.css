@@ -11,6 +11,12 @@
   opacity: 0.8;
   transition: opacity 0.5s;
 }
+.header__burger:focus {
+  box-shadow: 0 0 0 5px rgba(253, 253, 253, 0.5);
+  outline: 2px dashed rgba(107, 107, 107, 1);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
 
 @media screen and (max-width: 576px) {
   .header__burger {

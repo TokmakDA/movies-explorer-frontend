@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './AuthForm.css';
 import { Link } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
 
 export const AuthForm = ({ onSubmit, form, errMessage, children }) => {
-  const [currentButton, setButton] = useState(form.button);
   const { values, handleChange } = useForm();
 
   const handleSubmit = (e) => {
@@ -39,6 +38,7 @@ export const AuthForm = ({ onSubmit, form, errMessage, children }) => {
               name="name"
               required
               maxLength="100"
+              placeholder="Введите Имя"
             ></input>
           </label>
         )}
@@ -54,6 +54,7 @@ export const AuthForm = ({ onSubmit, form, errMessage, children }) => {
             name="email"
             required
             maxLength="100"
+            placeholder="Введите E-mail"
           ></input>
         </label>
         <label className="form__lebel">
@@ -68,6 +69,7 @@ export const AuthForm = ({ onSubmit, form, errMessage, children }) => {
             name="password"
             required
             maxLength="100"
+            placeholder="Введите Пароль"
           ></input>
         </label>
         <span className="form__error">{errMessage}</span>
@@ -77,7 +79,7 @@ export const AuthForm = ({ onSubmit, form, errMessage, children }) => {
           type="submit"
           className="form__button"
         >
-          {currentButton}
+          {form.button}
         </button>
         {children}
       </div>

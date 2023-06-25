@@ -22,7 +22,13 @@ export const AboutMe = () => {
         качественный продукт, как получать, так и предоставлять. В настоящий
         момент завершаю обучение на курсе Веб-разработка в Яндекс.Практикуме.
       </p>
-      <Link className="about-me__link">Github</Link>
+      <Link
+        className="about-me__link"
+        to="https://github.com/TokmakDA"
+        target="_blank"
+      >
+        Github
+      </Link>
     </div>
   );
 };

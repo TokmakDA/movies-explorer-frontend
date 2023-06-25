@@ -1,13 +1,29 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './NavTab.css';
+import AnchorLink from 'react-anchor-link-smooth-scroll';
 
 export const NavTab = () => {
   return (
     <nav className="content__nav-tab nav-tab">
-      <Link className="nav-tab__link">О проекте</Link>
-      <Link className="nav-tab__link">Технологии</Link>
-      <Link className="nav-tab__link">Студент</Link>
+      <AnchorLink
+        href="#about-project"
+        className="nav-tab__link"
+      >
+        О проекте
+      </AnchorLink>
+      <AnchorLink
+        href="#techs"
+        className="nav-tab__link"
+      >
+        Технологии
+      </AnchorLink>
+
+      <AnchorLink
+        href="#studen"
+        className="nav-tab__link"
+      >
+        Студент
+      </AnchorLink>
     </nav>
   );
 };

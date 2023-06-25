@@ -16,7 +16,7 @@ export const Profile = ({ setIsAuthorized }) => {
       name: currentUser?.name,
       email: currentUser?.email,
     });
-  }, [currentUser]);
+  }, [currentUser, setValues]);
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -47,7 +47,7 @@ export const Profile = ({ setIsAuthorized }) => {
       <button
         type="button"
         className="profile__button profile__button_edit"
-               onClick={switchEditProfile}
+        onClick={switchEditProfile}
       >
         Редактировать
       </button>
@@ -73,8 +73,9 @@ export const Profile = ({ setIsAuthorized }) => {
             className="profile__input"
             value={values?.name || ''}
             name="name"
-            disabled={!isEditOpen ? true : false}
+            disabled={!isEditOpen || errMessage ? true : false}
             onChange={handleChange}
+            placeholder="Введите Имя"
           />
         </label>
         <hr className="profile__line" />
@@ -84,8 +85,9 @@ export const Profile = ({ setIsAuthorized }) => {
             className="profile__input"
             value={values?.email || ''}
             name="email"
-            disabled={!isEditOpen ? true : false}
+            disabled={!isEditOpen || errMessage ? true : false}
             onChange={handleChange}
+            placeholder="Введите E-mail"
           />
         </label>
       </fieldset>
