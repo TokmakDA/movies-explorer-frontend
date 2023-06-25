@@ -1,7 +1,7 @@
 import React from 'react';
 import './AuthForm.css';
-import { Link } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
+import { Logo } from '../Logo/Logo';
 
 export const AuthForm = ({ onSubmit, form, errMessage, children }) => {
   const { values, handleChange } = useForm();
@@ -18,10 +18,7 @@ export const AuthForm = ({ onSubmit, form, errMessage, children }) => {
       onSubmit={handleSubmit}
     >
       <div className="form__top">
-        <Link
-          to="/"
-          className="form__logo"
-        />
+        <Logo parentClassName="form__logo" />
         <h1 className="form__greeting">{form.greeting}</h1>
       </div>
       <fieldset className="form__inputs">

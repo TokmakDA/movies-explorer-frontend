@@ -6,6 +6,8 @@ import './Header.css';
 import { Menu } from '../Menu/Menu';
 import { Navigation } from '../Navigation/Navigation';
 import { AuthButtons } from '../AuthButtons/AuthButtons';
+import { Logo } from '../Logo/Logo';
+
 
 export const Header = ({ isAuthorized }) => {
   const { isScreenLg } = useResize();
@@ -33,10 +35,7 @@ export const Header = ({ isAuthorized }) => {
   return (
     <>
       <header className={`header header_color_${themeColor}`}>
-        <Link
-          to="/"
-          className="header__logo"
-        />
+        <Logo parentClassName="header__logo" />
         {isAuthorized ? (
           isScreenLg ? (
             <>
