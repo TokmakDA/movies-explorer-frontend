@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './MoviesCard.css';
 
-export const MoviesCard = ({ card, insideMovies }) => {
+export const MoviesCard = ({ card, insideMovies, changeMyMovies }) => {
   const returnDuration = (duration) => {
     const minutes = duration % 60;
     const hours = Math.floor(duration / 60);
@@ -9,23 +9,18 @@ export const MoviesCard = ({ card, insideMovies }) => {
       minutes > 0 ? `${minutes}м` : ''
     }`;
   };
-
   const [myCards, setMyCards] = useState(
     JSON.parse(localStorage.getItem('myMovies')),
   );
   const [isLiked, setLiked] = useState(() =>
     myCards?.some((i) => i.movieId === card.movieId),
   );
-
   const deleteCard = () => {
     const cards = JSON.parse(localStorage.getItem('myMovies'));
     const result = cards.filter((i) => i.movieId !== card.movieId);
-    console.log('deleteCard => result', result);
     setMyCards(localStorage.setItem('myMovies', JSON.stringify([...result])));
-    console.log(
-      'new localStorage "myMovies"',
-      JSON.parse(localStorage.getItem('myMovies')),
-    );
+
+    changeMyMovies(true);
   };
   const addCard = () => {
     localStorage.getItem('myMovies') === null &&
@@ -34,6 +29,7 @@ export const MoviesCard = ({ card, insideMovies }) => {
     setMyCards(
       localStorage.setItem('myMovies', JSON.stringify([...cards, card])),
     );
+    changeMyMovies(true);
   };
   const handleClick = () => {
     // Проверяем локацию

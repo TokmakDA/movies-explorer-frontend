@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './Profile.css';
-import { useNavigate } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
 
-export const Profile = ({ setIsAuthorized }) => {
+export const Profile = ({ handleLogOut }) => {
   const { values, handleChange, setValues } = useForm();
   const [currentUser, setCurrentUser] = useState({
     name: 'Петруха',
@@ -17,7 +16,6 @@ export const Profile = ({ setIsAuthorized }) => {
       email: currentUser?.email,
     });
   }, [currentUser, setValues]);
-  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     setCurrentUser(values);
@@ -28,11 +26,7 @@ export const Profile = ({ setIsAuthorized }) => {
   const switchEditProfile = () => {
     setEditOpen(!isEditOpen);
   };
-  const handleLogOut = () => {
-    setIsAuthorized(false);
-    navigate('/');
-    localStorage.clear()
-  };
+
   const elementButtonSubmit = (
     <button
       type="submit"
@@ -53,7 +47,7 @@ export const Profile = ({ setIsAuthorized }) => {
         Редактировать
       </button>
       <button
-        onClick={handleLogOut}
+        onClick={(e) => handleLogOut(e)}
         className="profile__button profile__button_logout"
       >
         Выйти из аккаунта
