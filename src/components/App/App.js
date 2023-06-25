@@ -59,7 +59,7 @@ export const App = () => {
     setTimeout(() => {
       setPreloader(false);
       setSearchMovies(() => checkLocalStorage('searhMovies'));
-    }, 1000);
+    }, 1500);
   };
 
   useEffect(() => {
