@@ -49,7 +49,7 @@ export const App = () => {
       setMyMovies(() => checkLocalStorage('myMovies'));
       setСhangeMyMovies(false);
     }
-  }, [isСhangeMyMovies]);
+  }, [isСhangeMyMovies, checkLocalStorage]);
 
   const findMovies = (e) => {
     e.preventDefault();
@@ -57,7 +57,7 @@ export const App = () => {
     localStorage.setItem('searhMovies', JSON.stringify(NewMovies));
     setPreloader(true);
     setTimeout(() => {
-      setPreloader(false)
+      setPreloader(false);
       setSearchMovies(() => checkLocalStorage('searhMovies'));
     }, 1000);
   };
