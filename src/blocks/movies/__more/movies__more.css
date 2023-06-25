@@ -11,7 +11,21 @@
   border: 1px solid rgba(232, 232, 232, 1);
   border-radius: 6px;
   background: rgba(255, 255, 255, 1);
+  opacity: 1;
+  cursor: pointer;
+  transition: opacity 0.5s;
 }
+.movies__more:hover {
+  opacity: 0.8;
+  transition: opacity 0.5s;
+}
+.movies__more:focus {
+  transition: all 0.2s;
+  box-shadow: 0 0 0 5px rgba(253, 253, 253, 0.5);
+  outline: 2px dashed rgba(107, 107, 107, 1);
+  outline-offset: 2px;
+}
+
 
 @media screen and (max-width: 576px) {
   .movies__more {

@@ -17,8 +17,8 @@ export const App = () => {
   
   const findMovies = (e) => {
     e.preventDefault();
+    console.log('Нажали на поиск')
     localStorage.setItem('searhMovies', JSON.stringify(NewMovies));
-    alert('FindClick');
   };
 
   return (
@@ -51,7 +51,7 @@ export const App = () => {
             {/* 3 Уровень вложенности */}
             <Route
               path="/movies"
-              element={<Movies findMovies={findMovies} />}
+              element={<Movies findMovies={(e)=>findMovies(e)} />}
             />
             {/* 3 Уровень вложенности */}
             <Route

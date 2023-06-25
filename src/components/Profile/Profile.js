@@ -31,6 +31,7 @@ export const Profile = ({ setIsAuthorized }) => {
   const handleLogOut = () => {
     setIsAuthorized(false);
     navigate('/');
+    localStorage.clear()
   };
   const elementButtonSubmit = (
     <button

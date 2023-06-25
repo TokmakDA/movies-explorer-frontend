@@ -64,7 +64,6 @@ export const MoviesCard = ({ card, insideMovies }) => {
           className="movies__img"
           src={card.image}
           alt="Постер"
-          onClick={() => handleClick(card)}
         ></img>
       </div>
 
