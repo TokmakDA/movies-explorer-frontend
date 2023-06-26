@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { AuthForm } from '../AuthForm/AuthForm';
 
-export const Register = ({}) => {
+export const Register = () => {
   const navigate = useNavigate();
 
   const form = {

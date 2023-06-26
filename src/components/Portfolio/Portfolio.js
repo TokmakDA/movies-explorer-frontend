@@ -7,7 +7,7 @@ export const Portfolio = () => {
     <div className="student__portfolio portfolio">
       <h3 className="portfolio__title">Портфолио</h3>
       <ul className="portfolio__list">
-        <li>
+        <li className="portfolio__link-wrapper">
           <Link
             className="portfolio__link"
             to="https://github.com/TokmakDA/how-to-learn"
@@ -17,8 +17,7 @@ export const Portfolio = () => {
             <p className="portfolio__name-link">↗</p>
           </Link>
         </li>
-        <hr className="portfolio__line" />
-        <li>
+        <li className="portfolio__link-wrapper">
           <Link
             className="portfolio__link"
             to="https://tokmakda.github.io/russian-travel/index.html"
@@ -28,8 +27,7 @@ export const Portfolio = () => {
             <p className="portfolio__name-link">↗</p>
           </Link>
         </li>
-        <hr className="portfolio__line" />
-        <li>
+        <li className="portfolio__link-wrapper">
           <Link
             className="portfolio__link"
             to="https://tokmak-da.mesto.nomoredomains.monster"

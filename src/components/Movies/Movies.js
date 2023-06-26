@@ -19,7 +19,7 @@ export const Movies = ({ findMovies, movies, changeMyMovies }) => {
   };
 
   return (
-    <section className="content__movies movies">
+    <section className="movies">
       <SearchForm onSubmit={findMovies} />
       <MoviesCardList
         quantity={isQuantity}

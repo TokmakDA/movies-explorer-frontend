@@ -6,7 +6,7 @@ import { SavedDevider } from '../SavedDevider/SavedDevider';
 
 export const SavedMovies = ({ movies, changeMyMovies }) => {
   return (
-    <section className="content__movies movies">
+    <section className="movies">
       <SearchForm />
       <MoviesCardList
         movies={movies}

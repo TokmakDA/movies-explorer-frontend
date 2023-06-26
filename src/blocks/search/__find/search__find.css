@@ -25,3 +25,7 @@
   opacity: 0.8;
   transition: opacity 0.5s;
 }
+.search__find:disabled{
+  background: right no-repeat url(../../../images/find-unactive.svg);
+
+}
