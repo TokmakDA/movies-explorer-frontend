@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './Profile.css';
 import { useForm } from '../../hooks/useForm';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-export const Profile = ({ handleLogOut }) => {
+export const Profile = ({ onSignOut, onUpdateUser }) => {
   const { values, handleChange, setValues } = useForm();
-  const [currentUser, setCurrentUser] = useState({
-    name: 'Петруха',
-    email: 'petrucha@mail.ru',
-  });
+  // Подписка на контекст currentUser
+  const currentUser = useContext(CurrentUserContext);
+
   const [isEditOpen, setEditOpen] = useState(false);
   const [errMessage, setErrMessage] = useState(null);
   useEffect(() => {
@@ -16,11 +16,12 @@ export const Profile = ({ handleLogOut }) => {
       email: currentUser?.email,
     });
   }, [currentUser, setValues]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    setCurrentUser(values);
-    //Временная конструкция
-    setErrMessage('При обновлении профиля произошла ошибка.');
+    onUpdateUser(values);
+
+    console.log('Profile => handleSubmit => values', values);
   };
 
   const switchEditProfile = () => {
@@ -47,7 +48,7 @@ export const Profile = ({ handleLogOut }) => {
         Редактировать
       </button>
       <button
-        onClick={(e) => handleLogOut(e)}
+        onClick={(e) => onSignOut(e)}
         className="profile__button profile__button_logout"
       >
         Выйти из аккаунта
@@ -86,7 +87,7 @@ export const Profile = ({ handleLogOut }) => {
           />
         </label>
       </fieldset>
-      <span className="profile__error">{errMessage}</span>
+      <span className="profile__error">{errMessage || ''}</span>
       {!isEditOpen ? elementDefaulButtons : elementButtonSubmit}
     </form>
   );

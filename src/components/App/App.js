@@ -11,15 +11,20 @@ import { Register } from '../Register/Register';
 import { NotFound } from '../NotFound/NotFound';
 import { SavedMovies } from '../SavedMovies/SavedMovies';
 import { NewMovies } from '../../data/NewMovies';
-import ProtectedRoute from '../../utils/ProtectedRoute';
-import Preloader from '../Preloader/Preloader';
+import { ProtectedRoute } from '../../utils/ProtectedRoute';
+import { Preloader } from '../Preloader/Preloader';
+import { mainApi } from '../../utils/MainApi';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 export const App = () => {
-  const [isAuthorized, setIsAuthorized] = useState(false);
   const navigate = useNavigate();
+  const [isAuthorized, setAuthorized] = useState(false);
+  // Стейт данных пользователя
+  const [currentUser, setCurrentUser] = useState(null);
   const [isPreloader, setPreloader] = useState(false);
+
   const handleLogOut = (e) => {
-    setIsAuthorized(false);
+    setAuthorized(false);
     navigate('/');
     localStorage.clear();
     setSearchMovies([]);
@@ -67,8 +72,104 @@ export const App = () => {
     localStorage.setItem('searhMovies', JSON.stringify(searchMovies));
   }, [myMovies, searchMovies]);
 
+  // Обновление данных пользователя
+  const cbUpdateUser = async (userData) => {
+    setPreloader(true);
+    try {
+      const user = await mainApi.patchUserMe(userData);
+      console.log('cbUpdateUser => user', user);
+      setCurrentUser(user.data);
+      return;
+    } catch (err) {
+      console.log('cbUpdateUser => err', err);
+    } finally {
+      setPreloader(false);
+    }
+  };
+
+  const TESTdata = {
+    email: 'test@test.com',
+    password: 'test@test.com',
+  };
+  const TESTNewData = {
+    name: 'test@test.by',
+    email: 'test@test.by',
+    password: 'test@test.by',
+  };
+  // Авторизация
+  const cbSignIn = async (userData) => {
+    setPreloader(true);
+    try {
+      const user = await mainApi.postSignin(userData);
+      console.log('cbSignIn => user', user);
+      setCurrentUser(user.data);
+      navigate('/movies');
+      setAuthorized(true);
+      return;
+    } catch (err) {
+      console.log('cbSignIn => err', err);
+      navigate('/signin');
+    } finally {
+      setPreloader(false);
+    }
+  };
+  // Выход
+  const cbSignOut = async () => {
+    setPreloader(true);
+    try {
+      const res = await mainApi.getSignout();
+      setAuthorized(false);
+      localStorage.clear();
+      setCurrentUser(null);
+      setSearchMovies([]);
+      console.log('cbSignOut => res', res);
+    } catch (err) {
+      console.log('cbSignOut => err', err);
+    } finally {
+      setPreloader(false);
+      navigate('/');
+    }
+  };
+
+  // Регистрация
+  const cbSignUp = async (NewData) => {
+    setPreloader(true);
+    try {
+      const res = await mainApi.postSignup(NewData);
+      navigate('/signin');
+      console.log('cbSignUp => res', res);
+    } catch (err) {
+      console.log('cbSignUp => err', err);
+    } finally {
+      setPreloader(false);
+    }
+  };
+
+  const getInitial = useCallback(async () => {
+    setPreloader(true);
+    try {
+      const initialsData = await mainApi.getInitialsData();
+      if (initialsData) {
+        console.log('getInitial => initialsData', initialsData);
+        setAuthorized(true);
+        setCurrentUser(initialsData[0].data);
+        // setCurrentCards(initialsData[1].data);
+        // navigate('/movies');
+      }
+    } catch (err) {
+      console.log('getInitial => err', err);
+      setAuthorized(false);
+    } finally {
+      setPreloader(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    getInitial();
+  }, []);
+
   return (
-    <>
+    <CurrentUserContext.Provider value={currentUser}>
       {isPreloader && <Preloader />}
       <Routes>
         {/* 1 Уровень вложенности */}
@@ -126,7 +227,10 @@ export const App = () => {
             path="/profile"
             element={
               <ProtectedRoute isAuthorized={isAuthorized}>
-                <Profile handleLogOut={handleLogOut} />
+                <Profile
+                  onSignOut={cbSignOut}
+                  onUpdateUser={(userData) => cbUpdateUser(userData)}
+                />
               </ProtectedRoute>
             }
           />
@@ -134,12 +238,12 @@ export const App = () => {
         {/* 1 Уровень вложенности */}
         <Route
           path="/signup"
-          element={<Register />}
+          element={<Register onSignUp={(userData) => cbSignUp(userData)}/>}
         />
         {/* 1 Уровень вложенности */}
         <Route
           path="/signin"
-          element={<Login setIsAuthorized={setIsAuthorized} />}
+          element={<Login onSingIn={(userData) => cbSignIn(userData)} />}
         />
         {/* 1 Уровень вложенности */}
         <Route
@@ -147,6 +251,6 @@ export const App = () => {
           element={<NotFound />}
         />
       </Routes>
-    </>
+    </CurrentUserContext.Provider>
   );
 };

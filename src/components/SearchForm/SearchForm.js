@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import './SearchForm.css';
 import { FilterCheckbox } from '../FilterCheckbox/FilterCheckbox';
 import { useForm } from '../../hooks/useForm';
