@@ -1,0 +1,16 @@
+.about-project__timeline-wrapper {
+  margin: 0;
+  display: grid;
+  column-gap: 0;
+  row-gap: 14px;
+  grid-auto-flow: column dense;
+  grid-template-rows: auto auto;
+  grid-template-columns: minmax(140px, 1fr) minmax(140px, 4fr);
+}
+
+@media screen and (max-width: 576px) {
+  .about-project__timeline-wrapper {
+    grid-template-columns: minmax(100px, 1fr) minmax(100px, 4fr);
+    row-gap: 10px;
+  }
+}

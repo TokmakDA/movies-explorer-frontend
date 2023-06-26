@@ -1,0 +1,20 @@
+.form__link {
+  margin: 0;
+  padding: 0;
+  color: rgba(43, 224, 128, 1);
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+.form__link:hover {
+  opacity: 0.7;
+  transition: opacity 0.5s;
+}
+.form__link:focus {
+  transition: all 0.2s;
+  box-shadow: 0 0 0 5px rgba(253, 253, 253, 0.5);
+  outline: 2px dashed rgba(107, 107, 107, 1);
+  outline-offset: 2px;
+  border-radius: 3px;
+}

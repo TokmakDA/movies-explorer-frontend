@@ -1,0 +1,12 @@
+.search__line {
+  margin: 0;
+  box-sizing: border-box;
+  border: none;
+  outline: 0.5px solid rgba(232, 232, 232, 1);
+}
+@media screen and (max-width: 576px) {
+  .search__line {
+    margin-left: 4px;
+    margin-right: 4px;
+  }
+}

@@ -1,0 +1,31 @@
+.search__find {
+  margin: 19px;
+  padding: 0;
+  background: right no-repeat url(../../../images/find.svg);
+  background-size: 34px;
+  height: 34px;
+  min-width: 34px;
+  border: none;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+.search__find:hover {
+  opacity: 0.8;
+  transition: opacity 0.5s;
+}
+.search__find:focus {
+  transition: all 0.2s;
+  box-shadow: 0 0 0 5px rgba(253, 253, 253, 0.5);
+  outline: 2px dashed rgba(107, 107, 107, 1);
+  outline-offset: 2px;
+  border-radius: 50%;
+}
+.search__find:hover {
+  opacity: 0.8;
+  transition: opacity 0.5s;
+}
+.search__find:disabled{
+  background: right no-repeat url(../../../images/find-unactive.svg);
+
+}

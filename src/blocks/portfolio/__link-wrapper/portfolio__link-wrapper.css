@@ -1,0 +1,13 @@
+.portfolio__link-wrapper {
+  padding: 20px 0 18px;
+  margin: 0;
+  box-sizing: border-box;
+  border-bottom: 1px solid rgba(232, 232, 232, 1);
+}
+.portfolio__link-wrapper:first-child {
+  padding-top: 0;
+}
+.portfolio__link-wrapper:last-child {
+  padding-bottom: 0;
+  border: none;
+}

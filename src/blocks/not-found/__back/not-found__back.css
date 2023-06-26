@@ -1,0 +1,25 @@
+.not-found__back {
+  grid-row-start: 3;
+  align-self: center;
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: rgba(43, 224, 128, 1);
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+.not-found__back:hover {
+  opacity: 0.8;
+  transition: opacity 0.5s;
+}
+@media screen and (max-width: 576px) {
+  .not-found__back {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

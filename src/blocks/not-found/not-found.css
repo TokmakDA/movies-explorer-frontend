@@ -1,0 +1,21 @@
+.not-found {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 60px;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 1fr auto;
+  height: 100vh;
+  align-items: center;
+}
+@media screen and (max-width: 992px) {
+  .not-found {
+    padding-top: clamp(60px, calc(100vh - 802px), 222px);
+    padding-bottom: clamp(60px, calc(100vh - 802px), 222px);
+  }
+}
+@media screen and (max-width: 576px) {
+  .not-found {
+    padding: 30px;
+  }
+}

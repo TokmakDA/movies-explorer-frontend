@@ -1,0 +1,22 @@
+.form__input {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 15px;
+  min-height: 46px;
+  background: rgba(249, 249, 249, 1);
+  border-radius: 8px;
+  border: none;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  color: rgba(0, 0, 0, 1);
+}
+.form__input:invalid {
+  color: rgba(238, 52, 101, 1);
+}
+.form__input:focus {
+  transition: all 0.2s;
+  box-shadow: 0 0 0 5px rgba(253, 253, 253, 0.5);
+  outline: 2px dashed rgba(107, 107, 107, 1);
+  outline-offset: 2px;
+}

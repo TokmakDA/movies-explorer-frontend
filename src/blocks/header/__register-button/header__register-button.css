@@ -1,0 +1,32 @@
+.header__register-button {
+  display: flex;
+  align-items: center;
+  text-align: right;
+  margin: 0;
+  padding: 0;
+  color: rgba(255, 255, 255, 1);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+.header__register-button:hover {
+  opacity: 0.8;
+  transition: opacity 0.5s;
+}
+.header__register-button:focus {
+  transition: all 0.2s;
+  box-shadow: 0 0 0 5px rgba(253, 253, 253, 0.5);
+  outline: 2px dashed rgba(107, 107, 107, 1);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+@media screen and (max-width: 576px) {
+  .header__register-button {
+    font-size: 10px;
+  }
+}

@@ -1,0 +1,21 @@
+.nav__links {
+  display: flex;
+  list-style: none;
+  column-gap: 16px;
+  justify-self: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+@media screen and (max-width: 992px) {
+  .nav__links {
+    flex-direction: column;
+    row-gap: 28px;
+    align-items: center;
+  }
+}
+@media screen and (max-width: 576px) {
+  .nav__links {
+    row-gap: 24px;
+  }
+}

@@ -1,0 +1,8 @@
+@import url(../../blocks/movies/__card/movies__card.css);
+@import url(../../blocks/movies/__img-wrapper/movies__img-wrapper.css);
+@import url(../../blocks/movies/__img/movies__img.css);
+@import url(../../blocks/movies/__name/movies__name.css);
+@import url(../../blocks/movies/__like/movies__like.css);
+@import url(../../blocks/movies/__like/_active/movies__like_active.css);
+@import url(../../blocks/movies/__like/_delete/movies__like_delete.css);
+@import url(../../blocks/movies/__time/movies__time.css);

@@ -1,0 +1,17 @@
+.about-me {
+  box-sizing: border-box;
+
+  margin: 66px 0 0;
+  display: grid;
+  column-gap: 49px;
+  align-content: stretch;
+  justify-content: space-between;
+  align-items: stretch;
+  justify-items: stretch;
+}
+
+@media screen and (max-width: 576px) {
+  .about-me {
+    margin-top: 60px;
+  }
+}

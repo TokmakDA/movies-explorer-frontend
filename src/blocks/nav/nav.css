@@ -1,0 +1,24 @@
+.nav {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-start: 2;
+  grid-column-end: 4;
+  width: 100%;
+}
+@media screen and (max-width: 992px) {
+  .nav {
+    grid-template-columns: auto;
+    grid-template-rows: 1fr max-content;
+    height: 100%;
+    padding-top: 90px;
+    padding-bottom: 90px;
+  }
+}
+@media screen and (max-width: 576px) {
+  .nav {
+    padding-bottom: 46px;
+  }
+}

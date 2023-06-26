@@ -1,0 +1,27 @@
+.about-me__link {
+  margin: 40px 0 0;
+  padding: 0;
+  width: max-content;
+  grid-row-start: 5;
+  grid-row-end: 6;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  text-decoration: none;
+  color: rgba(0, 0, 0, 1);
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+.about-me__link:hover {
+  opacity: 0.7;
+  transition: opacity 0.5s;
+}
+.about-me__link:focus {
+  transition: all 0.2s;
+  box-shadow: 0 0 0 5px rgba(253, 253, 253, 0.5);
+  outline: 2px dashed rgba(107, 107, 107, 1);
+  outline-offset: 2px;
+  border-radius: 3px;
+
+}

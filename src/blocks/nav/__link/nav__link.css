@@ -1,0 +1,33 @@
+.nav__link {
+  margin: 0;
+  padding: 0;
+  font-size: 13px;
+  line-height: 18px;
+  text-align: center;
+  color: rgba(0, 0, 0, 1);
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+.nav__link:hover {
+  opacity: 0.7;
+  transition: opacity 0.5s;
+}
+.nav__link:focus {
+  transition: all 0.2s;
+  box-shadow: 0 0 0 5px rgba(253, 253, 253, 0.5);
+  outline: 2px dashed rgba(107, 107, 107, 1);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+@media screen and (max-width: 992px) {
+  .nav__link {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+@media screen and (max-width: 576px) {
+  .nav__link {
+    margin: 15px;
+  }
+}

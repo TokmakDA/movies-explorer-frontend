@@ -1,0 +1,26 @@
+.header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 0 auto;
+  min-height: 74px;
+  padding: 0 70px;
+  align-items: center;
+  justify-items: stretch;
+  justify-content: space-between;
+}
+
+
+@media screen and (max-width: 992px) {
+  .header {
+    padding-right: 30px;
+    padding-left: 30px;
+    grid-template-columns: auto auto;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .header {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+}

@@ -1,0 +1,17 @@
+.movies__name {
+  margin: 13px 0;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  max-width: 100%;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  text-align: start;
+  color: rgba(0, 0, 0, 1);
+  white-space: pre-wrap;
+  overflow: hidden;
+  min-height: 32px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}

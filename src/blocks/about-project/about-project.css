@@ -1,0 +1,16 @@
+.about-project {
+  background: rgba(255, 255, 255, 1);
+  padding: 110px 70px;
+}
+
+@media screen and (max-width: 992px) {
+  .about-project {
+    padding: 90px 50px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .about-project {
+    padding: 70px 18px;
+  }
+}

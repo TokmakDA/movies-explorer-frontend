@@ -1,0 +1,18 @@
+.promo__wrapper {
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: center no-repeat url(../../../images/landing-logo.svg);
+  background-size: 320px 320px;
+  min-height: 320px;
+}
+
+@media screen and (max-width: 576px) {
+  .promo__wrapper {
+    background-size: 248px 248px;
+    min-height: 248px;
+
+  }
+}

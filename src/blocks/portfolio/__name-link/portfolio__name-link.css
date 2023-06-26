@@ -1,0 +1,23 @@
+.portfolio__name-link {
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 50px;
+  letter-spacing: -0.04em;
+  color: rgba(0, 0, 0, 1);
+}
+
+@media screen and (max-width: 992px) {
+  .portfolio__name-link {
+    font-size: 28px;
+    line-height: 50px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .portfolio__name-link {
+    font-size: 18px;
+    line-height: 28px;
+  }
+}

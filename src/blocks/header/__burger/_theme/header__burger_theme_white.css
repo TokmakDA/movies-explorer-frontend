@@ -1,0 +1,9 @@
+.header__burger_theme_white {
+  background: center no-repeat url(../../../../images/icon-main_768.svg);
+}
+
+@media screen and (max-width: 576px) {
+  .header__burger_theme_white {
+    background: center no-repeat url(../../../../images/icon-main_320.svg);
+  }
+}

@@ -1,0 +1,7 @@
+@import url(../../blocks/header/header.css);
+@import url(../../blocks/header/_color/header_color_white.css);
+@import url(../../blocks/header/_color/header_color_gray.css);
+@import url(../../blocks/header/__logo/header__logo.css);
+@import url(../../blocks/header/__burger/header__burger.css);
+@import url(../../blocks/header/__burger/_theme/header__burger_theme_gray.css);
+@import url(../../blocks/header/__burger/_theme/header__burger_theme_white.css);
