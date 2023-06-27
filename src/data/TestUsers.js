@@ -20,27 +20,3 @@ const TESTdata = [
     password: 'qwerty@qwerty.ru',
   },
 ];
-
-const source = {
-  name: 'fffggfg',
-  surname: 'fhfhfhfg',
-  about: 'kdfkdfk',
-};
-
-console.log(
-  Object.keys(source)
-    .filter((key) => key !== 'about')
-    .reduce((res, key) => {
-      res[key] = source[key];
-      return res;
-    }, {}),
-);
-
-console.log(
-  source
-    .filter((key) => key !== 'about')
-    .reduce((res, key) => {
-      res[key] = source[key];
-      return res;
-    }, {}),
-);
