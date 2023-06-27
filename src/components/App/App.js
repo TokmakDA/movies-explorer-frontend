@@ -10,11 +10,13 @@ import { Login } from '../Login/Login';
 import { Register } from '../Register/Register';
 import { NotFound } from '../NotFound/NotFound';
 import { SavedMovies } from '../SavedMovies/SavedMovies';
-import { NewMovies } from '../../data/NewMovies';
+// import { NewMovies } from '../../data/NewMovies';
 import { ProtectedRoute } from '../../utils/ProtectedRoute';
 import { Preloader } from '../Preloader/Preloader';
 import { mainApi } from '../../utils/MainApi';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { moviesApi } from '../../utils/MoviesApi';
+import { handlingCards } from '../../utils/handlingCards';
 
 export const App = () => {
   const navigate = useNavigate();
@@ -22,23 +24,17 @@ export const App = () => {
   // Стейт данных пользователя
   const [currentUser, setCurrentUser] = useState(null);
   const [isPreloader, setPreloader] = useState(false);
-
-  const handleLogOut = (e) => {
-    setAuthorized(false);
-    navigate('/');
-    localStorage.clear();
-    setSearchMovies([]);
-  };
   // Проверить localStorage
   const checkLocalStorage = useCallback((key) => {
     const item = JSON.parse(localStorage.getItem(key));
     if (item) {
       return item;
     }
-    console.log('checLocalStorage =>', key);
+    console.log('checLocalStorage =>', key); // Удалить
     return [];
   }, []);
 
+  // проверяем localStorage на наличие фильмов и сохраняем в соответсвующий стейт
   const [searchMovies, setSearchMovies] = useState(() =>
     checkLocalStorage('searhMovies'),
   );
@@ -56,10 +52,21 @@ export const App = () => {
     }
   }, [isСhangeMyMovies, checkLocalStorage]);
 
+  const getMovies = async () => {
+    setPreloader(true);
+    const cards = await moviesApi();
+    console.log(cards);
+    const newCards = handlingCards(cards);
+    console.log('getMovies => newCards', newCards);
+
+    localStorage.setItem('searhMovies', JSON.stringify(newCards));
+  };
+
   const findMovies = (e) => {
     e.preventDefault();
-    console.log('Нажали на поиск');
-    localStorage.setItem('searhMovies', JSON.stringify(NewMovies));
+    console.log('Нажали на поиск'); // Удалить
+    // localStorage.setItem('searhMovies', JSON.stringify(NewMovies));
+    getMovies();
     setPreloader(true);
     setTimeout(() => {
       setPreloader(false);
@@ -72,42 +79,65 @@ export const App = () => {
     localStorage.setItem('searhMovies', JSON.stringify(searchMovies));
   }, [myMovies, searchMovies]);
 
+  // обработчик лайков и дизлайков
+  const cbLike = async (card) => {
+    // Проверяем лайк лайк
+    const isMy = myMovies?.find((i) => i.movieId === card.movieId);
+    console.log('cbLike => isMy', isMy);
+    try {
+      if (!isMy) {
+        // Добавляем карточку
+        const mewMyMovie = await mainApi.postMovies(
+          Object.keys(card)
+            .filter((key) => key !== '_id')
+            .reduce((res, key) => {
+              res[key] = card[key];
+              return res;
+            }, {}),
+        );
+        console.log('cbLike => !isMy => postMovies', mewMyMovie);
+        setMyMovies([...myMovies, mewMyMovie.data]);
+        console.log('cbLike => !isMy => postMovies => myMovies', myMovies);
+        // changeMyMovies(true);
+      } else {
+        // Удаляем карточку
+        await mainApi.deleteMovies(isMy._id);
+        console.log('cbLike => isMy => deleteMovies');
+        const result = myMovies.filter((i) => i.movieId !== card.movieId);
+        setMyMovies([...result]);
+      }
+      changeMyMovies(true);
+      console.log('cbLike => if(){}else{} => changeMyMovies', isСhangeMyMovies);
+    } catch (err) {
+      console.log('cbCardLike => err', err);
+    }
+  };
+
   // Обновление данных пользователя
   const cbUpdateUser = async (userData) => {
     setPreloader(true);
     try {
       const user = await mainApi.patchUserMe(userData);
-      console.log('cbUpdateUser => user', user);
+      console.log('cbUpdateUser => user', user); // Удалить
       setCurrentUser(user.data);
       return;
     } catch (err) {
-      console.log('cbUpdateUser => err', err);
+      console.log('cbUpdateUser => err', err); // Удалить
     } finally {
       setPreloader(false);
     }
-  };
-
-  const TESTdata = {
-    email: 'test@test.com',
-    password: 'test@test.com',
-  };
-  const TESTNewData = {
-    name: 'test@test.by',
-    email: 'test@test.by',
-    password: 'test@test.by',
   };
   // Авторизация
   const cbSignIn = async (userData) => {
     setPreloader(true);
     try {
       const user = await mainApi.postSignin(userData);
-      console.log('cbSignIn => user', user);
       setCurrentUser(user.data);
       navigate('/movies');
       setAuthorized(true);
-      return;
+      console.log('cbSignIn => user', user); // Удалить
     } catch (err) {
-      console.log('cbSignIn => err', err);
+      console.log('cbSignIn => err', err); // Удалить
       navigate('/signin');
     } finally {
       setPreloader(false);
@@ -118,52 +148,56 @@ export const App = () => {
     setPreloader(true);
     try {
       const res = await mainApi.getSignout();
+      console.log('cbSignOut => res', res); // Удалить
       setAuthorized(false);
       localStorage.clear();
       setCurrentUser(null);
       setSearchMovies([]);
-      console.log('cbSignOut => res', res);
+      setMyMovies([]);
     } catch (err) {
-      console.log('cbSignOut => err', err);
+      console.log('cbSignOut => err', err); // Удалить
     } finally {
       setPreloader(false);
       navigate('/');
     }
   };
-
   // Регистрация
   const cbSignUp = async (NewData) => {
     setPreloader(true);
     try {
       const res = await mainApi.postSignup(NewData);
-      navigate('/signin');
-      console.log('cbSignUp => res', res);
+      cbSignIn({
+        email: NewData.email,
+        password: NewData.password,
+      });
+      console.log('cbSignUp => res', res); // Удалить
     } catch (err) {
-      console.log('cbSignUp => err', err);
+      console.log('cbSignUp => err', err); // Удалить
     } finally {
       setPreloader(false);
     }
   };
 
+  // Переписать
   const getInitial = useCallback(async () => {
     setPreloader(true);
     try {
-      const initialsData = await mainApi.getInitialsData();
-      if (initialsData) {
-        console.log('getInitial => initialsData', initialsData);
-        setAuthorized(true);
-        setCurrentUser(initialsData[0].data);
-        // setCurrentCards(initialsData[1].data);
-        // navigate('/movies');
-      }
+      const initialsUser = await mainApi.getUserMe();
+      const initialsCard = await mainApi.getMovies();
+      console.log('getInitial => initialsUser', initialsUser);
+      console.log('getInitial => initialsCard', initialsCard);
+      setAuthorized(true);
+      setCurrentUser(initialsUser.data);
+      setMyMovies(initialsCard.data);
+      navigate('/movies');
     } catch (err) {
-      console.log('getInitial => err', err);
+      console.log('getInitial => err', err); // Удалить
+      navigate('/');
       setAuthorized(false);
     } finally {
       setPreloader(false);
     }
-  }, []);
-
+  }, [navigate]);
   useEffect(() => {
     getInitial();
   }, []);
@@ -205,6 +239,7 @@ export const App = () => {
                     findMovies={(e) => findMovies(e)}
                     movies={searchMovies}
                     changeMyMovies={changeMyMovies}
+                    onLike={cbLike}
                   />
                 </ProtectedRoute>
               }
@@ -217,6 +252,7 @@ export const App = () => {
                   <SavedMovies
                     movies={myMovies}
                     changeMyMovies={changeMyMovies}
+                    onLike={cbLike}
                   />
                 </ProtectedRoute>
               }
@@ -238,7 +274,7 @@ export const App = () => {
         {/* 1 Уровень вложенности */}
         <Route
           path="/signup"
-          element={<Register onSignUp={(userData) => cbSignUp(userData)}/>}
+          element={<Register onSignUp={(userData) => cbSignUp(userData)} />}
         />
         {/* 1 Уровень вложенности */}
         <Route

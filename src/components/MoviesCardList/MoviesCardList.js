@@ -7,7 +7,7 @@ export const MoviesCardList = ({
   quantity,
   insideMovies,
   movies,
-  changeMyMovies,
+  onLike
 }) => {
   return (
     <ul className="movies__cards">
@@ -15,10 +15,10 @@ export const MoviesCardList = ({
         movies.slice(0, quantity).map((card) => {
           return (
             <MoviesCard
-              key={card.movieId}
+              key={card._id}
               card={card}
               insideMovies={insideMovies}
-              changeMyMovies={changeMyMovies}
+              onLike={onLike}
             />
           );
         })}

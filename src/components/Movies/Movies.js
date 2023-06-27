@@ -6,7 +6,7 @@ import { MoviesCardList } from '../MoviesCardList/MoviesCardList';
 import { SearchForm } from '../SearchForm/SearchForm';
 import { More } from '../More/More';
 
-export const Movies = ({ findMovies, movies, changeMyMovies }) => {
+export const Movies = ({ findMovies, movies, onLike}) => {
   const [isQuantity, setQuantity] = useState(null);
   const { isScreenLg, isScreenSm } = useResize();
   useEffect(() => {
@@ -25,7 +25,7 @@ export const Movies = ({ findMovies, movies, changeMyMovies }) => {
         quantity={isQuantity}
         insideMovies={true}
         movies={movies}
-        changeMyMovies={changeMyMovies}
+        onLike={onLike}
       />
       <More onClick={(e) => handleClick(e, isQuantity)} />
     </section>

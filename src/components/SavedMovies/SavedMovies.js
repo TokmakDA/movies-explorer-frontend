@@ -4,13 +4,13 @@ import { SearchForm } from '../SearchForm/SearchForm';
 import { MoviesCardList } from '../MoviesCardList/MoviesCardList';
 import { SavedDevider } from '../SavedDevider/SavedDevider';
 
-export const SavedMovies = ({ movies, changeMyMovies }) => {
+export const SavedMovies = ({ movies, onLike }) => {
   return (
     <section className="movies">
       <SearchForm />
       <MoviesCardList
         movies={movies}
-        changeMyMovies={changeMyMovies}
+        onLike={onLike}
       />
       <SavedDevider />
     </section>
