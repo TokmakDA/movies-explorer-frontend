@@ -1,5 +1,6 @@
 .preloader {
-  position: fixed;
+  box-sizing: border-box;
+  position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -7,4 +8,5 @@
   height: 100%;
   z-index: 10;
   margin: 0;
+  padding: 0;
 }

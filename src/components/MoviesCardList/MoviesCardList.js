@@ -1,14 +1,9 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import './MoviesCardList.css';
 import { MoviesCard } from '../MoviesCard/MoviesCard';
 
-export const MoviesCardList = ({
-  quantity,
-  insideMovies,
-  movies,
-  onLike
-}) => {
+export const MoviesCardList = ({ quantity, insideMovies, movies, onLike }) => {
   return (
     <ul className="movies__cards">
       {movies !== null &&

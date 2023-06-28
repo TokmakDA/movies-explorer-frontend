@@ -10,13 +10,13 @@ import { Login } from '../Login/Login';
 import { Register } from '../Register/Register';
 import { NotFound } from '../NotFound/NotFound';
 import { SavedMovies } from '../SavedMovies/SavedMovies';
-// import { NewMovies } from '../../data/NewMovies';
 import { ProtectedRoute } from '../../utils/ProtectedRoute';
 import { Preloader } from '../Preloader/Preloader';
 import { mainApi } from '../../utils/MainApi';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { moviesApi } from '../../utils/MoviesApi';
 import { handlingCards } from '../../utils/handlingCards';
+import { filterMovies } from '../../utils/filterMovies';
 
 export const App = () => {
   const navigate = useNavigate();
@@ -24,6 +24,7 @@ export const App = () => {
   // Стейт данных пользователя
   const [currentUser, setCurrentUser] = useState(null);
   const [isPreloader, setPreloader] = useState(false);
+  // const [isCheked, setChecked] = useState(false);
   // Проверить localStorage
   const checkLocalStorage = useCallback((key) => {
     const item = JSON.parse(localStorage.getItem(key));
@@ -52,26 +53,23 @@ export const App = () => {
     }
   }, [isСhangeMyMovies, checkLocalStorage]);
 
-  const getMovies = async () => {
+  // Запрос фильмов с Beatfilm-Movies
+  const getMovies = async (value) => {
     setPreloader(true);
-    const cards = await moviesApi();
-    console.log(cards);
-    const newCards = handlingCards(cards);
-    console.log('getMovies => newCards', newCards);
-
-    localStorage.setItem('searhMovies', JSON.stringify(newCards));
-  };
-
-  const findMovies = (e) => {
-    e.preventDefault();
-    console.log('Нажали на поиск'); // Удалить
-    // localStorage.setItem('searhMovies', JSON.stringify(NewMovies));
-    getMovies();
-    setPreloader(true);
-    setTimeout(() => {
-      setPreloader(false);
+    try {
+      const cards = await moviesApi();
+      const newCards = handlingCards(cards);
+      const dataCards = filterMovies(newCards, value);
+      localStorage.setItem('searhMovies', JSON.stringify(dataCards));
       setSearchMovies(() => checkLocalStorage('searhMovies'));
-    }, 1500);
+    } catch (err) {
+      console.log('getMovies => err', err);
+    } finally {
+      setPreloader(false);
+    }
+  };
+  const findMovies = (value) => {
+    getMovies(value);
   };
 
   useEffect(() => {
@@ -133,14 +131,15 @@ export const App = () => {
     try {
       const user = await mainApi.postSignin(userData);
       setCurrentUser(user.data);
-      navigate('/movies');
       setAuthorized(true);
+
       console.log('cbSignIn => user', user); // Удалить
     } catch (err) {
       console.log('cbSignIn => err', err); // Удалить
-      navigate('/signin');
+      // navigate('/signin');
     } finally {
       setPreloader(false);
+      setTimeout(navigate('/movies'), 100);
     }
   };
   // Выход
@@ -205,88 +204,84 @@ export const App = () => {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       {isPreloader && <Preloader />}
-      <Routes>
-        {/* 1 Уровень вложенности */}
-        <Route
-          path="/"
-          element={
-            <>
-              <Header isAuthorized={isAuthorized} />
-              <Outlet />
-            </>
-          }
-        >
-          {/* 2 Уровень вложенности */}
+      <ProtectedRoute isAuthorized={isAuthorized}>
+        <Routes>
+          {/* 1 Уровень вложенности */}
           <Route
+            path="/"
             element={
               <>
+                <Header isAuthorized={isAuthorized} />
                 <Outlet />
-                <Footer />
               </>
             }
           >
-            {/* 3 Уровень вложенности */}
+            {/* 2 Уровень вложенности */}
             <Route
-              index
-              element={<Main />}
-            />
-            {/* 3 Уровень вложенности */}
-            <Route
-              path="/movies"
               element={
-                <ProtectedRoute isAuthorized={isAuthorized}>
+                <>
+                  <Outlet />
+                  <Footer />
+                </>
+              }
+            >
+              {/* 3 Уровень вложенности */}
+              <Route
+                index
+                element={<Main />}
+              />
+              {/* 3 Уровень вложенности */}
+              <Route
+                path="/movies"
+                element={
                   <Movies
-                    findMovies={(e) => findMovies(e)}
+                    findMovies={(value) => findMovies(value)}
                     movies={searchMovies}
                     changeMyMovies={changeMyMovies}
                     onLike={cbLike}
                   />
-                </ProtectedRoute>
-              }
-            />
-            {/* 3 Уровень вложенности */}
-            <Route
-              path="/saved-movies"
-              element={
-                <ProtectedRoute isAuthorized={isAuthorized}>
+                }
+              />
+              {/* 3 Уровень вложенности */}
+              <Route
+                path="/saved-movies"
+                element={
                   <SavedMovies
                     movies={myMovies}
                     changeMyMovies={changeMyMovies}
                     onLike={cbLike}
                   />
-                </ProtectedRoute>
-              }
-            />
-          </Route>
-          {/* 2 Уровень вложенности */}
-          <Route
-            path="/profile"
-            element={
-              <ProtectedRoute isAuthorized={isAuthorized}>
+                }
+              />
+            </Route>
+            {/* 2 Уровень вложенности */}
+            <Route
+              path="/profile"
+              element={
                 <Profile
                   onSignOut={cbSignOut}
                   onUpdateUser={(userData) => cbUpdateUser(userData)}
                 />
-              </ProtectedRoute>
-            }
+              }
+            />
+          </Route>
+          {/* 1 Уровень вложенности */}
+          <Route
+            path="/signup"
+            element={<Register onSignUp={(userData) => cbSignUp(userData)} />}
           />
-        </Route>
-        {/* 1 Уровень вложенности */}
-        <Route
-          path="/signup"
-          element={<Register onSignUp={(userData) => cbSignUp(userData)} />}
-        />
-        {/* 1 Уровень вложенности */}
-        <Route
-          path="/signin"
-          element={<Login onSingIn={(userData) => cbSignIn(userData)} />}
-        />
-        {/* 1 Уровень вложенности */}
-        <Route
-          path="*"
-          element={<NotFound />}
-        />
-      </Routes>
+          {/* 1 Уровень вложенности */}
+          <Route
+            path="/signin"
+            element={<Login onSingIn={(userData) => cbSignIn(userData)} />}
+          />
+          {/* 1 Уровень вложенности */}
+          <Route
+            path="*"
+            element={<NotFound />}
+          />
+        </Routes>
+      </ProtectedRoute>
     </CurrentUserContext.Provider>
   );
 };

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import './SavedMovies.css';
+import './SearchMovies.css';
 import { SearchForm } from '../SearchForm/SearchForm';
 import { MoviesCardList } from '../MoviesCardList/MoviesCardList';
 import { SavedDevider } from '../SavedDevider/SavedDevider';
 import { useCheckbox } from '../../hooks/useCheckbox';
 import { filterCheckbox } from '../../utils/filterMovies';
 
-export const SavedMovies = ({ movies, onLike }) => {
+export const SearchMovies = ({ movies, onLike }) => {
   const { checked, chengeCheckbox } = useCheckbox();
   const [currentMovies, setMovies] = useState([]);
   useEffect(() => {
