@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 
 export const useCheckbox = () => {
   const [checked, setChecked] = useState(false);
-  const chengeCheckbox = () => {
-    setChecked(!checked);
+  const chengeCheckbox = (e) => {
+    setChecked(e.target.checked);
   };
   useEffect(() => {
     setChecked(checked);

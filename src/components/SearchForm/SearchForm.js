@@ -4,15 +4,16 @@ import { useForm } from '../../hooks/useForm';
 
 export const SearchForm = ({ onSubmit, checked, onCheck }) => {
   const { values, handleChange } = useForm();
-  const handleValues = (e) => {
-    e.preventDefault();
-    onSubmit(values);
+  const handleSubmitValues = (event) => {
+    event.preventDefault();
+    onSubmit(values.search);
   };
+
   return (
     <div className="search">
       <form
         className="search__form"
-        onSubmit={(e) => handleValues(e)}
+        onSubmit={handleSubmitValues}
       >
         <fieldset className="search__fieldset">
           <div className="search__wrapper">

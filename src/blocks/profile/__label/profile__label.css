@@ -1,10 +1,12 @@
 .profile__label {
   margin: 0;
-  padding: 17px 0 17px;
+  padding: 17px 0 0;
+
   justify-content: space-between;
   display: grid;
   grid-template-columns: auto 1fr;
   column-gap: 10px;
+  row-gap: 4px;
   width: 100%;
   font-weight: 500;
   font-size: 11px;
@@ -13,7 +15,4 @@
 }
 .profile__label:first-child {
   padding-top: 0;
-}
-.profile__label:last-child {
-  padding-bottom: 0;
 }

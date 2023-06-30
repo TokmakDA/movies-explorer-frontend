@@ -2,9 +2,12 @@ import React from 'react';
 import './AuthForm.css';
 import { useForm } from '../../hooks/useForm';
 import { Logo } from '../Logo/Logo';
+import { useFormWithValidation } from '../../hooks/useFormWithValidation';
 
 export const AuthForm = ({ onSubmit, form, errMessage, children }) => {
-  const { values, handleChange } = useForm();
+  // const { values, handleChange } = useForm();
+  const { values, handleChange, setValues, errors, isValid, resetForm } =
+    useFormWithValidation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -34,9 +37,11 @@ export const AuthForm = ({ onSubmit, form, errMessage, children }) => {
               onChange={handleChange}
               name="name"
               required
-              maxLength="100"
+              minLength="2"
+              maxLength="30"
               placeholder="Введите Имя"
             ></input>
+            <span className="form__input-error">{errors.name}</span>
           </label>
         )}
         <label className="form__lebel">
@@ -53,6 +58,7 @@ export const AuthForm = ({ onSubmit, form, errMessage, children }) => {
             maxLength="100"
             placeholder="Введите E-mail"
           ></input>
+          <span className="form__input-error">{errors.email}</span>
         </label>
         <label className="form__lebel">
           Пароль
@@ -68,6 +74,7 @@ export const AuthForm = ({ onSubmit, form, errMessage, children }) => {
             maxLength="100"
             placeholder="Введите Пароль"
           ></input>
+          <span className="form__input-error">{errors.password}</span>
         </label>
         <span className="form__error">{errMessage}</span>
       </fieldset>

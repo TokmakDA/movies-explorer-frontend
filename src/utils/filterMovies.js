@@ -3,7 +3,7 @@ export const filterMovies = (dataCards, value) => {
     [i.nameRU, i.nameEN, i.description, i.country, i.director]
       .toString()
       .toLowerCase()
-      .includes(value.search.toLowerCase()),
+      .includes(value.toLowerCase()),
   );
   console.log('filterMovies => value, movies', value, movies);
   return movies;

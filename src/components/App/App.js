@@ -24,7 +24,6 @@ export const App = () => {
   // Стейт данных пользователя
   const [currentUser, setCurrentUser] = useState(null);
   const [isPreloader, setPreloader] = useState(false);
-  // const [isCheked, setChecked] = useState(false);
   // Проверить localStorage
   const checkLocalStorage = useCallback((key) => {
     const item = JSON.parse(localStorage.getItem(key));
@@ -68,6 +67,7 @@ export const App = () => {
       setPreloader(false);
     }
   };
+
   const findMovies = (value) => {
     getMovies(value);
   };
@@ -93,19 +93,18 @@ export const App = () => {
               return res;
             }, {}),
         );
-        console.log('cbLike => !isMy => postMovies', mewMyMovie);
+        console.log('cbLike => !isMy => postMovies', mewMyMovie); // Удалить
         setMyMovies([...myMovies, mewMyMovie.data]);
-        console.log('cbLike => !isMy => postMovies => myMovies', myMovies);
-        // changeMyMovies(true);
+        console.log('cbLike => !isMy => postMovies => myMovies', myMovies); // Удалить
       } else {
         // Удаляем карточку
         await mainApi.deleteMovies(isMy._id);
-        console.log('cbLike => isMy => deleteMovies');
+        console.log('cbLike => isMy => deleteMovies'); // Удалить
         const result = myMovies.filter((i) => i.movieId !== card.movieId);
         setMyMovies([...result]);
       }
       changeMyMovies(true);
-      console.log('cbLike => if(){}else{} => changeMyMovies', isСhangeMyMovies);
+      console.log('cbLike => if(){}else{} => changeMyMovies', isСhangeMyMovies); // Удалить
     } catch (err) {
       console.log('cbCardLike => err', err);
     }
@@ -136,7 +135,6 @@ export const App = () => {
       console.log('cbSignIn => user', user); // Удалить
     } catch (err) {
       console.log('cbSignIn => err', err); // Удалить
-      // navigate('/signin');
     } finally {
       setPreloader(false);
       setTimeout(navigate('/movies'), 100);
@@ -149,6 +147,7 @@ export const App = () => {
       const res = await mainApi.getSignout();
       console.log('cbSignOut => res', res); // Удалить
       setAuthorized(false);
+      // Очистка данных
       localStorage.clear();
       setCurrentUser(null);
       setSearchMovies([]);
@@ -183,8 +182,8 @@ export const App = () => {
     try {
       const initialsUser = await mainApi.getUserMe();
       const initialsCard = await mainApi.getMovies();
-      console.log('getInitial => initialsUser', initialsUser);
-      console.log('getInitial => initialsCard', initialsCard);
+      console.log('getInitial => initialsUser', initialsUser); // Удалить
+      console.log('getInitial => initialsCard', initialsCard); // Удалить
       setAuthorized(true);
       setCurrentUser(initialsUser.data);
       setMyMovies(initialsCard.data);

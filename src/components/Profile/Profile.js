@@ -1,13 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
 import './Profile.css';
-import { useForm } from '../../hooks/useForm';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { useFormWithValidation } from '../../hooks/useFormWithValidation';
 
 export const Profile = ({ onSignOut, onUpdateUser }) => {
-  const { values, handleChange, setValues } = useForm();
-  // Подписка на контекст currentUser
+  // // Подписка на контекст currentUser
   const currentUser = useContext(CurrentUserContext);
 
+  const { values, handleChange, setValues, errors, isValid, resetForm } =
+    useFormWithValidation();
   const [isEditOpen, setEditOpen] = useState(false);
   const [errMessage, setErrMessage] = useState(null);
   useEffect(() => {
@@ -69,10 +70,15 @@ export const Profile = ({ onSignOut, onUpdateUser }) => {
             className="profile__input"
             value={values?.name || ''}
             name="name"
+            type="text"
             disabled={!isEditOpen || errMessage ? true : false}
-            onChange={handleChange}
+            onChange={(e) => handleChange(e)}
             placeholder="Введите Имя"
+            required
+            maxLength={30}
+            minLength={2}
           />
+          <span className="profile__input-error">{errors.name}</span>
         </label>
         <hr className="profile__line" />
         <label className="profile__label">
@@ -81,10 +87,13 @@ export const Profile = ({ onSignOut, onUpdateUser }) => {
             className="profile__input"
             value={values?.email || ''}
             name="email"
+            type="email"
             disabled={!isEditOpen || errMessage ? true : false}
             onChange={handleChange}
             placeholder="Введите E-mail"
+            required
           />
+          <span className="profile__input-error">{errors.email}</span>
         </label>
       </fieldset>
       <span className="profile__error">{errMessage || ''}</span>
