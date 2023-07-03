@@ -11,15 +11,17 @@
   line-height: 16px;
   color: rgba(0, 0, 0, 1);
 }
-.form__input:invalid {
-  color: rgba(238, 52, 101, 1);
-  outline: 2px dashed rgba(238, 52, 101, 1);
-  outline-offset: 2px;
-  border-radius: 3px;
-}
+
 .form__input:focus {
   transition: all 0.2s;
   box-shadow: 0 0 0 5px rgba(253, 253, 253, 0.5);
   outline: 2px dashed rgba(107, 107, 107, 1);
   outline-offset: 2px;
+}
+
+.form__input:invalid {
+  outline: 2px dashed rgba(238, 52, 101, 1);
+  color: rgba(238, 52, 101, 1);
+  outline-offset: 2px;
+  transition: all 0.2s;
 }

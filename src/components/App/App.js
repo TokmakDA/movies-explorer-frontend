@@ -132,12 +132,12 @@ export const App = () => {
       setCurrentUser(user.data);
       setAuthorized(true);
 
+      navigate('/movies');
       console.log('cbSignIn => user', user); // Удалить
     } catch (err) {
       console.log('cbSignIn => err', err); // Удалить
     } finally {
       setPreloader(false);
-      setTimeout(navigate('/movies'), 100);
     }
   };
   // Выход

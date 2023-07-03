@@ -6,12 +6,12 @@ export function useFormWithValidation() {
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
 
-  const handleChange = (event) => {
-    const { value, name, validationMessage } = event.target;
+  const handleChange = (e) => {
+    const { value, name, validationMessage } = e.target;
     setValues({ ...values, [name]: value });
     setErrors({ ...errors, [name]: validationMessage });
 
-    setIsValid(event.target.closest('form').checkValidity());
+    setIsValid(e.target.closest('form').checkValidity());
   };
 
   const resetForm = useCallback(
@@ -23,5 +23,30 @@ export function useFormWithValidation() {
     [setValues, setErrors, setIsValid],
   );
 
-  return { values, handleChange, setValues, errors, isValid, resetForm };
+  // Проверка изменения формы
+  const getDirtyFields = (formData) =>
+    Object.keys(values).reduce((acc, key) => {
+      const isDirty = values[key] !== formData[key];
+      return { ...acc, [key]: isDirty };
+    }, {});
+  const hasChanges = (formData) => {
+    const dirtyFields = getDirtyFields(formData);
+    return Object.values(dirtyFields).every((isDirty) => !isDirty);
+  };
+
+  const handleOnBlur = (e) => {
+    e.target.required = true;
+    handleChange(e);
+  };
+
+  return {
+    values,
+    handleChange,
+    setValues,
+    errors,
+    isValid,
+    resetForm,
+    hasChanges,
+    handleOnBlur
+  };
 }

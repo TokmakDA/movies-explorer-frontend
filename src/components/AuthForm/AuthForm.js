@@ -1,12 +1,12 @@
 import React from 'react';
 import './AuthForm.css';
-import { useForm } from '../../hooks/useForm';
 import { Logo } from '../Logo/Logo';
 import { useFormWithValidation } from '../../hooks/useFormWithValidation';
 
 export const AuthForm = ({ onSubmit, form, errMessage, children }) => {
-  // const { values, handleChange } = useForm();
-  const { values, handleChange, setValues, errors, isValid, resetForm } =
+  const INITIALS_FORM = { name: '', email: '', password: '' };
+
+  const { values, handleChange, errors, isValid, hasChanges, handleOnBlur } =
     useFormWithValidation();
 
   const handleSubmit = (e) => {
@@ -29,6 +29,7 @@ export const AuthForm = ({ onSubmit, form, errMessage, children }) => {
           <label className="form__lebel">
             Имя
             <input
+              onBlur={handleOnBlur}
               autoComplete="nickname"
               type="text"
               className="form__input"
@@ -47,14 +48,16 @@ export const AuthForm = ({ onSubmit, form, errMessage, children }) => {
         <label className="form__lebel">
           E-mail
           <input
+            onBlur={handleOnBlur}
             autoComplete="email"
             type="email"
             className="form__input"
             id="email"
             value={values?.email || ''}
             onChange={handleChange}
+            required={false}
             name="email"
-            required
+            pattern="[\w+\.+\%+\-]+@[\w+\-]+\.[a-z]{2,}"
             maxLength="100"
             placeholder="Введите E-mail"
           ></input>
@@ -63,6 +66,7 @@ export const AuthForm = ({ onSubmit, form, errMessage, children }) => {
         <label className="form__lebel">
           Пароль
           <input
+            onBlur={handleOnBlur}
             autoComplete="current-password"
             type="password"
             className="form__input"
@@ -70,7 +74,7 @@ export const AuthForm = ({ onSubmit, form, errMessage, children }) => {
             value={values?.password || ''}
             onChange={handleChange}
             name="password"
-            required
+            required={false}
             maxLength="100"
             placeholder="Введите Пароль"
           ></input>
@@ -82,6 +86,7 @@ export const AuthForm = ({ onSubmit, form, errMessage, children }) => {
         <button
           type="submit"
           className="form__button"
+          disabled={hasChanges(INITIALS_FORM) || !isValid}
         >
           {form.button}
         </button>
