@@ -1,30 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import './SearchMovies.css';
-import { SearchForm } from '../SearchForm/SearchForm';
-import { MoviesCardList } from '../MoviesCardList/MoviesCardList';
-import { SavedDevider } from '../SavedDevider/SavedDevider';
-import { useCheckbox } from '../../hooks/useCheckbox';
-import { filterCheckbox } from '../../utils/filterMovies';
+import { Movies } from '../Movies/Movies';
+import { filterMovies } from '../../utils/filterMovies';
 
-export const SearchMovies = ({ movies, onLike }) => {
-  const { checked, chengeCheckbox } = useCheckbox();
+export const SearchMovies = ({ findMovies, movies, onLike }) => {
   const [currentMovies, setMovies] = useState([]);
+  const [value, setValue] = useState(null);
+
   useEffect(() => {
-    console.log('MoviesCardList => checked', checked);
-    setMovies(filterCheckbox(movies, checked));
-  }, [movies, checked, setMovies]);
+    if (value) {
+      setMovies(filterMovies(movies, value));
+    }
+  }, [movies, value]);
+
+  const handleFindMovies = (value) => {
+    if (movies.length === 0) {
+      findMovies();
+    }
+    setValue(value);
+  };
+
   return (
-    <section className="movies">
-      <SearchForm
-        // onSubmit={findMovies}
-        checked={checked}
-        onCheck={chengeCheckbox}
-      />
-      <MoviesCardList
-        movies={currentMovies}
-        onLike={onLike}
-      />
-      <SavedDevider />
-    </section>
+    <Movies
+      findMovies={(value) => handleFindMovies(value)}
+      movies={currentMovies}
+      onLike={onLike}
+      localStorageKey={'searchPage'}
+      insideMovies={true}
+    />
   );
 };

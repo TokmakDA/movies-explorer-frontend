@@ -17,6 +17,7 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { moviesApi } from '../../utils/MoviesApi';
 import { handlingCards } from '../../utils/handlingCards';
 import { filterMovies } from '../../utils/filterMovies';
+import { SearchMovies } from '../SearchMovies/SearchMovies';
 
 export const App = () => {
   const navigate = useNavigate();
@@ -34,9 +35,13 @@ export const App = () => {
     return [];
   }, []);
 
+  // стейт Тект Ошибки
+  const [isErrorMessage, setErrorMessage] = useState(null);
+  const [isError, setError] = useState(false);
+
   // проверяем localStorage на наличие фильмов и сохраняем в соответсвующий стейт
   const [searchMovies, setSearchMovies] = useState(() =>
-    checkLocalStorage('searhMovies'),
+    checkLocalStorage('searchMovies'),
   );
   const [myMovies, setMyMovies] = useState(() => checkLocalStorage('myMovies'));
   // Состояние отслеживания изменения в карточках пользователя
@@ -52,17 +57,44 @@ export const App = () => {
     }
   }, [isСhangeMyMovies, checkLocalStorage]);
 
+  // Переписать
+  const getInitial = useCallback(async () => {
+    setPreloader(true);
+    try {
+      const initialsUser = await mainApi.getUserMe();
+      const initialsCard = await mainApi.getMovies();
+      console.log('getInitial => initialsUser', initialsUser); // Удалить
+      console.log('getInitial => initialsCard', initialsCard); // Удалить
+      setAuthorized(true);
+      setCurrentUser(initialsUser.data);
+      setMyMovies(initialsCard.data);
+      navigate('/movies');
+    } catch (err) {
+      console.log('getInitial => err', err); // Удалить
+      navigate('/');
+      setAuthorized(false);
+    } finally {
+      setPreloader(false);
+    }
+  }, [navigate]);
+  useEffect(() => {
+    getInitial();
+  }, []);
+
   // Запрос фильмов с Beatfilm-Movies
   const getMovies = async (value) => {
     setPreloader(true);
     try {
       const cards = await moviesApi();
       const newCards = handlingCards(cards);
-      const dataCards = filterMovies(newCards, value);
-      localStorage.setItem('searhMovies', JSON.stringify(dataCards));
-      setSearchMovies(() => checkLocalStorage('searhMovies'));
+      // const dataCards = filterMovies(newCards, value);
+      localStorage.setItem('searchMovies', JSON.stringify(newCards));
+      setSearchMovies(() => checkLocalStorage('searchMovies'));
     } catch (err) {
       console.log('getMovies => err', err);
+      //
+      setError(true);
+      setErrorMessage(err.message);
     } finally {
       setPreloader(false);
     }
@@ -74,7 +106,7 @@ export const App = () => {
 
   useEffect(() => {
     localStorage.setItem('myMovies', JSON.stringify(myMovies));
-    localStorage.setItem('searhMovies', JSON.stringify(searchMovies));
+    localStorage.setItem('searchMovies', JSON.stringify(searchMovies));
   }, [myMovies, searchMovies]);
 
   // обработчик лайков и дизлайков
@@ -120,6 +152,9 @@ export const App = () => {
       return;
     } catch (err) {
       console.log('cbUpdateUser => err', err); // Удалить
+      //
+      setError(true);
+      setErrorMessage(err.message);
     } finally {
       setPreloader(false);
     }
@@ -131,11 +166,14 @@ export const App = () => {
       const user = await mainApi.postSignin(userData);
       setCurrentUser(user.data);
       setAuthorized(true);
-
+      getInitial()
       navigate('/movies');
       console.log('cbSignIn => user', user); // Удалить
     } catch (err) {
       console.log('cbSignIn => err', err); // Удалить
+      //
+      setError(true);
+      setErrorMessage(err.message);
     } finally {
       setPreloader(false);
     }
@@ -171,34 +209,13 @@ export const App = () => {
       console.log('cbSignUp => res', res); // Удалить
     } catch (err) {
       console.log('cbSignUp => err', err); // Удалить
+      //
+      setError(true);
+      setErrorMessage(err.message);
     } finally {
       setPreloader(false);
     }
   };
-
-  // Переписать
-  const getInitial = useCallback(async () => {
-    setPreloader(true);
-    try {
-      const initialsUser = await mainApi.getUserMe();
-      const initialsCard = await mainApi.getMovies();
-      console.log('getInitial => initialsUser', initialsUser); // Удалить
-      console.log('getInitial => initialsCard', initialsCard); // Удалить
-      setAuthorized(true);
-      setCurrentUser(initialsUser.data);
-      setMyMovies(initialsCard.data);
-      navigate('/movies');
-    } catch (err) {
-      console.log('getInitial => err', err); // Удалить
-      navigate('/');
-      setAuthorized(false);
-    } finally {
-      setPreloader(false);
-    }
-  }, [navigate]);
-  useEffect(() => {
-    getInitial();
-  }, []);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -233,10 +250,10 @@ export const App = () => {
               <Route
                 path="/movies"
                 element={
-                  <Movies
+                  <SearchMovies
                     findMovies={(value) => findMovies(value)}
                     movies={searchMovies}
-                    changeMyMovies={changeMyMovies}
+                    // changeMyMovies={changeMyMovies}
                     onLike={cbLike}
                   />
                 }
@@ -247,7 +264,7 @@ export const App = () => {
                 element={
                   <SavedMovies
                     movies={myMovies}
-                    changeMyMovies={changeMyMovies}
+                    // changeMyMovies={changeMyMovies}
                     onLike={cbLike}
                   />
                 }
@@ -260,6 +277,7 @@ export const App = () => {
                 <Profile
                   onSignOut={cbSignOut}
                   onUpdateUser={(userData) => cbUpdateUser(userData)}
+                  errMessage={isErrorMessage}
                 />
               }
             />
@@ -267,12 +285,22 @@ export const App = () => {
           {/* 1 Уровень вложенности */}
           <Route
             path="/signup"
-            element={<Register onSignUp={(userData) => cbSignUp(userData)} />}
+            element={
+              <Register
+                onSignUp={(userData) => cbSignUp(userData)}
+                errMessage={isErrorMessage}
+              />
+            }
           />
           {/* 1 Уровень вложенности */}
           <Route
             path="/signin"
-            element={<Login onSingIn={(userData) => cbSignIn(userData)} />}
+            element={
+              <Login
+                onSingIn={(userData) => cbSignIn(userData)}
+                errMessage={isErrorMessage}
+              />
+            }
           />
           {/* 1 Уровень вложенности */}
           <Route

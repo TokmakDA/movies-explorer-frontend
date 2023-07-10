@@ -1,19 +1,20 @@
 import './SearchForm.css';
 import { FilterCheckbox } from '../FilterCheckbox/FilterCheckbox';
-import { useForm } from '../../hooks/useForm';
+// import { useForm } from '../../hooks/useForm';
+// import { useEffect } from 'react';
 
-export const SearchForm = ({ onSubmit, checked, onCheck }) => {
-  const { values, handleChange } = useForm();
-  const handleSubmitValues = (event) => {
-    event.preventDefault();
-    onSubmit(values.search);
-  };
-
+export const SearchForm = ({
+  onSubmit,
+  checked,
+  onCheck,
+  values,
+  handleChange,
+}) => {
   return (
     <div className="search">
       <form
         className="search__form"
-        onSubmit={handleSubmitValues}
+        onSubmit={onSubmit}
       >
         <fieldset className="search__fieldset">
           <div className="search__wrapper">
@@ -24,7 +25,7 @@ export const SearchForm = ({ onSubmit, checked, onCheck }) => {
               value={values?.search || ''}
               name="search"
               required
-              onChange={handleChange}
+              onChange={(e) => handleChange(e)}
             ></input>
             <button
               type="submit"

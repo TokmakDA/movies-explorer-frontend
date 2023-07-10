@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useResize } from '../../hooks/useResize';
 import './Movies.css';
 import { MoviesCardList } from '../MoviesCardList/MoviesCardList';
@@ -8,41 +8,16 @@ import { filterCheckbox } from '../../utils/filterMovies';
 
 import { useCheckbox } from '../../hooks/useCheckbox';
 import { SavedDevider } from '../SavedDevider/SavedDevider';
+import { useFormWithValidation } from '../../hooks/useFormWithValidation';
+import { useForm } from '../../hooks/useForm';
 
-export const Movies = ({ findMovies, movies, onLike }) => {
-  const { checked, chengeCheckbox } = useCheckbox();
+export const Movies = ({ findMovies, movies, onLike, localStorageKey, insideMovies}) => {
+  const { checked, chengeCheckbox, setChecked } = useCheckbox();
   const [isQuantity, setQuantity] = useState(null);
   const { isScreenXl, isScreenLg, isScreenSm } = useResize();
   const [currentMovies, setMovies] = useState([]);
 
-  // const [pageState, setPageState] = useState({
-  //   isQuantity,
-  //   checked,
-  //   curentValue,
-  // });
-  // useEffect(() => {
-  //   setPageState(JSON.parse(localStorage.getItem('pageState')));
-  // }, []);
-
-  // useEffect(() => {
-  //   setPageState({
-  //     isQuantity,
-  //     checked,
-  //     curentValue,
-  //   });
-  // }, [setPageState, isQuantity, checked, curentValue]);
-
-  // useEffect(() => {
-  //   setPageState(JSON.parse(localStorage.getItem('pageState')));
-  // }, []);
-
-  const handleSearch = (value) => {
-    findMovies(value);
-  };
-
-  useEffect(() => {
-    setMovies(filterCheckbox(movies, checked));
-  }, [movies, checked, setMovies]);
+  const { values, handleChange, setValues } = useForm();
 
   const handleMore = (e, isQuantity) => {
     e.preventDefault();
@@ -54,7 +29,7 @@ export const Movies = ({ findMovies, movies, onLike }) => {
         : isQuantity + 2,
     );
   };
-  useEffect(() => {
+  const changeQuantity = useCallback(() => {
     isScreenXl
       ? setQuantity(16)
       : isScreenLg
@@ -64,16 +39,65 @@ export const Movies = ({ findMovies, movies, onLike }) => {
       : setQuantity(4);
   }, [isScreenXl, isScreenLg, isScreenSm, setQuantity]);
 
+  useEffect(() => {
+    changeQuantity();
+  }, [changeQuantity]);
+
+  // Проверить localStorage currentPage
+  const checkCurentPage = useCallback(() => {
+    const isPage = JSON.parse(localStorage.getItem(localStorageKey));
+    if (isPage) {
+      return isPage;
+    }
+    return {};
+  }, []);
+
+  const [currentPage, setCurrentPage] = useState(() => checkCurentPage());
+
+  useEffect(() => {
+    localStorage.setItem(localStorageKey, JSON.stringify(currentPage));
+  }, [currentPage]);
+
+  useEffect(() => {
+    if (currentPage) {
+      const { checked, isQuantity, values, currentMovies } = currentPage;
+      console.log(currentPage)
+      setChecked(checked);
+      setQuantity(isQuantity);
+      setValues(values);
+      values?.search && findMovies(values.search);
+      console.log(currentPage);
+    }
+  }, []);
+  
+  useEffect(() => {
+    setCurrentPage({ checked, isQuantity, values, currentMovies });
+    console.log(currentPage);
+  }, [checked, isQuantity, values, currentMovies]);
+
+  const handleSearch = (event) => {
+    event.preventDefault();
+    findMovies(values.search);
+    changeQuantity();
+  };
+
+  useEffect(() => {
+    setMovies(filterCheckbox(movies, checked));
+  }, [movies, checked, setMovies]);
+
+
   return (
     <section className="movies">
       <SearchForm
         onSubmit={handleSearch}
         checked={checked}
         onCheck={chengeCheckbox}
+        values={values}
+        handleChange={handleChange}
       />
       <MoviesCardList
         quantity={isQuantity}
-        insideMovies={true}
+        insideMovies={insideMovies}
         movies={currentMovies}
         onLike={onLike}
       />

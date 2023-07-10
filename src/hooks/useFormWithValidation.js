@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 
 //хук управления формой и валидации формы
-export function useFormWithValidation() {
+export const useFormWithValidation = () => {
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
@@ -47,6 +47,6 @@ export function useFormWithValidation() {
     isValid,
     resetForm,
     hasChanges,
-    handleOnBlur
+    handleOnBlur,
   };
-}
+};

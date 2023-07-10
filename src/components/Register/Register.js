@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { AuthForm } from '../AuthForm/AuthForm';
 
-export const Register = ({ onSignUp }) => {
+export const Register = ({ onSignUp, errMessage }) => {
   const form = {
     name: 'register',
     greeting: 'Добро пожаловать!',
@@ -15,7 +15,7 @@ export const Register = ({ onSignUp }) => {
     <AuthForm
       onSubmit={onSignUp}
       form={form}
-      errMessage={false}
+      errMessage={errMessage}
     >
       <div className="form__link-wrapper">
         <p className="form__link-preface">Уже зарегистрированы?</p>

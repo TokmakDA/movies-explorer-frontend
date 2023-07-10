@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { AuthForm } from '../AuthForm/AuthForm';
 
-export const Login = ({ onSingIn }) => {
+export const Login = ({ onSingIn, errMessage }) => {
   const form = {
     name: 'login',
     greeting: 'Рады видеть!',
@@ -15,7 +15,7 @@ export const Login = ({ onSingIn }) => {
     <AuthForm
       onSubmit={onSingIn}
       form={form}
-      errMessage={false}
+      errMessage={errMessage}
     >
       <div className="form__link-wrapper">
         <p className="form__link-preface">Ещё не зарегистрированы?</p>
