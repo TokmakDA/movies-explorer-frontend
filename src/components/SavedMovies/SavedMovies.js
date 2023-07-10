@@ -10,6 +10,8 @@ export const SavedMovies = ({ movies, onLike }) => {
   useEffect(() => {
     if (value) {
       setMovies(filterMovies(movies, value));
+    } else {
+      setMovies(filterMovies(movies, ''));
     }
   }, [movies, value]);
 
@@ -24,7 +26,6 @@ export const SavedMovies = ({ movies, onLike }) => {
       onLike={onLike}
       localStorageKey={'savedPage'}
       insideMovies={false}
-      setValue={setValue}
     />
   );
 };

@@ -11,7 +11,13 @@ import { SavedDevider } from '../SavedDevider/SavedDevider';
 import { useFormWithValidation } from '../../hooks/useFormWithValidation';
 import { useForm } from '../../hooks/useForm';
 
-export const Movies = ({ findMovies, movies, onLike, localStorageKey, insideMovies}) => {
+export const Movies = ({
+  findMovies,
+  movies,
+  onLike,
+  localStorageKey,
+  insideMovies,
+}) => {
   const { checked, chengeCheckbox, setChecked } = useCheckbox();
   const [isQuantity, setQuantity] = useState(null);
   const { isScreenXl, isScreenLg, isScreenSm } = useResize();
@@ -39,10 +45,6 @@ export const Movies = ({ findMovies, movies, onLike, localStorageKey, insideMovi
       : setQuantity(4);
   }, [isScreenXl, isScreenLg, isScreenSm, setQuantity]);
 
-  useEffect(() => {
-    changeQuantity();
-  }, [changeQuantity]);
-
   // Проверить localStorage currentPage
   const checkCurentPage = useCallback(() => {
     const isPage = JSON.parse(localStorage.getItem(localStorageKey));
@@ -60,8 +62,8 @@ export const Movies = ({ findMovies, movies, onLike, localStorageKey, insideMovi
 
   useEffect(() => {
     if (currentPage) {
-      const { checked, isQuantity, values, currentMovies } = currentPage;
-      console.log(currentPage)
+      const { checked, isQuantity, values } = currentPage;
+      // console.log(currentPage);
       setChecked(checked);
       setQuantity(isQuantity);
       setValues(values);
@@ -69,11 +71,11 @@ export const Movies = ({ findMovies, movies, onLike, localStorageKey, insideMovi
       console.log(currentPage);
     }
   }, []);
-  
+
   useEffect(() => {
-    setCurrentPage({ checked, isQuantity, values, currentMovies });
-    console.log(currentPage);
-  }, [checked, isQuantity, values, currentMovies]);
+    setCurrentPage({ checked, isQuantity, values });
+    // console.log(currentPage);
+  }, [checked, isQuantity, values]);
 
   const handleSearch = (event) => {
     event.preventDefault();
@@ -85,6 +87,15 @@ export const Movies = ({ findMovies, movies, onLike, localStorageKey, insideMovi
     setMovies(filterCheckbox(movies, checked));
   }, [movies, checked, setMovies]);
 
+  useEffect(() => {
+    if (!insideMovies) {
+      findMovies(values?.search);
+    }
+  }, [values, findMovies, insideMovies]);
+
+  useEffect(() => {
+    changeQuantity();
+  }, [changeQuantity]);
 
   return (
     <section className="movies">
