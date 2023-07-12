@@ -4,7 +4,7 @@ import { Outlet, Route, Routes, useNavigate } from 'react-router-dom';
 import { Main } from '../Main/Main';
 import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
-import { Movies } from '../Movies/Movies';
+// import { Movies } from '../Movies/Movies';
 import { Profile } from '../Profile/Profile';
 import { Login } from '../Login/Login';
 import { Register } from '../Register/Register';
@@ -16,7 +16,7 @@ import { mainApi } from '../../utils/MainApi';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { moviesApi } from '../../utils/MoviesApi';
 import { handlingCards } from '../../utils/handlingCards';
-import { filterMovies } from '../../utils/filterMovies';
+// import { filterMovies } from '../../utils/filterMovies';
 import { SearchMovies } from '../SearchMovies/SearchMovies';
 
 export const App = () => {
@@ -82,7 +82,7 @@ export const App = () => {
   }, []);
 
   // Запрос фильмов с Beatfilm-Movies
-  const getMovies = async (value) => {
+  const getMovies = useCallback(async () => {
     setPreloader(true);
     try {
       const cards = await moviesApi();
@@ -98,11 +98,11 @@ export const App = () => {
     } finally {
       setPreloader(false);
     }
-  };
+  }, []);
 
-  const findMovies = (value) => {
-    getMovies(value);
-  };
+  // const findMovies = useCallback(() => {
+  //   getMovies();
+  // },[])
 
   useEffect(() => {
     localStorage.setItem('myMovies', JSON.stringify(myMovies));
@@ -166,7 +166,7 @@ export const App = () => {
       const user = await mainApi.postSignin(userData);
       setCurrentUser(user.data);
       setAuthorized(true);
-      getInitial()
+      getInitial();
       navigate('/movies');
       console.log('cbSignIn => user', user); // Удалить
     } catch (err) {
@@ -251,10 +251,11 @@ export const App = () => {
                 path="/movies"
                 element={
                   <SearchMovies
-                    findMovies={(value) => findMovies(value)}
+                    getMovies={getMovies}
                     movies={searchMovies}
                     // changeMyMovies={changeMyMovies}
                     onLike={cbLike}
+                    isPreloader={isPreloader}
                   />
                 }
               />
@@ -266,6 +267,7 @@ export const App = () => {
                     movies={myMovies}
                     // changeMyMovies={changeMyMovies}
                     onLike={cbLike}
+                    isPreloader={isPreloader}
                   />
                 }
               />
@@ -277,7 +279,7 @@ export const App = () => {
                 <Profile
                   onSignOut={cbSignOut}
                   onUpdateUser={(userData) => cbUpdateUser(userData)}
-                  errMessage={isErrorMessage}
+                  isErrorMessage={isErrorMessage}
                 />
               }
             />

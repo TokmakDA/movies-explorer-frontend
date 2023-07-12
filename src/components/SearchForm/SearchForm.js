@@ -1,7 +1,5 @@
 import './SearchForm.css';
 import { FilterCheckbox } from '../FilterCheckbox/FilterCheckbox';
-// import { useForm } from '../../hooks/useForm';
-// import { useEffect } from 'react';
 
 export const SearchForm = ({
   onSubmit,
@@ -9,6 +7,7 @@ export const SearchForm = ({
   onCheck,
   values,
   handleChange,
+  disabledSubmit,
 }) => {
   return (
     <div className="search">
@@ -25,13 +24,13 @@ export const SearchForm = ({
               value={values?.search || ''}
               name="search"
               required
-              onChange={(e) => handleChange(e)}
+              onChange={handleChange}
             ></input>
             <button
               type="submit"
               className="search__find"
               placeholder="Искать"
-              disabled={values?.search === '' ? true : false}
+              disabled={disabledSubmit}
             ></button>
             <hr className="search__stick"></hr>
           </div>

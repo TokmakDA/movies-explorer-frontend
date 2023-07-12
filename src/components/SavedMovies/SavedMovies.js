@@ -3,7 +3,7 @@ import './SavedMovies.css';
 import { Movies } from '../Movies/Movies';
 import { filterMovies } from '../../utils/filterMovies';
 
-export const SavedMovies = ({ movies, onLike }) => {
+export const SavedMovies = ({ movies, onLike, isPreloader }) => {
   const [currentMovies, setMovies] = useState([]);
   const [value, setValue] = useState(null);
 
@@ -26,6 +26,7 @@ export const SavedMovies = ({ movies, onLike }) => {
       onLike={onLike}
       localStorageKey={'savedPage'}
       insideMovies={false}
+      isPreloader={isPreloader}
     />
   );
 };

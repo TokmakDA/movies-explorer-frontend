@@ -9,7 +9,6 @@ import { filterCheckbox } from '../../utils/filterMovies';
 import { useCheckbox } from '../../hooks/useCheckbox';
 import { SavedDevider } from '../SavedDevider/SavedDevider';
 import { useFormWithValidation } from '../../hooks/useFormWithValidation';
-import { useForm } from '../../hooks/useForm';
 
 export const Movies = ({
   findMovies,
@@ -17,13 +16,15 @@ export const Movies = ({
   onLike,
   localStorageKey,
   insideMovies,
+  isPreloader,
 }) => {
   const { checked, chengeCheckbox, setChecked } = useCheckbox();
   const [isQuantity, setQuantity] = useState(null);
-  const { isScreenXl, isScreenLg, isScreenSm } = useResize();
   const [currentMovies, setMovies] = useState([]);
-
-  const { values, handleChange, setValues } = useForm();
+  const { isScreenXl, isScreenLg, isScreenSm } = useResize();
+  const { values, handleChange, setValues, isValid, hasChanges } =
+    useFormWithValidation();
+  const INITIALS_FORM = { search: '' };
 
   const handleMore = (e, isQuantity) => {
     e.preventDefault();
@@ -45,13 +46,31 @@ export const Movies = ({
       : setQuantity(4);
   }, [isScreenXl, isScreenLg, isScreenSm, setQuantity]);
 
+  // useEffect(() => {
+  //   changeQuantity();
+  // }, [changeQuantity]);
+
+  useEffect(() => {
+    !isQuantity && changeQuantity();
+  }, [isQuantity, changeQuantity]);
+
+  useEffect(() => {
+    setMovies(filterCheckbox(movies, checked));
+  }, [movies, checked, setMovies]);
+
+  useEffect(() => {
+    if (!insideMovies) {
+      findMovies(values?.search);
+    }
+  }, [values, findMovies, insideMovies]);
+
   // Проверить localStorage currentPage
   const checkCurentPage = useCallback(() => {
     const isPage = JSON.parse(localStorage.getItem(localStorageKey));
     if (isPage) {
       return isPage;
     }
-    return {};
+    return { values: { search: '' } };
   }, []);
 
   const [currentPage, setCurrentPage] = useState(() => checkCurentPage());
@@ -77,25 +96,27 @@ export const Movies = ({
     // console.log(currentPage);
   }, [checked, isQuantity, values]);
 
+  // Состояние выполнить поиск
+  const [isRunSearch, setRunSearc] = useState(false);
+  const [isNoMoviesFound, setNoMoviesFound] = useState(false);
+
   const handleSearch = (event) => {
     event.preventDefault();
     findMovies(values.search);
     changeQuantity();
+    setRunSearc(true);
   };
 
+  // При изменении строки поиска изменить состояние setRunSearc
   useEffect(() => {
-    setMovies(filterCheckbox(movies, checked));
-  }, [movies, checked, setMovies]);
+    setRunSearc(false);
+  }, [values]);
 
   useEffect(() => {
-    if (!insideMovies) {
-      findMovies(values?.search);
-    }
-  }, [values, findMovies, insideMovies]);
-
-  useEffect(() => {
-    changeQuantity();
-  }, [changeQuantity]);
+    isRunSearch & (currentMovies.length === 0) & !isPreloader
+      ? setNoMoviesFound(true)
+      : setNoMoviesFound(false);
+  }, [isRunSearch, currentMovies, isPreloader]);
 
   return (
     <section className="movies">
@@ -105,6 +126,7 @@ export const Movies = ({
         onCheck={chengeCheckbox}
         values={values}
         handleChange={handleChange}
+        disabledSubmit={hasChanges(INITIALS_FORM)}
       />
       <MoviesCardList
         quantity={isQuantity}
@@ -115,7 +137,7 @@ export const Movies = ({
       {currentMovies.length > isQuantity ? (
         <More onClick={(e) => handleMore(e, isQuantity)} />
       ) : (
-        <SavedDevider />
+        <SavedDevider isNoMoviesFound={isNoMoviesFound} />
       )}
     </section>
   );

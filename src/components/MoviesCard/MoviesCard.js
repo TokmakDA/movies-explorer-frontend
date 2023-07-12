@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './MoviesCard.css';
+import { Link } from 'react-router-dom';
 
 export const MoviesCard = ({ card, insideMovies, onLike }) => {
   const returnDuration = (duration) => {
@@ -26,13 +27,17 @@ export const MoviesCard = ({ card, insideMovies, onLike }) => {
 
   return (
     <li className="movies__card">
-      <div className="movies__img-wrapper">
+      <Link
+        className="movies__img-wrapper"
+        to={card.trailerLink}
+        target="_blank"
+      >
         <img
           className="movies__img"
           src={card.image}
           alt="Постер"
         ></img>
-      </div>
+      </Link>
 
       <p className="movies__name">{card.nameRU}</p>
       <button

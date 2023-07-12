@@ -2,11 +2,11 @@ import React, { useContext, useEffect, useState } from 'react';
 import './Profile.css';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { useFormWithValidation } from '../../hooks/useFormWithValidation';
+import { REGULAR_EMAIL } from '../../constants/regular';
 
-export const Profile = ({ onSignOut, onUpdateUser }) => {
+export const Profile = ({ onSignOut, onUpdateUser, isErrorMessage }) => {
   // // Подписка на контекст currentUser
   const currentUser = useContext(CurrentUserContext);
-
   const {
     values,
     handleChange,
@@ -14,11 +14,15 @@ export const Profile = ({ onSignOut, onUpdateUser }) => {
     errors,
     isValid,
     hasChanges,
-    handleOnBlur,
+    // handleOnBlur,
   } = useFormWithValidation();
   const [isEditOpen, setEditOpen] = useState(false);
 
   const [errMessage, setErrMessage] = useState(null);
+  useEffect(() => {
+    setErrMessage(isErrorMessage);
+  }, [isErrorMessage]);
+
   useEffect(() => {
     setValues({
       name: currentUser?.name,
@@ -60,12 +64,11 @@ export const Profile = ({ onSignOut, onUpdateUser }) => {
       className="profile__submit-button"
       //Временная конструкция
       disabled={hasChanges(currentUser) || !isValid}
-      // onClick={switchEditProfile}
     >
       Сохранить
     </button>
   );
-  
+
   return (
     <form
       className="profile"
@@ -81,7 +84,7 @@ export const Profile = ({ onSignOut, onUpdateUser }) => {
             value={values?.name || ''}
             name="name"
             type="text"
-            disabled={!isEditOpen || errMessage ? true : false}
+            disabled={!isEditOpen ? true : false}
             onChange={(e) => handleChange(e)}
             placeholder="Введите Имя"
             required
@@ -97,7 +100,7 @@ export const Profile = ({ onSignOut, onUpdateUser }) => {
             // onBlur={handleOnBlur}
             className="profile__input"
             value={values?.email || ''}
-            pattern="[\w+\.+\%+\-]+@[\w+\-]+\.[a-z]{2,}"
+            pattern={REGULAR_EMAIL}
             name="email"
             type="email"
             disabled={!isEditOpen || errMessage ? true : false}

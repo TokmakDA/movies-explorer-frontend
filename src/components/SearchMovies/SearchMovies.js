@@ -3,7 +3,7 @@ import './SearchMovies.css';
 import { Movies } from '../Movies/Movies';
 import { filterMovies } from '../../utils/filterMovies';
 
-export const SearchMovies = ({ findMovies, movies, onLike }) => {
+export const SearchMovies = ({ getMovies, movies, onLike, isPreloader }) => {
   const [currentMovies, setMovies] = useState([]);
   const [value, setValue] = useState(null);
 
@@ -15,7 +15,7 @@ export const SearchMovies = ({ findMovies, movies, onLike }) => {
 
   const handleFindMovies = (value) => {
     if (movies.length === 0) {
-      findMovies();
+      getMovies();
     }
     setValue(value);
   };
@@ -27,6 +27,7 @@ export const SearchMovies = ({ findMovies, movies, onLike }) => {
       onLike={onLike}
       localStorageKey={'searchPage'}
       insideMovies={true}
+      isPreloader={isPreloader}
     />
   );
 };

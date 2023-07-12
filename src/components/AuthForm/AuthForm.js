@@ -2,10 +2,10 @@ import React from 'react';
 import './AuthForm.css';
 import { Logo } from '../Logo/Logo';
 import { useFormWithValidation } from '../../hooks/useFormWithValidation';
+import { REGULAR_EMAIL } from '../../constants/regular';
 
 export const AuthForm = ({ onSubmit, form, errMessage, children }) => {
   const INITIALS_FORM = { name: '', email: '', password: '' };
-
   const { values, handleChange, errors, isValid, hasChanges, handleOnBlur } =
     useFormWithValidation();
 
@@ -57,7 +57,7 @@ export const AuthForm = ({ onSubmit, form, errMessage, children }) => {
             onChange={handleChange}
             required={false}
             name="email"
-            pattern="[\w+\.+\%+\-]+@[\w+\-]+\.[a-z]{2,}"
+            pattern={REGULAR_EMAIL}
             maxLength="100"
             placeholder="Введите E-mail"
           ></input>
@@ -80,8 +80,10 @@ export const AuthForm = ({ onSubmit, form, errMessage, children }) => {
           ></input>
           <span className="form__input-error">{errors.password}</span>
         </label>
-        <span className="form__error">{errMessage}</span>
+        {/* <span className="form__error">{errMessage}</span> */}
       </fieldset>
+      <span className="form__error">{errMessage}</span>
+
       <div className="form__buttons">
         <button
           type="submit"
