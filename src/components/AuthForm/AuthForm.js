@@ -5,7 +5,7 @@ import { useFormWithValidation } from '../../hooks/useFormWithValidation';
 import { REGULAR_EMAIL } from '../../constants/regular';
 
 export const AuthForm = ({ onSubmit, form, errMessage, children }) => {
-  const INITIALS_FORM = { name: '', email: '', password: '' };
+  const initialForm = { name: '', email: '', password: '' };
   const { values, handleChange, errors, isValid, hasChanges, handleOnBlur } =
     useFormWithValidation();
 
@@ -88,7 +88,7 @@ export const AuthForm = ({ onSubmit, form, errMessage, children }) => {
         <button
           type="submit"
           className="form__button"
-          disabled={hasChanges(INITIALS_FORM) || !isValid}
+          disabled={hasChanges(initialForm) || !isValid}
         >
           {form.button}
         </button>

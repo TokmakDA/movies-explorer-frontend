@@ -22,9 +22,9 @@ export const Movies = ({
   const [isQuantity, setQuantity] = useState(null);
   const [currentMovies, setMovies] = useState([]);
   const { isScreenXl, isScreenLg, isScreenSm } = useResize();
-  const { values, handleChange, setValues, isValid, hasChanges } =
+  const { values, handleChange, setValues, hasChanges } =
     useFormWithValidation();
-  const INITIALS_FORM = { search: '' };
+  const initialForm = { search: '' };
 
   const handleMore = (e, isQuantity) => {
     e.preventDefault();
@@ -93,23 +93,23 @@ export const Movies = ({
 
   useEffect(() => {
     setCurrentPage({ checked, isQuantity, values });
-    // console.log(currentPage);
   }, [checked, isQuantity, values]);
 
   // Состояние выполнить поиск
-  const [isRunSearch, setRunSearc] = useState(false);
+  const [isRunSearch, setRunSearch] = useState(false);
   const [isNoMoviesFound, setNoMoviesFound] = useState(false);
 
+  // ручка поиск
   const handleSearch = (event) => {
     event.preventDefault();
     findMovies(values.search);
     changeQuantity();
-    setRunSearc(true);
+    setRunSearch(true);
   };
 
-  // При изменении строки поиска изменить состояние setRunSearc
+  // При изменении строки поиска изменить состояние setRunSearch
   useEffect(() => {
-    setRunSearc(false);
+    setRunSearch(false);
   }, [values]);
 
   useEffect(() => {
@@ -126,14 +126,16 @@ export const Movies = ({
         onCheck={chengeCheckbox}
         values={values}
         handleChange={handleChange}
-        disabledSubmit={hasChanges(INITIALS_FORM)}
+        disabledSubmit={hasChanges(initialForm)}
       />
-      <MoviesCardList
-        quantity={isQuantity}
-        insideMovies={insideMovies}
-        movies={currentMovies}
-        onLike={onLike}
-      />
+      {isNoMoviesFound || (
+        <MoviesCardList
+          quantity={isQuantity}
+          insideMovies={insideMovies}
+          movies={currentMovies}
+          onLike={onLike}
+        />
+      )}
       {currentMovies.length > isQuantity ? (
         <More onClick={(e) => handleMore(e, isQuantity)} />
       ) : (

@@ -17,9 +17,9 @@ export const MoviesCard = ({ card, insideMovies, onLike }) => {
     myCards?.some((i) => i.movieId === card.movieId),
   );
 
-  const handleClick = () => {
-    onLike(card);
-    return setLiked(!isLiked);
+  const handleClick = async () => {
+    const liked = await onLike(card);
+    setLiked(liked);
   };
   const cardLikeButtonClassName = `movies__like ${
     insideMovies ? isLiked && 'movies__like_active' : 'movies__like_delete'

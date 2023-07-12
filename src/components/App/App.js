@@ -44,18 +44,6 @@ export const App = () => {
     checkLocalStorage('searchMovies'),
   );
   const [myMovies, setMyMovies] = useState(() => checkLocalStorage('myMovies'));
-  // Состояние отслеживания изменения в карточках пользователя
-  const [isСhangeMyMovies, setСhangeMyMovies] = useState(false);
-  // Изменение состояния отслеживания изменения в карточках пользователя
-  const changeMyMovies = () => {
-    setСhangeMyMovies(true);
-  };
-  useEffect(() => {
-    if (isСhangeMyMovies) {
-      setMyMovies(() => checkLocalStorage('myMovies'));
-      setСhangeMyMovies(false);
-    }
-  }, [isСhangeMyMovies, checkLocalStorage]);
 
   // Переписать
   const getInitial = useCallback(async () => {
@@ -92,7 +80,7 @@ export const App = () => {
       setSearchMovies(() => checkLocalStorage('searchMovies'));
     } catch (err) {
       console.log('getMovies => err', err);
-      //
+
       setError(true);
       setErrorMessage(err.message);
     } finally {
@@ -100,20 +88,18 @@ export const App = () => {
     }
   }, []);
 
-  // const findMovies = useCallback(() => {
-  //   getMovies();
-  // },[])
-
   useEffect(() => {
     localStorage.setItem('myMovies', JSON.stringify(myMovies));
+  }, [myMovies]);
+  useEffect(() => {
     localStorage.setItem('searchMovies', JSON.stringify(searchMovies));
-  }, [myMovies, searchMovies]);
+  }, [searchMovies]);
 
   // обработчик лайков и дизлайков
   const cbLike = async (card) => {
-    // Проверяем лайк лайк
+    setPreloader(true);
+    let isLiked;
     const isMy = myMovies?.find((i) => i.movieId === card.movieId);
-    console.log('cbLike => isMy', isMy);
     try {
       if (!isMy) {
         // Добавляем карточку
@@ -125,20 +111,23 @@ export const App = () => {
               return res;
             }, {}),
         );
-        console.log('cbLike => !isMy => postMovies', mewMyMovie); // Удалить
         setMyMovies([...myMovies, mewMyMovie.data]);
-        console.log('cbLike => !isMy => postMovies => myMovies', myMovies); // Удалить
+        isLiked = true;
       } else {
         // Удаляем карточку
-        await mainApi.deleteMovies(isMy._id);
-        console.log('cbLike => isMy => deleteMovies'); // Удалить
-        const result = myMovies.filter((i) => i.movieId !== card.movieId);
-        setMyMovies([...result]);
+        const resultDelete = await mainApi.deleteMovies(isMy._id);
+        console.log(resultDelete);
+        const resultMyCards = myMovies.filter(
+          (i) => i.movieId !== card.movieId,
+        );
+        setMyMovies([...resultMyCards]);
+        isLiked = false;
       }
-      changeMyMovies(true);
-      console.log('cbLike => if(){}else{} => changeMyMovies', isСhangeMyMovies); // Удалить
+      return isLiked;
     } catch (err) {
       console.log('cbCardLike => err', err);
+    } finally {
+      setPreloader(false);
     }
   };
 
@@ -253,7 +242,6 @@ export const App = () => {
                   <SearchMovies
                     getMovies={getMovies}
                     movies={searchMovies}
-                    // changeMyMovies={changeMyMovies}
                     onLike={cbLike}
                     isPreloader={isPreloader}
                   />
@@ -265,7 +253,6 @@ export const App = () => {
                 element={
                   <SavedMovies
                     movies={myMovies}
-                    // changeMyMovies={changeMyMovies}
                     onLike={cbLike}
                     isPreloader={isPreloader}
                   />
