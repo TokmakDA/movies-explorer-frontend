@@ -126,7 +126,7 @@ export const Movies = ({
         onCheck={chengeCheckbox}
         values={values}
         handleChange={handleChange}
-        disabledSubmit={hasChanges(initialForm)}
+        disabledSubmit={hasChanges(initialForm) || isPreloader}
       />
       {isNoMoviesFound || (
         <MoviesCardList

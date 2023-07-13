@@ -10,9 +10,11 @@ export const MoviesCard = ({ card, insideMovies, onLike }) => {
       minutes > 0 ? `${minutes}м` : ''
     }`;
   };
-  const [myCards, setMyCards] = useState(
-    JSON.parse(localStorage.getItem('myMovies')),
-  );
+  // const [myCards, setMyCards] = useState(
+  //   JSON.parse(localStorage.getItem('myMovies')),
+  // );
+  
+  const myCards = JSON.parse(localStorage.getItem('myMovies'))
   const [isLiked, setLiked] = useState(() =>
     myCards?.some((i) => i.movieId === card.movieId),
   );

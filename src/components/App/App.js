@@ -31,7 +31,7 @@ export const App = () => {
     if (item) {
       return item;
     }
-    console.log('checLocalStorage =>', key); // Удалить
+    // console.log('checLocalStorage =>', key); // Удалить
     return [];
   }, []);
 
@@ -51,8 +51,8 @@ export const App = () => {
     try {
       const initialsUser = await mainApi.getUserMe();
       const initialsCard = await mainApi.getMovies();
-      console.log('getInitial => initialsUser', initialsUser); // Удалить
-      console.log('getInitial => initialsCard', initialsCard); // Удалить
+      // console.log('getInitial => initialsUser', initialsUser); // Удалить
+      // console.log('getInitial => initialsCard', initialsCard); // Удалить
       setAuthorized(true);
       setCurrentUser(initialsUser.data);
       setMyMovies(initialsCard.data);
@@ -75,25 +75,17 @@ export const App = () => {
     try {
       const cards = await moviesApi();
       const newCards = handlingCards(cards);
-      // const dataCards = filterMovies(newCards, value);
       localStorage.setItem('searchMovies', JSON.stringify(newCards));
       setSearchMovies(() => checkLocalStorage('searchMovies'));
     } catch (err) {
       console.log('getMovies => err', err);
-
+      // ЗАМЕНИТЬ КОНСТРУКЦИЮ
       setError(true);
       setErrorMessage(err.message);
     } finally {
       setPreloader(false);
     }
   }, []);
-
-  useEffect(() => {
-    localStorage.setItem('myMovies', JSON.stringify(myMovies));
-  }, [myMovies]);
-  useEffect(() => {
-    localStorage.setItem('searchMovies', JSON.stringify(searchMovies));
-  }, [searchMovies]);
 
   // обработчик лайков и дизлайков
   const cbLike = async (card) => {
@@ -116,13 +108,14 @@ export const App = () => {
       } else {
         // Удаляем карточку
         const resultDelete = await mainApi.deleteMovies(isMy._id);
-        console.log(resultDelete);
+        console.log('cbLike => Снять лайк', resultDelete);
         const resultMyCards = myMovies.filter(
           (i) => i.movieId !== card.movieId,
         );
         setMyMovies([...resultMyCards]);
         isLiked = false;
       }
+      // вернуть информацию в отображаемую карточку
       return isLiked;
     } catch (err) {
       console.log('cbCardLike => err', err);
@@ -130,13 +123,12 @@ export const App = () => {
       setPreloader(false);
     }
   };
-
   // Обновление данных пользователя
   const cbUpdateUser = async (userData) => {
     setPreloader(true);
     try {
       const user = await mainApi.patchUserMe(userData);
-      console.log('cbUpdateUser => user', user); // Удалить
+      // console.log('cbUpdateUser => user', user); // Удалить
       setCurrentUser(user.data);
       return;
     } catch (err) {
@@ -157,7 +149,7 @@ export const App = () => {
       setAuthorized(true);
       getInitial();
       navigate('/movies');
-      console.log('cbSignIn => user', user); // Удалить
+      // console.log('cbSignIn => user', user); // Удалить
     } catch (err) {
       console.log('cbSignIn => err', err); // Удалить
       //
@@ -172,7 +164,7 @@ export const App = () => {
     setPreloader(true);
     try {
       const res = await mainApi.getSignout();
-      console.log('cbSignOut => res', res); // Удалить
+      // console.log('cbSignOut => res', res); // Удалить
       setAuthorized(false);
       // Очистка данных
       localStorage.clear();
@@ -187,15 +179,16 @@ export const App = () => {
     }
   };
   // Регистрация
-  const cbSignUp = async (NewData) => {
+  const cbSignUp = async (userData) => {
     setPreloader(true);
     try {
-      const res = await mainApi.postSignup(NewData);
+      // переписать, не очень красиво написал
+      const res = await mainApi.postSignup(userData);
       cbSignIn({
-        email: NewData.email,
-        password: NewData.password,
+        email: userData.email,
+        password: userData.password,
       });
-      console.log('cbSignUp => res', res); // Удалить
+      // console.log('cbSignUp => res', res); // Удалить
     } catch (err) {
       console.log('cbSignUp => err', err); // Удалить
       //
@@ -205,6 +198,13 @@ export const App = () => {
       setPreloader(false);
     }
   };
+
+  useEffect(() => {
+    localStorage.setItem('myMovies', JSON.stringify(myMovies));
+  }, [myMovies]);
+  useEffect(() => {
+    localStorage.setItem('searchMovies', JSON.stringify(searchMovies));
+  }, [searchMovies]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
