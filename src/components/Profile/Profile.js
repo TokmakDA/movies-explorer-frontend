@@ -8,7 +8,7 @@ import { RessetErrorContext } from '../../contexts/RessetErrorContext';
 import { IsPreloaderContext } from '../../contexts/IsPreloaderContext';
 
 export const Profile = ({ onSignOut, onUpdateUser }) => {
-  // // Подписка на контекст
+  // Подписка на контекст
   const currentUser = useContext(CurrentUserContext);
   const isErrorMessage = useContext(CurrentErrorContext);
   const ressetError = useContext(RessetErrorContext);

@@ -7,7 +7,6 @@ export const useCheckbox = () => {
   };
   useEffect(() => {
     setChecked(checked);
-    // console.log('FilterCheckbox', checked);
   }, [setChecked, checked]);
   return { checked, setChecked, chengeCheckbox };
 };

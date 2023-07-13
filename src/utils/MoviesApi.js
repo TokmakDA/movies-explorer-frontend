@@ -17,5 +17,4 @@ export const moviesApi = async () => {
   } catch {
     throw new Error(NOT_CONNECT_ERROR);
   }
-  // return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
 };

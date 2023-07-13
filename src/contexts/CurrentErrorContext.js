@@ -1,3 +1,3 @@
-import React from 'react';
+import { createContext } from 'react';
 
-export const CurrentErrorContext = React.createContext()
+export const CurrentErrorContext = createContext()

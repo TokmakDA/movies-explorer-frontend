@@ -78,7 +78,7 @@ export const App = () => {
       localStorage.setItem('searchMovies', JSON.stringify(newCards));
       setSearchMovies(() => checkLocalStorage('searchMovies'));
     } catch (err) {
-      console.log('getMovies => err', err);
+      console.log('getMovies => err', err); // Консоль
       setErrorMessage(err.message);
     } finally {
       setPreloader(false);
@@ -105,7 +105,7 @@ export const App = () => {
       } else {
         // Удаляем карточку
         const resultDelete = await mainApi.deleteMovies(isMy._id);
-        console.log('cbLike => Снять лайк', resultDelete);
+        console.log('cbLike => Снять лайк', resultDelete); // Консоль
         const resultMyCards = myMovies.filter(
           (i) => i.movieId !== card.movieId,
         );
