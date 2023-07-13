@@ -8,3 +8,5 @@
 ВМ IP: [51.250.20.233](51.250.20.233)
 
 Url: [diploma.tokmak.nomoredomains.rocks](https://diploma.tokmak.nomoredomains.rocks)
+
+Url [Pull request](https://github.com/TokmakDA/movies-explorer-frontend/pull/2)
