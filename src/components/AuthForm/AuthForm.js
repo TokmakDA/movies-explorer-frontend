@@ -1,18 +1,25 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import './AuthForm.css';
 import { Logo } from '../Logo/Logo';
 import { useFormWithValidation } from '../../hooks/useFormWithValidation';
 import { REGULAR_EMAIL } from '../../constants/regular';
+import { ErrorContext } from '../../contexts/ErrorContext';
+import { RessetErrorContext } from '../../contexts/RessetErrorContext';
 
-export const AuthForm = ({ onSubmit, form, errMessage, children }) => {
+export const AuthForm = ({ onSubmit, form, children }) => {
   const initialForm = { name: '', email: '', password: '' };
   const { values, handleChange, errors, isValid, hasChanges, handleOnBlur } =
     useFormWithValidation();
 
+  const isErrorMessage = useContext(ErrorContext);
+  const ressetError = useContext(RessetErrorContext);
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(values);
   };
+  useEffect(() => {
+    ressetError();
+  }, [values, ressetError]);
 
   return (
     <form
@@ -80,10 +87,8 @@ export const AuthForm = ({ onSubmit, form, errMessage, children }) => {
           ></input>
           <span className="form__input-error">{errors.password}</span>
         </label>
-        {/* <span className="form__error">{errMessage}</span> */}
       </fieldset>
-      <span className="form__error">{errMessage}</span>
-
+      <span className="form__error">{isErrorMessage}</span>
       <div className="form__buttons">
         <button
           type="submit"

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { useResize } from '../../hooks/useResize';
 import './Movies.css';
 import { MoviesCardList } from '../MoviesCardList/MoviesCardList';
@@ -9,6 +9,8 @@ import { filterCheckbox } from '../../utils/filterMovies';
 import { useCheckbox } from '../../hooks/useCheckbox';
 import { SavedDevider } from '../SavedDevider/SavedDevider';
 import { useFormWithValidation } from '../../hooks/useFormWithValidation';
+import { ErrorContext } from '../../contexts/ErrorContext';
+import { RessetErrorContext } from '../../contexts/RessetErrorContext';
 
 export const Movies = ({
   findMovies,
@@ -24,6 +26,10 @@ export const Movies = ({
   const { isScreenXl, isScreenLg, isScreenSm } = useResize();
   const { values, handleChange, setValues, hasChanges } =
     useFormWithValidation();
+
+  const isErrorMessage = useContext(ErrorContext);
+  const ressetError = useContext(RessetErrorContext);
+
   const initialForm = { search: '' };
 
   const handleMore = (e, isQuantity) => {
@@ -82,12 +88,10 @@ export const Movies = ({
   useEffect(() => {
     if (currentPage) {
       const { checked, isQuantity, values } = currentPage;
-      // console.log(currentPage);
       setChecked(checked);
       setQuantity(isQuantity);
       setValues(values);
       values?.search && findMovies(values.search);
-      console.log(currentPage);
     }
   }, []);
 
@@ -118,6 +122,14 @@ export const Movies = ({
       : setNoMoviesFound(false);
   }, [isRunSearch, currentMovies, isPreloader]);
 
+  useEffect(() => {
+    ressetError();
+  }, [values, ressetError]);
+
+  useEffect(() => {
+    ressetError();
+  }, [values, ressetError]);
+
   return (
     <section className="movies">
       <SearchForm
@@ -128,18 +140,19 @@ export const Movies = ({
         handleChange={handleChange}
         disabledSubmit={hasChanges(initialForm) || isPreloader}
       />
-      {isNoMoviesFound || (
-        <MoviesCardList
-          quantity={isQuantity}
-          insideMovies={insideMovies}
-          movies={currentMovies}
-          onLike={onLike}
-        />
-      )}
+      <MoviesCardList
+        quantity={isQuantity}
+        insideMovies={insideMovies}
+        movies={currentMovies}
+        onLike={onLike}
+      />
       {currentMovies.length > isQuantity ? (
         <More onClick={(e) => handleMore(e, isQuantity)} />
       ) : (
-        <SavedDevider isNoMoviesFound={isNoMoviesFound} />
+        <SavedDevider
+          isNoMoviesFound={isNoMoviesFound}
+          isErrorMessage={isErrorMessage}
+        />
       )}
     </section>
   );

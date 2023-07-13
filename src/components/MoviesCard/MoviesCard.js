@@ -13,7 +13,6 @@ export const MoviesCard = ({ card, insideMovies, onLike }) => {
   // const [myCards, setMyCards] = useState(
   //   JSON.parse(localStorage.getItem('myMovies')),
   // );
-  
   const myCards = JSON.parse(localStorage.getItem('myMovies'))
   const [isLiked, setLiked] = useState(() =>
     myCards?.some((i) => i.movieId === card.movieId),

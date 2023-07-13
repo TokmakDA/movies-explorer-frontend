@@ -1,3 +1,5 @@
+import { NOT_CONNECT_ERROR } from '../constants/errorsMessage';
+
 class MainApi {
   constructor(options) {
     this._baseUrl = options.baseUrl;
@@ -20,7 +22,7 @@ class MainApi {
         } else if (err.message) {
           throw new Error(err.message);
         } else {
-          throw new Error('Неизвестная ошибка');
+          throw new Error(NOT_CONNECT_ERROR);
         }
       } catch (e) {
         return Promise.reject(e);
@@ -61,7 +63,7 @@ class MainApi {
   postMovies = (card) => this._makeRequest('movies', 'POST', card);
   // удаляет сохранённый фильм по id
   deleteMovies = (cardID) => this._makeRequest(`movies/${cardID}`, 'DELETE');
-  
+
   // закгружаем первичную информацию с сервера
   // getInitialsData = () =>
   //   Promise.all([this.getUserMe(), this.getMovies()]);

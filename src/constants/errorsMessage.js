@@ -9,3 +9,4 @@ export const ERROR_LOGGING = 'При регистрации пользовате
 export const ERROR_USER_UPDATE = 'При обновлении профиля произошла ошибка.';
 export const DEFAULT_MESSAGE_ERROR = 'На сервере произошла ошибка.';
 export const NOT_FOUND_ERROR = 'Страница по указанному маршруту не найдена.';
+export const NOT_CONNECT_ERROR = 'Ошибка. Проверьте интернет соединение.';

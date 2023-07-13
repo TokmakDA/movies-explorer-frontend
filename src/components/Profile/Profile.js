@@ -3,10 +3,15 @@ import './Profile.css';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { useFormWithValidation } from '../../hooks/useFormWithValidation';
 import { REGULAR_EMAIL } from '../../constants/regular';
+import { ErrorContext } from '../../contexts/ErrorContext';
+import { RessetErrorContext } from '../../contexts/RessetErrorContext';
 
-export const Profile = ({ onSignOut, onUpdateUser, isErrorMessage }) => {
+export const Profile = ({ onSignOut, onUpdateUser }) => {
   // // Подписка на контекст currentUser
   const currentUser = useContext(CurrentUserContext);
+  const isErrorMessage = useContext(ErrorContext);
+  const ressetError = useContext(RessetErrorContext);
+
   const {
     values,
     handleChange,
@@ -16,12 +21,13 @@ export const Profile = ({ onSignOut, onUpdateUser, isErrorMessage }) => {
     hasChanges,
     // handleOnBlur,
   } = useFormWithValidation();
+
   const [isEditOpen, setEditOpen] = useState(false);
 
-  const [errMessage, setErrMessage] = useState(null);
-  useEffect(() => {
-    setErrMessage(isErrorMessage);
-  }, [isErrorMessage]);
+  // const [errMessage, setErrMessage] = useState(null);
+  // useEffect(() => {
+  //   setErrMessage(isErrorMessage);
+  // }, [isErrorMessage]);
 
   useEffect(() => {
     setValues({
@@ -69,6 +75,10 @@ export const Profile = ({ onSignOut, onUpdateUser, isErrorMessage }) => {
     </button>
   );
 
+  useEffect(() => {
+    ressetError();
+  }, [values, ressetError]);
+
   return (
     <form
       className="profile"
@@ -103,7 +113,7 @@ export const Profile = ({ onSignOut, onUpdateUser, isErrorMessage }) => {
             pattern={REGULAR_EMAIL}
             name="email"
             type="email"
-            disabled={!isEditOpen || errMessage ? true : false}
+            disabled={!isEditOpen ? true : false}
             onChange={handleChange}
             placeholder="Введите E-mail"
             required
@@ -111,7 +121,7 @@ export const Profile = ({ onSignOut, onUpdateUser, isErrorMessage }) => {
           <span className="profile__input-error">{errors.email}</span>
         </label>
       </fieldset>
-      <span className="profile__error">{errMessage || ''}</span>
+      <span className="profile__error">{isErrorMessage || ''}</span>
       {!isEditOpen ? elementDefaulButtons : elementButtonSubmit}
     </form>
   );
