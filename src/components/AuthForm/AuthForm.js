@@ -3,16 +3,19 @@ import './AuthForm.css';
 import { Logo } from '../Logo/Logo';
 import { useFormWithValidation } from '../../hooks/useFormWithValidation';
 import { REGULAR_EMAIL } from '../../constants/regular';
-import { ErrorContext } from '../../contexts/ErrorContext';
+import { CurrentErrorContext } from '../../contexts/CurrentErrorContext';
 import { RessetErrorContext } from '../../contexts/RessetErrorContext';
+import { IsPreloaderContext } from '../../contexts/IsPreloaderContext';
 
 export const AuthForm = ({ onSubmit, form, children }) => {
   const initialForm = { name: '', email: '', password: '' };
   const { values, handleChange, errors, isValid, hasChanges, handleOnBlur } =
     useFormWithValidation();
-
-  const isErrorMessage = useContext(ErrorContext);
+  //Подписка на контекст
+  const isErrorMessage = useContext(CurrentErrorContext);
   const ressetError = useContext(RessetErrorContext);
+  const isPreloader = useContext(IsPreloaderContext);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(values);
@@ -48,6 +51,7 @@ export const AuthForm = ({ onSubmit, form, children }) => {
               minLength="2"
               maxLength="30"
               placeholder="Введите Имя"
+              disabled={isPreloader}
             ></input>
             <span className="form__input-error">{errors.name}</span>
           </label>
@@ -67,6 +71,7 @@ export const AuthForm = ({ onSubmit, form, children }) => {
             pattern={REGULAR_EMAIL}
             maxLength="100"
             placeholder="Введите E-mail"
+            disabled={isPreloader}
           ></input>
           <span className="form__input-error">{errors.email}</span>
         </label>
@@ -84,6 +89,7 @@ export const AuthForm = ({ onSubmit, form, children }) => {
             required={false}
             maxLength="100"
             placeholder="Введите Пароль"
+            disabled={isPreloader}
           ></input>
           <span className="form__input-error">{errors.password}</span>
         </label>
@@ -93,7 +99,7 @@ export const AuthForm = ({ onSubmit, form, children }) => {
         <button
           type="submit"
           className="form__button"
-          disabled={hasChanges(initialForm) || !isValid}
+          disabled={hasChanges(initialForm) || !isValid || isPreloader}
         >
           {form.button}
         </button>

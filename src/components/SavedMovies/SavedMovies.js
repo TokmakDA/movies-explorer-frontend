@@ -26,7 +26,6 @@ export const SavedMovies = ({ movies, onLike, isPreloader }) => {
       onLike={onLike}
       localStorageKey={'savedPage'}
       insideMovies={false}
-      isPreloader={isPreloader}
     />
   );
 };

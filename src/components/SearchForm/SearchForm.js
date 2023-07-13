@@ -1,5 +1,7 @@
 import './SearchForm.css';
 import { FilterCheckbox } from '../FilterCheckbox/FilterCheckbox';
+import { IsPreloaderContext } from '../../contexts/IsPreloaderContext';
+import { useContext } from 'react';
 
 export const SearchForm = ({
   onSubmit,
@@ -9,6 +11,8 @@ export const SearchForm = ({
   handleChange,
   disabledSubmit,
 }) => {
+  const isPreloader = useContext(IsPreloaderContext);
+
   return (
     <div className="search">
       <form
@@ -25,6 +29,7 @@ export const SearchForm = ({
               name="search"
               required
               onChange={handleChange}
+              disabled={isPreloader}
             ></input>
             <button
               type="submit"

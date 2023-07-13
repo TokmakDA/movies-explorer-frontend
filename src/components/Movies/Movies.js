@@ -4,13 +4,13 @@ import './Movies.css';
 import { MoviesCardList } from '../MoviesCardList/MoviesCardList';
 import { SearchForm } from '../SearchForm/SearchForm';
 import { More } from '../More/More';
-import { filterCheckbox } from '../../utils/filterMovies';
-
-import { useCheckbox } from '../../hooks/useCheckbox';
 import { SavedDevider } from '../SavedDevider/SavedDevider';
+import { filterCheckbox } from '../../utils/filterMovies';
+import { useCheckbox } from '../../hooks/useCheckbox';
 import { useFormWithValidation } from '../../hooks/useFormWithValidation';
-import { ErrorContext } from '../../contexts/ErrorContext';
+import { CurrentErrorContext } from '../../contexts/CurrentErrorContext';
 import { RessetErrorContext } from '../../contexts/RessetErrorContext';
+import { IsPreloaderContext } from '../../contexts/IsPreloaderContext';
 
 export const Movies = ({
   findMovies,
@@ -18,7 +18,6 @@ export const Movies = ({
   onLike,
   localStorageKey,
   insideMovies,
-  isPreloader,
 }) => {
   const { checked, chengeCheckbox, setChecked } = useCheckbox();
   const [isQuantity, setQuantity] = useState(null);
@@ -27,8 +26,9 @@ export const Movies = ({
   const { values, handleChange, setValues, hasChanges } =
     useFormWithValidation();
 
-  const isErrorMessage = useContext(ErrorContext);
+  const isErrorMessage = useContext(CurrentErrorContext);
   const ressetError = useContext(RessetErrorContext);
+  const isPreloader = useContext(IsPreloaderContext);
 
   const initialForm = { search: '' };
 
@@ -52,10 +52,6 @@ export const Movies = ({
       : setQuantity(4);
   }, [isScreenXl, isScreenLg, isScreenSm, setQuantity]);
 
-  // useEffect(() => {
-  //   changeQuantity();
-  // }, [changeQuantity]);
-
   useEffect(() => {
     !isQuantity && changeQuantity();
   }, [isQuantity, changeQuantity]);
@@ -77,13 +73,13 @@ export const Movies = ({
       return isPage;
     }
     return { values: { search: '' } };
-  }, []);
+  }, [localStorageKey]);
 
   const [currentPage, setCurrentPage] = useState(() => checkCurentPage());
 
   useEffect(() => {
     localStorage.setItem(localStorageKey, JSON.stringify(currentPage));
-  }, [currentPage]);
+  }, [currentPage, localStorageKey]);
 
   useEffect(() => {
     if (currentPage) {

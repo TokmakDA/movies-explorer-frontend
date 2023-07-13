@@ -63,10 +63,6 @@ class MainApi {
   postMovies = (card) => this._makeRequest('movies', 'POST', card);
   // удаляет сохранённый фильм по id
   deleteMovies = (cardID) => this._makeRequest(`movies/${cardID}`, 'DELETE');
-
-  // закгружаем первичную информацию с сервера
-  // getInitialsData = () =>
-  //   Promise.all([this.getUserMe(), this.getMovies()]);
 }
 
 const config = {

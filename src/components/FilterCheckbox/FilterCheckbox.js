@@ -9,7 +9,6 @@ export const FilterCheckbox = ({ className, checked, onCheck }) => {
         className="filter-checkbox__input"
         checked={checked | false}
         onChange={onCheck}
-        onClick={(e) => console.log(e.target.checked)}
       ></input>
       Короткометражки
     </label>

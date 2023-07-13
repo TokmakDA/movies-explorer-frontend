@@ -6,7 +6,6 @@ export const useForm = () => {
   const handleChange = (event) => {
     const { value, name } = event.target;
     setValues({ ...values, [name]: value });
-    console.log(event);
   };
   return { values, handleChange, setValues };
 };

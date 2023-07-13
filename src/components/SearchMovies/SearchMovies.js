@@ -27,7 +27,6 @@ export const SearchMovies = ({ getMovies, movies, onLike, isPreloader }) => {
       onLike={onLike}
       localStorageKey={'searchPage'}
       insideMovies={true}
-      isPreloader={isPreloader}
     />
   );
 };

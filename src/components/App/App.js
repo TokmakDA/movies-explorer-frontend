@@ -16,8 +16,9 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { moviesApi } from '../../utils/MoviesApi';
 import { handlingCards } from '../../utils/handlingCards';
 import { SearchMovies } from '../SearchMovies/SearchMovies';
-import { ErrorContext } from '../../contexts/ErrorContext';
+import { CurrentErrorContext } from '../../contexts/CurrentErrorContext';
 import { RessetErrorContext } from '../../contexts/RessetErrorContext';
+import { IsPreloaderContext } from '../../contexts/IsPreloaderContext';
 
 export const App = () => {
   const navigate = useNavigate();
@@ -37,7 +38,6 @@ export const App = () => {
   // стейт Ошибки
   const [isErrorMessage, setErrorMessage] = useState(null);
   const ressetError = useCallback(() => {
-    console.log('ressetError =>', isErrorMessage);
     setErrorMessage(null);
   }, [setErrorMessage]);
 
@@ -68,6 +68,7 @@ export const App = () => {
   useEffect(() => {
     getInitial();
   }, []);
+
   // Запрос фильмов с Beatfilm-Movies
   const getMovies = useCallback(async () => {
     setPreloader(true);
@@ -82,7 +83,7 @@ export const App = () => {
     } finally {
       setPreloader(false);
     }
-  }, []);
+  }, [checkLocalStorage]);
   // обработчик лайков и дизлайков
   const cbLike = async (card) => {
     setPreloader(true);
@@ -197,91 +198,93 @@ export const App = () => {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <ErrorContext.Provider value={isErrorMessage}>
+      <CurrentErrorContext.Provider value={isErrorMessage}>
         <RessetErrorContext.Provider value={ressetError}>
-          {isPreloader && <Preloader />}
-          <ProtectedRoute isAuthorized={isAuthorized}>
-            <Routes>
-              {/* 1 Уровень вложенности */}
-              <Route
-                path="/"
-                element={
-                  <>
-                    <Header isAuthorized={isAuthorized} />
-                    <Outlet />
-                  </>
-                }
-              >
-                {/* 2 Уровень вложенности */}
+          <IsPreloaderContext.Provider value={isPreloader}>
+            {isPreloader && <Preloader />}
+            <ProtectedRoute isAuthorized={isAuthorized}>
+              <Routes>
+                {/* 1 Уровень вложенности */}
                 <Route
+                  path="/"
                   element={
                     <>
+                      <Header isAuthorized={isAuthorized} />
                       <Outlet />
-                      <Footer />
                     </>
                   }
                 >
-                  {/* 3 Уровень вложенности */}
+                  {/* 2 Уровень вложенности */}
                   <Route
-                    index
-                    element={<Main />}
-                  />
-                  {/* 3 Уровень вложенности */}
-                  <Route
-                    path="/movies"
                     element={
-                      <SearchMovies
-                        getMovies={getMovies}
-                        movies={searchMovies}
-                        onLike={cbLike}
-                        isPreloader={isPreloader}
-                      />
+                      <>
+                        <Outlet />
+                        <Footer />
+                      </>
                     }
-                  />
-                  {/* 3 Уровень вложенности */}
+                  >
+                    {/* 3 Уровень вложенности */}
+                    <Route
+                      index
+                      element={<Main />}
+                    />
+                    {/* 3 Уровень вложенности */}
+                    <Route
+                      path="/movies"
+                      element={
+                        <SearchMovies
+                          getMovies={getMovies}
+                          movies={searchMovies}
+                          onLike={cbLike}
+                        />
+                      }
+                    />
+                    {/* 3 Уровень вложенности */}
+                    <Route
+                      path="/saved-movies"
+                      element={
+                        <SavedMovies
+                          movies={myMovies}
+                          onLike={cbLike}
+                        />
+                      }
+                    />
+                  </Route>
+                  {/* 2 Уровень вложенности */}
                   <Route
-                    path="/saved-movies"
+                    path="/profile"
                     element={
-                      <SavedMovies
-                        movies={myMovies}
-                        onLike={cbLike}
-                        isPreloader={isPreloader}
+                      <Profile
+                        onSignOut={cbSignOut}
+                        onUpdateUser={(userData) => cbUpdateUser(userData)}
                       />
                     }
                   />
                 </Route>
-                {/* 2 Уровень вложенности */}
+                {/* 1 Уровень вложенности */}
                 <Route
-                  path="/profile"
+                  path="/signup"
                   element={
-                    <Profile
-                      onSignOut={cbSignOut}
-                      onUpdateUser={(userData) => cbUpdateUser(userData)}
-                    />
+                    <Register onSignUp={(userData) => cbSignUp(userData)} />
                   }
                 />
-              </Route>
-              {/* 1 Уровень вложенности */}
-              <Route
-                path="/signup"
-                element={
-                  <Register onSignUp={(userData) => cbSignUp(userData)} />
-                }
-              />
-              {/* 1 Уровень вложенности */}
-              <Route
-                path="/signin"
-                element={<Login onSingIn={(userData) => cbSignIn(userData)} />}
-              />
-              {/* 1 Уровень вложенности */}
-              <Route
-                path="*"
-                element={<NotFound />}
-              />
-            </Routes>
-          </ProtectedRoute>
+                {/* 1 Уровень вложенности */}
+                <Route
+                  path="/signin"
+                  element={
+                    <Login onSingIn={(userData) => cbSignIn(userData)} />
+                  }
+                />
+                {/* 1 Уровень вложенности */}
+                <Route
+                  path="*"
+                  element={<NotFound />}
+                />
+              </Routes>
+            </ProtectedRoute>
+          </IsPreloaderContext.Provider>
         </RessetErrorContext.Provider>
-      </ErrorContext.Provider>
+      </CurrentErrorContext.Provider>
     </CurrentUserContext.Provider>
   );
 };

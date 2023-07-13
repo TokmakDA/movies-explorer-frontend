@@ -3,31 +3,21 @@ import './Profile.css';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { useFormWithValidation } from '../../hooks/useFormWithValidation';
 import { REGULAR_EMAIL } from '../../constants/regular';
-import { ErrorContext } from '../../contexts/ErrorContext';
+import { CurrentErrorContext } from '../../contexts/CurrentErrorContext';
 import { RessetErrorContext } from '../../contexts/RessetErrorContext';
+import { IsPreloaderContext } from '../../contexts/IsPreloaderContext';
 
 export const Profile = ({ onSignOut, onUpdateUser }) => {
-  // // Подписка на контекст currentUser
+  // // Подписка на контекст
   const currentUser = useContext(CurrentUserContext);
-  const isErrorMessage = useContext(ErrorContext);
+  const isErrorMessage = useContext(CurrentErrorContext);
   const ressetError = useContext(RessetErrorContext);
+  const isPreloader = useContext(IsPreloaderContext);
 
-  const {
-    values,
-    handleChange,
-    setValues,
-    errors,
-    isValid,
-    hasChanges,
-    // handleOnBlur,
-  } = useFormWithValidation();
+  const { values, handleChange, setValues, errors, isValid, hasChanges } =
+    useFormWithValidation();
 
   const [isEditOpen, setEditOpen] = useState(false);
-
-  // const [errMessage, setErrMessage] = useState(null);
-  // useEffect(() => {
-  //   setErrMessage(isErrorMessage);
-  // }, [isErrorMessage]);
 
   useEffect(() => {
     setValues({
@@ -39,8 +29,6 @@ export const Profile = ({ onSignOut, onUpdateUser }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     onUpdateUser(values);
-
-    console.log('Profile => handleSubmit => values', values);
   };
 
   const switchEditProfile = () => {
@@ -68,8 +56,7 @@ export const Profile = ({ onSignOut, onUpdateUser }) => {
     <button
       type="submit"
       className="profile__submit-button"
-      //Временная конструкция
-      disabled={hasChanges(currentUser) || !isValid}
+      disabled={hasChanges(currentUser) || !isValid || isPreloader}
     >
       Сохранить
     </button>
@@ -94,7 +81,7 @@ export const Profile = ({ onSignOut, onUpdateUser }) => {
             value={values?.name || ''}
             name="name"
             type="text"
-            disabled={!isEditOpen ? true : false}
+            disabled={!isEditOpen || isPreloader ? true : false}
             onChange={(e) => handleChange(e)}
             placeholder="Введите Имя"
             required
@@ -113,7 +100,7 @@ export const Profile = ({ onSignOut, onUpdateUser }) => {
             pattern={REGULAR_EMAIL}
             name="email"
             type="email"
-            disabled={!isEditOpen ? true : false}
+            disabled={!isEditOpen || isPreloader ? true : false}
             onChange={handleChange}
             placeholder="Введите E-mail"
             required

@@ -5,7 +5,6 @@ export const filterMovies = (dataCards, value) => {
       .toLowerCase()
       .includes(value.toLowerCase()),
   );
-  // console.log('filterMovies => value, movies', value, movies);
   return movies;
 };
 
