@@ -3,7 +3,7 @@ import './SearchMovies.css';
 import { Movies } from '../Movies/Movies';
 import { filterMovies } from '../../utils/filterMovies';
 
-export const SearchMovies = ({ getMovies, movies, onLike, isPreloader }) => {
+export const SearchMovies = ({ getMovies, movies, onLike }) => {
   const [currentMovies, setMovies] = useState([]);
   const [value, setValue] = useState(null);
 

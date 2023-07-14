@@ -11,21 +11,17 @@ class MainApi {
     if (res.ok) {
       return await res.json();
     } else {
-      try {
-        const err = await res.json();
-        if (err.validation) {
-          throw new Error(
-            err.validation.body.message ||
-              err.validation.params.message ||
-              err.message,
-          );
-        } else if (err.message) {
-          throw new Error(err.message);
-        } else {
-          throw new Error(NOT_CONNECT_ERROR);
-        }
-      } catch (e) {
-        return Promise.reject(e);
+      const err = await res.json();
+      if (err.validation) {
+        return Promise.reject(
+          err.validation.body.message ||
+            err.validation.params.message ||
+            err.message,
+        );
+      } else if (err.message) {
+        return Promise.reject(err.message);
+      } else {
+        return Promise.reject(NOT_CONNECT_ERROR);
       }
     }
   };

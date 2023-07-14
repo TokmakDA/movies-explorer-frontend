@@ -9,7 +9,7 @@ import { IsPreloaderContext } from '../../contexts/IsPreloaderContext';
 
 export const AuthForm = ({ onSubmit, form, children }) => {
   const initialForm = { name: '', email: '', password: '' };
-  const { values, handleChange, errors, isValid, hasChanges, handleOnBlur } =
+  const { values, handleChange, errors, isValid, hasChanges, isOnBlur } =
     useFormWithValidation();
   //Подписка на контекст
   const isErrorMessage = useContext(CurrentErrorContext);
@@ -39,10 +39,12 @@ export const AuthForm = ({ onSubmit, form, children }) => {
           <label className="form__lebel">
             Имя
             <input
-              onBlur={handleOnBlur}
+              onBlur={handleChange}
               autoComplete="nickname"
               type="text"
-              className="form__input"
+              className={`form__input ${
+                !isValid & isOnBlur.name ? 'form__input_invalid' : ''
+              }`}
               id="name"
               value={values?.name || ''}
               onChange={handleChange}
@@ -59,14 +61,17 @@ export const AuthForm = ({ onSubmit, form, children }) => {
         <label className="form__lebel">
           E-mail
           <input
-            onBlur={handleOnBlur}
+            onBlur={handleChange}
             autoComplete="email"
             type="email"
-            className="form__input"
+            // className="form__input"
+            className={`form__input ${
+              !isValid & isOnBlur?.email ? 'form__input_invalid' : ''
+            }`}
             id="email"
             value={values?.email || ''}
             onChange={handleChange}
-            required={false}
+            required
             name="email"
             pattern={REGULAR_EMAIL}
             maxLength="100"
@@ -78,15 +83,18 @@ export const AuthForm = ({ onSubmit, form, children }) => {
         <label className="form__lebel">
           Пароль
           <input
-            onBlur={handleOnBlur}
+            onBlur={handleChange}
             autoComplete="current-password"
             type="password"
-            className="form__input"
+            className={`form__input ${
+              !isValid & isOnBlur?.password ? 'form__input_invalid' : ''
+            }`}
             id="password"
             value={values?.password || ''}
             onChange={handleChange}
             name="password"
-            required={false}
+            required
+            minLength="8"
             maxLength="100"
             placeholder="Введите Пароль"
             disabled={isPreloader}

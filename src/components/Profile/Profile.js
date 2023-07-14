@@ -26,9 +26,10 @@ export const Profile = ({ onSignOut, onUpdateUser }) => {
     });
   }, [currentUser, setValues]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onUpdateUser(values);
+    const newIsEditOpen = await onUpdateUser(values);
+    setEditOpen(newIsEditOpen);
   };
 
   const switchEditProfile = () => {
@@ -76,7 +77,6 @@ export const Profile = ({ onSignOut, onUpdateUser }) => {
         <label className="profile__label">
           Имя
           <input
-            // onBlur={handleOnBlur}
             className="profile__input"
             value={values?.name || ''}
             name="name"
@@ -94,7 +94,6 @@ export const Profile = ({ onSignOut, onUpdateUser }) => {
         <label className="profile__label">
           E-mail
           <input
-            // onBlur={handleOnBlur}
             className="profile__input"
             value={values?.email || ''}
             pattern={REGULAR_EMAIL}

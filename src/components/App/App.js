@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Outlet, Route, Routes, useNavigate } from 'react-router-dom';
+import { Outlet, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 
 import { Main } from '../Main/Main';
 import { Header } from '../Header/Header';
@@ -21,6 +21,7 @@ import { RessetErrorContext } from '../../contexts/RessetErrorContext';
 import { IsPreloaderContext } from '../../contexts/IsPreloaderContext';
 
 export const App = () => {
+  const location = useLocation()
   const navigate = useNavigate();
   const [isAuthorized, setAuthorized] = useState(false);
   // Стейт данных пользователя
@@ -56,7 +57,7 @@ export const App = () => {
       setAuthorized(true);
       setCurrentUser(initialsUser.data);
       setMyMovies(initialsCard.data);
-      navigate('/movies');
+      navigate(location.pathname || "/movies");
     } catch (err) {
       console.log('getInitial => err', err); // Консоль
       navigate('/');
@@ -79,7 +80,7 @@ export const App = () => {
       setSearchMovies(() => checkLocalStorage('searchMovies'));
     } catch (err) {
       console.log('getMovies => err', err); // Консоль
-      setErrorMessage(err.message);
+      setErrorMessage(err);
     } finally {
       setPreloader(false);
     }
@@ -123,13 +124,18 @@ export const App = () => {
   // Обновление данных пользователя
   const cbUpdateUser = async (userData) => {
     setPreloader(true);
+    let isEditOpen;
+
     try {
       const user = await mainApi.patchUserMe(userData);
       setCurrentUser(user.data);
-      return;
+      isEditOpen = false;
+      return isEditOpen;
     } catch (err) {
       console.log('cbUpdateUser => err', err); // Консоль
-      setErrorMessage(err.message);
+      setErrorMessage(err);
+      isEditOpen = true;
+      return isEditOpen;
     } finally {
       setPreloader(false);
     }
@@ -145,7 +151,7 @@ export const App = () => {
       navigate('/movies');
     } catch (err) {
       console.log('cbSignIn => err', err); // Консоль
-      setErrorMessage(err.message);
+      setErrorMessage(err);
     } finally {
       setPreloader(false);
     }
@@ -164,7 +170,7 @@ export const App = () => {
       setMyMovies([]);
     } catch (err) {
       console.log('cbSignOut => err', err); // Консоль
-      setErrorMessage(err.message);
+      setErrorMessage(err);
     } finally {
       setPreloader(false);
       navigate('/');
@@ -183,7 +189,7 @@ export const App = () => {
       });
     } catch (err) {
       console.log('cbSignUp => err', err); // Консоль
-      setErrorMessage(err.message);
+      setErrorMessage(err);
     } finally {
       setPreloader(false);
     }
