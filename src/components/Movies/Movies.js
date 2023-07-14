@@ -5,32 +5,38 @@ import { MoviesCardList } from '../MoviesCardList/MoviesCardList';
 import { SearchForm } from '../SearchForm/SearchForm';
 import { More } from '../More/More';
 import { SavedDevider } from '../SavedDevider/SavedDevider';
-import { filterCheckbox } from '../../utils/filterMovies';
+import { filterCheckbox, filterMovies } from '../../utils/filterMovies';
 import { useCheckbox } from '../../hooks/useCheckbox';
 import { useFormWithValidation } from '../../hooks/useFormWithValidation';
 import { CurrentErrorContext } from '../../contexts/CurrentErrorContext';
 import { RessetErrorContext } from '../../contexts/RessetErrorContext';
 import { IsPreloaderContext } from '../../contexts/IsPreloaderContext';
 
-export const Movies = ({
-  findMovies,
-  movies,
-  onLike,
-  localStorageKey,
-  insideMovies,
-}) => {
+export const Movies = ({ getMovies, movies, onLike }) => {
   const { checked, chengeCheckbox, setChecked } = useCheckbox();
   const [isQuantity, setQuantity] = useState(null);
   const [currentMovies, setMovies] = useState([]);
+  const [cгrrentFilterMovies, setFilterMovies] = useState([]);
   const { isScreenXl, isScreenLg, isScreenSm } = useResize();
   const { values, handleChange, setValues, hasChanges } =
     useFormWithValidation();
+  const [value, setValue] = useState(null);
+  // Состояние выполнить поиск
+  const [isRunSearch, setRunSearch] = useState(false);
+  const [isNoMoviesFound, setNoMoviesFound] = useState(false);
 
   const isErrorMessage = useContext(CurrentErrorContext);
   const ressetError = useContext(RessetErrorContext);
   const isPreloader = useContext(IsPreloaderContext);
 
   const initialForm = { search: '' };
+
+  const handleFindMovies = (value) => {
+    if (movies.length === 0) {
+      getMovies();
+    }
+    setValue(value);
+  };
 
   const handleMore = (e, isQuantity) => {
     e.preventDefault();
@@ -57,29 +63,23 @@ export const Movies = ({
   }, [isQuantity, changeQuantity]);
 
   useEffect(() => {
-    setMovies(filterCheckbox(movies, checked));
-  }, [movies, checked, setMovies]);
-
-  useEffect(() => {
-    if (!insideMovies) {
-      findMovies(values?.search);
-    }
-  }, [values, findMovies, insideMovies]);
+    setFilterMovies(filterCheckbox(currentMovies, checked));
+  }, [currentMovies, checked, setFilterMovies]);
 
   // Проверить localStorage currentPage
   const checkCurentPage = useCallback(() => {
-    const isPage = JSON.parse(localStorage.getItem(localStorageKey));
+    const isPage = JSON.parse(localStorage.getItem('searchPage'));
     if (isPage) {
       return isPage;
     }
     return { values: { search: '' } };
-  }, [localStorageKey]);
+  }, []);
 
   const [currentPage, setCurrentPage] = useState(() => checkCurentPage());
 
   useEffect(() => {
-    localStorage.setItem(localStorageKey, JSON.stringify(currentPage));
-  }, [currentPage, localStorageKey]);
+    localStorage.setItem('searchPage', JSON.stringify(currentPage));
+  }, [currentPage]);
 
   useEffect(() => {
     if (currentPage) {
@@ -87,7 +87,7 @@ export const Movies = ({
       setChecked(checked);
       setQuantity(isQuantity);
       setValues(values);
-      values?.search && findMovies(values.search);
+      values?.search && handleFindMovies(values.search);
     }
   }, []);
 
@@ -95,14 +95,16 @@ export const Movies = ({
     setCurrentPage({ checked, isQuantity, values });
   }, [checked, isQuantity, values]);
 
-  // Состояние выполнить поиск
-  const [isRunSearch, setRunSearch] = useState(false);
-  const [isNoMoviesFound, setNoMoviesFound] = useState(false);
+  useEffect(() => {
+    if (value) {
+      setMovies(filterMovies(movies, value));
+    }
+  }, [movies, value]);
 
   // ручка поиск
   const handleSearch = (event) => {
     event.preventDefault();
-    findMovies(values.search);
+    handleFindMovies(values.search);
     changeQuantity();
     setRunSearch(true);
   };
@@ -122,10 +124,6 @@ export const Movies = ({
     ressetError();
   }, [values, ressetError]);
 
-  useEffect(() => {
-    ressetError();
-  }, [values, ressetError]);
-
   return (
     <section className="movies">
       <SearchForm
@@ -138,11 +136,11 @@ export const Movies = ({
       />
       <MoviesCardList
         quantity={isQuantity}
-        insideMovies={insideMovies}
-        movies={currentMovies}
+        insideMovies={true}
+        movies={cгrrentFilterMovies}
         onLike={onLike}
       />
-      {currentMovies.length > isQuantity ? (
+      {cгrrentFilterMovies.length > isQuantity ? (
         <More onClick={(e) => handleMore(e, isQuantity)} />
       ) : (
         <SavedDevider

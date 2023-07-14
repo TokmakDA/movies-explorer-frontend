@@ -1,5 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Outlet, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import {
+  Outlet,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom';
 
 import { Main } from '../Main/Main';
 import { Header } from '../Header/Header';
@@ -15,13 +21,13 @@ import { mainApi } from '../../utils/MainApi';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { moviesApi } from '../../utils/MoviesApi';
 import { handlingCards } from '../../utils/handlingCards';
-import { SearchMovies } from '../SearchMovies/SearchMovies';
 import { CurrentErrorContext } from '../../contexts/CurrentErrorContext';
 import { RessetErrorContext } from '../../contexts/RessetErrorContext';
 import { IsPreloaderContext } from '../../contexts/IsPreloaderContext';
+import { Movies } from '../Movies/Movies';
 
 export const App = () => {
-  const location = useLocation()
+  const location = useLocation();
   const navigate = useNavigate();
   const [isAuthorized, setAuthorized] = useState(false);
   // Стейт данных пользователя
@@ -57,7 +63,7 @@ export const App = () => {
       setAuthorized(true);
       setCurrentUser(initialsUser.data);
       setMyMovies(initialsCard.data);
-      navigate(location.pathname || "/movies");
+      navigate(location.pathname || '/movies');
     } catch (err) {
       console.log('getInitial => err', err); // Консоль
       navigate('/');
@@ -65,7 +71,7 @@ export const App = () => {
     } finally {
       setPreloader(false);
     }
-  }, [navigate]);
+  }, [navigate, location]);
   useEffect(() => {
     getInitial();
   }, []);
@@ -238,7 +244,7 @@ export const App = () => {
                     <Route
                       path="/movies"
                       element={
-                        <SearchMovies
+                        <Movies
                           getMovies={getMovies}
                           movies={searchMovies}
                           onLike={cbLike}
