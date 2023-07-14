@@ -6,6 +6,7 @@ import { REGULAR_EMAIL } from '../../constants/regular';
 import { CurrentErrorContext } from '../../contexts/CurrentErrorContext';
 import { RessetErrorContext } from '../../contexts/RessetErrorContext';
 import { IsPreloaderContext } from '../../contexts/IsPreloaderContext';
+import { SUCCESSFULL_UPDATE } from '../../constants/successfulMessage';
 
 export const Profile = ({ onSignOut, onUpdateUser }) => {
   // Подписка на контекст
@@ -20,7 +21,6 @@ export const Profile = ({ onSignOut, onUpdateUser }) => {
   const [isEditOpen, setEditOpen] = useState(false);
   const [isSuccessUpdate, setSuccessUpdate] = useState(false);
 
-  const successUpdate = 'Данные пользователя успешно изменены.';
 
   useEffect(() => {
     setValues({
@@ -123,7 +123,7 @@ export const Profile = ({ onSignOut, onUpdateUser }) => {
           isErrorMessage && 'profile__message_error'
         }`}
       >
-        {isErrorMessage || (isSuccessUpdate ? successUpdate : '') || ''}
+        {isErrorMessage || (isSuccessUpdate ? SUCCESSFULL_UPDATE : '') || ''}
       </span>
       {!isEditOpen ? elementDefaulButtons : elementButtonSubmit}
     </form>
