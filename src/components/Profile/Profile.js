@@ -1,42 +1,46 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './Profile.css';
-import { useForm } from '../../hooks/useForm';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { useFormWithValidation } from '../../hooks/useFormWithValidation';
+import { REGULAR_EMAIL } from '../../constants/regular';
+import { CurrentErrorContext } from '../../contexts/CurrentErrorContext';
+import { RessetErrorContext } from '../../contexts/RessetErrorContext';
+import { IsPreloaderContext } from '../../contexts/IsPreloaderContext';
+import { SUCCESSFULL_UPDATE } from '../../constants/successfulMessage';
 
-export const Profile = ({ handleLogOut }) => {
-  const { values, handleChange, setValues } = useForm();
-  const [currentUser, setCurrentUser] = useState({
-    name: 'Петруха',
-    email: 'petrucha@mail.ru',
-  });
+export const Profile = ({ onSignOut, onUpdateUser }) => {
+  // Подписка на контекст
+  const currentUser = useContext(CurrentUserContext);
+  const isErrorMessage = useContext(CurrentErrorContext);
+  const ressetError = useContext(RessetErrorContext);
+  const isPreloader = useContext(IsPreloaderContext);
+
+  const { values, handleChange, setValues, errors, isValid, hasChanges } =
+    useFormWithValidation();
+
   const [isEditOpen, setEditOpen] = useState(false);
-  const [errMessage, setErrMessage] = useState(null);
+  const [isSuccessUpdate, setSuccessUpdate] = useState(false);
+
+
   useEffect(() => {
     setValues({
       name: currentUser?.name,
       email: currentUser?.email,
     });
   }, [currentUser, setValues]);
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setCurrentUser(values);
-    //Временная конструкция
-    setErrMessage('При обновлении профиля произошла ошибка.');
+    const isEdit = await onUpdateUser(values);
+    setEditOpen(!isEdit);
+    setSuccessUpdate(isEdit);
   };
 
   const switchEditProfile = () => {
     setEditOpen(!isEditOpen);
+    setSuccessUpdate(false);
   };
 
-  const elementButtonSubmit = (
-    <button
-      type="submit"
-      className="profile__submit-button"
-      //Временная конструкция
-      disabled={errMessage ? true : false}
-    >
-      Сохранить
-    </button>
-  );
   const elementDefaulButtons = (
     <div className="profile__buttons">
       <button
@@ -47,13 +51,32 @@ export const Profile = ({ handleLogOut }) => {
         Редактировать
       </button>
       <button
-        onClick={(e) => handleLogOut(e)}
+        onClick={(e) => onSignOut(e)}
         className="profile__button profile__button_logout"
       >
         Выйти из аккаунта
       </button>
     </div>
   );
+  const elementButtonSubmit = (
+    <button
+      type="submit"
+      className="profile__submit-button"
+      disabled={hasChanges(currentUser) || !isValid || isPreloader}
+    >
+      Сохранить
+    </button>
+  );
+
+  useEffect(() => {
+    if (isSuccessUpdate) {
+      setTimeout(() => setSuccessUpdate(false), 5000);
+    }
+  }, [isSuccessUpdate]);
+
+  useEffect(() => {
+    ressetError();
+  }, [values, ressetError]);
 
   return (
     <form
@@ -68,10 +91,15 @@ export const Profile = ({ handleLogOut }) => {
             className="profile__input"
             value={values?.name || ''}
             name="name"
-            disabled={!isEditOpen || errMessage ? true : false}
-            onChange={handleChange}
+            type="text"
+            disabled={!isEditOpen || isPreloader ? true : false}
+            onChange={(e) => handleChange(e)}
             placeholder="Введите Имя"
+            required
+            maxLength={30}
+            minLength={2}
           />
+          <span className="profile__input-error">{errors.name}</span>
         </label>
         <hr className="profile__line" />
         <label className="profile__label">
@@ -79,14 +107,24 @@ export const Profile = ({ handleLogOut }) => {
           <input
             className="profile__input"
             value={values?.email || ''}
+            pattern={REGULAR_EMAIL}
             name="email"
-            disabled={!isEditOpen || errMessage ? true : false}
+            type="email"
+            disabled={!isEditOpen || isPreloader ? true : false}
             onChange={handleChange}
             placeholder="Введите E-mail"
+            required
           />
+          <span className="profile__input-error">{errors.email}</span>
         </label>
       </fieldset>
-      <span className="profile__error">{errMessage}</span>
+      <span
+        className={`profile__message ${
+          isErrorMessage && 'profile__message_error'
+        }`}
+      >
+        {isErrorMessage || (isSuccessUpdate ? SUCCESSFULL_UPDATE : '') || ''}
+      </span>
       {!isEditOpen ? elementDefaulButtons : elementButtonSubmit}
     </form>
   );

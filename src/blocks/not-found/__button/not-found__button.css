@@ -1,4 +1,4 @@
-.not-found__back {
+.not-found__button {
   grid-row-start: 3;
   align-self: center;
   margin: 0;
@@ -12,13 +12,23 @@
   cursor: pointer;
   opacity: 1;
   transition: opacity 0.5s;
+  background: none;
+  border: none;
 }
-.not-found__back:hover {
+.not-found__button:hover {
   opacity: 0.8;
   transition: opacity 0.5s;
 }
+.not-found__button:focus {
+  transition: all 0.2s;
+  box-shadow: 0 0 0 5px rgba(253, 253, 253, 0.5);
+  outline: 2px dashed rgba(107, 107, 107, 1);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
 @media screen and (max-width: 576px) {
-  .not-found__back {
+  .not-found__button {
     font-size: 12px;
     line-height: 15px;
   }

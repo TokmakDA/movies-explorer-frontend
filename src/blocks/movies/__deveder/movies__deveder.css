@@ -1,3 +1,5 @@
 .movies__deveder {
   min-height: 140px;
+  display: flex;
+  align-items: center;
 }

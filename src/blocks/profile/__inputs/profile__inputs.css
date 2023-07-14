@@ -1,4 +1,8 @@
 .profile__inputs {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: min-content;
   margin: 0;
   padding: 0;
   border: none;

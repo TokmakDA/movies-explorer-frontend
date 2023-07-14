@@ -1,15 +1,28 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import './AuthForm.css';
-import { useForm } from '../../hooks/useForm';
 import { Logo } from '../Logo/Logo';
+import { useFormWithValidation } from '../../hooks/useFormWithValidation';
+import { REGULAR_EMAIL } from '../../constants/regular';
+import { CurrentErrorContext } from '../../contexts/CurrentErrorContext';
+import { RessetErrorContext } from '../../contexts/RessetErrorContext';
+import { IsPreloaderContext } from '../../contexts/IsPreloaderContext';
 
-export const AuthForm = ({ onSubmit, form, errMessage, children }) => {
-  const { values, handleChange } = useForm();
+export const AuthForm = ({ onSubmit, form, children }) => {
+  const initialForm = { name: '', email: '', password: '' };
+  const { values, handleChange, errors, isValid, hasChanges, isOnBlur } =
+    useFormWithValidation();
+  //Подписка на контекст
+  const isErrorMessage = useContext(CurrentErrorContext);
+  const ressetError = useContext(RessetErrorContext);
+  const isPreloader = useContext(IsPreloaderContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(values);
   };
+  useEffect(() => {
+    ressetError();
+  }, [values, ressetError]);
 
   return (
     <form
@@ -26,55 +39,75 @@ export const AuthForm = ({ onSubmit, form, errMessage, children }) => {
           <label className="form__lebel">
             Имя
             <input
+              onBlur={handleChange}
               autoComplete="nickname"
               type="text"
-              className="form__input"
+              className={`form__input ${
+                !isValid & isOnBlur.name ? 'form__input_invalid' : ''
+              }`}
               id="name"
               value={values?.name || ''}
               onChange={handleChange}
               name="name"
               required
-              maxLength="100"
+              minLength="2"
+              maxLength="30"
               placeholder="Введите Имя"
+              disabled={isPreloader}
             ></input>
+            <span className="form__input-error">{errors.name}</span>
           </label>
         )}
         <label className="form__lebel">
           E-mail
           <input
+            onBlur={handleChange}
             autoComplete="email"
             type="email"
-            className="form__input"
+            // className="form__input"
+            className={`form__input ${
+              !isValid & isOnBlur?.email ? 'form__input_invalid' : ''
+            }`}
             id="email"
             value={values?.email || ''}
             onChange={handleChange}
-            name="email"
             required
+            name="email"
+            pattern={REGULAR_EMAIL}
             maxLength="100"
             placeholder="Введите E-mail"
+            disabled={isPreloader}
           ></input>
+          <span className="form__input-error">{errors.email}</span>
         </label>
         <label className="form__lebel">
           Пароль
           <input
+            onBlur={handleChange}
             autoComplete="current-password"
             type="password"
-            className="form__input"
+            className={`form__input ${
+              !isValid & isOnBlur?.password ? 'form__input_invalid' : ''
+            }`}
             id="password"
             value={values?.password || ''}
             onChange={handleChange}
             name="password"
             required
+            minLength="8"
             maxLength="100"
             placeholder="Введите Пароль"
+            disabled={isPreloader}
           ></input>
+          <span className="form__input-error">{errors.password}</span>
         </label>
-        <span className="form__error">{errMessage}</span>
       </fieldset>
+      <span className="form__error">{isErrorMessage}</span>
       <div className="form__buttons">
         <button
           type="submit"
           className="form__button"
+          disabled={hasChanges(initialForm) || !isValid || isPreloader}
         >
           {form.button}
         </button>

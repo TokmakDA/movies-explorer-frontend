@@ -1,13 +1,14 @@
 import React from 'react';
 import './Navigation.css';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useResize } from '../../hooks/useResize';
 
 export const Navigation = ({ themeColor, closeMenu }) => {
   const { isScreenLg } = useResize();
-  const location = useLocation();
-  const checkLink = (patch) => {
-    return location.pathname === patch ? 'active' : 'unactive';
+  const handleClassLink = ({ isActive }) => {
+    return `nav__link nav__link_${
+      isActive ? 'active' : 'unactive'
+    } nav__link_theme_${themeColor}`;
   };
 
   return (
@@ -15,38 +16,32 @@ export const Navigation = ({ themeColor, closeMenu }) => {
       <ul className="nav__links">
         {!isScreenLg && (
           <li>
-            <Link
+            <NavLink
               to="/"
-              className={`nav__link nav__link_${checkLink(
-                '/',
-              )} nav__link_theme_${themeColor}`}
+              className={handleClassLink}
               onClick={() => closeMenu?.()}
             >
               Главная
-            </Link>
+            </NavLink>
           </li>
         )}
         <li>
-          <Link
+          <NavLink
             to="/movies"
-            className={`nav__link nav__link_${checkLink(
-              '/movies',
-            )} nav__link_theme_${themeColor}`}
+            className={handleClassLink}
             onClick={() => closeMenu?.()}
           >
             Фильмы
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link
+          <NavLink
             to="/saved-movies"
-            className={`nav__link nav__link_${checkLink(
-              '/saved-movies',
-            )} nav__link_theme_${themeColor}`}
+            className={handleClassLink}
             onClick={() => closeMenu?.()}
           >
             Сохранённые фильмы
-          </Link>
+          </NavLink>
         </li>
       </ul>
       <Link

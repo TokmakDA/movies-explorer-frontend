@@ -1,29 +1,21 @@
 import React from 'react';
 import './Login.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { AuthForm } from '../AuthForm/AuthForm';
 
-export const Login = ({ setIsAuthorized }) => {
+export const Login = ({ onSingIn, errMessage }) => {
   const form = {
     name: 'login',
     greeting: 'Рады видеть!',
     button: 'Войти',
   };
 
-  const navigate = useNavigate();
-
-  const handleSubmit = (values) => {
-    setIsAuthorized(true);
-    console.log('Login => handleSubmit => Я тут');
-    navigate('/', { replace: false });
-  };
-
   return (
     <AuthForm
-      onSubmit={handleSubmit}
+      onSubmit={onSingIn}
       form={form}
-      errMessage="Что-то пошло не так..."
+      errMessage={errMessage}
     >
       <div className="form__link-wrapper">
         <p className="form__link-preface">Ещё не зарегистрированы?</p>

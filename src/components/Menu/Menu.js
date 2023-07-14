@@ -15,8 +15,6 @@ export const Menu = ({ isOpen, closeMenu, children }) => {
   }, [isOpen, closeMenu]);
   // создаем обработчик клика на оверлей
   const handleOverlay = (e) => {
-    console.log('e.target ===>', e.target);
-    console.log('e.currentTarget ===>', e.currentTarget);
     if (e.target === e.currentTarget) {
       closeMenu();
     }

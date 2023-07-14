@@ -5,9 +5,25 @@
   width: 100%;
   grid-column-start: 1;
   grid-column-end: 3;
+  opacity: 1;
+  cursor: pointer;
+  transition: opacity 0.5s;
 }
 .movies__img-wrapper::after {
   display: block;
   content: '';
   padding-top: 56.25%;
+}
+
+.movies__img-wrapper:hover {
+  opacity: 0.8;
+  transition: opacity 0.5s;
+}
+.movies__img-wrapper:focus {
+  opacity: 0.8;
+  transition: all 0.2s;
+  box-shadow: 0 0 0 5px rgba(253, 253, 253, 0.5);
+  outline: 2px dashed rgba(107, 107, 107, 1);
+  outline-offset: 2px;
+  border-radius: 2px;
 }
