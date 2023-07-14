@@ -130,18 +130,18 @@ export const App = () => {
   // Обновление данных пользователя
   const cbUpdateUser = async (userData) => {
     setPreloader(true);
-    let isEditOpen;
+    let isEdit;
 
     try {
       const user = await mainApi.patchUserMe(userData);
       setCurrentUser(user.data);
-      isEditOpen = false;
-      return isEditOpen;
+      isEdit = true;
+      return isEdit;
     } catch (err) {
       console.log('cbUpdateUser => err', err); // Консоль
       setErrorMessage(err);
-      isEditOpen = true;
-      return isEditOpen;
+      isEdit = false;
+      return isEdit;
     } finally {
       setPreloader(false);
     }

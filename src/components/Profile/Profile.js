@@ -18,6 +18,9 @@ export const Profile = ({ onSignOut, onUpdateUser }) => {
     useFormWithValidation();
 
   const [isEditOpen, setEditOpen] = useState(false);
+  const [isSuccessUpdate, setSuccessUpdate] = useState(false);
+
+  const successUpdate = 'Данные пользователя успешно изменены.';
 
   useEffect(() => {
     setValues({
@@ -28,12 +31,14 @@ export const Profile = ({ onSignOut, onUpdateUser }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const newIsEditOpen = await onUpdateUser(values);
-    setEditOpen(newIsEditOpen);
+    const isEdit = await onUpdateUser(values);
+    setEditOpen(!isEdit);
+    setSuccessUpdate(isEdit);
   };
 
   const switchEditProfile = () => {
     setEditOpen(!isEditOpen);
+    setSuccessUpdate(false);
   };
 
   const elementDefaulButtons = (
@@ -62,6 +67,12 @@ export const Profile = ({ onSignOut, onUpdateUser }) => {
       Сохранить
     </button>
   );
+
+  useEffect(() => {
+    if (isSuccessUpdate) {
+      setTimeout(() => setSuccessUpdate(false), 5000);
+    }
+  }, [isSuccessUpdate]);
 
   useEffect(() => {
     ressetError();
@@ -107,7 +118,13 @@ export const Profile = ({ onSignOut, onUpdateUser }) => {
           <span className="profile__input-error">{errors.email}</span>
         </label>
       </fieldset>
-      <span className="profile__error">{isErrorMessage || ''}</span>
+      <span
+        className={`profile__message ${
+          isErrorMessage && 'profile__message_error'
+        }`}
+      >
+        {isErrorMessage || (isSuccessUpdate ? successUpdate : '') || ''}
+      </span>
       {!isEditOpen ? elementDefaulButtons : elementButtonSubmit}
     </form>
   );

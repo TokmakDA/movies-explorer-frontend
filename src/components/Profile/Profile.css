@@ -9,6 +9,6 @@
 @import url(../../blocks/profile/profile/__button/_edit/profile__button_edit.css);
 @import url(../../blocks/profile/__line/profile__line.css);
 @import url(../../blocks/profile/__submit-button/profile__submit-button.css);
-@import url(../../blocks/profile/__error/profile__error.css);
+@import url(../../blocks/profile/__message.css);
+@import url(../../blocks/profile/__message/_error/profile__message_error.css);
 @import url(../../blocks/profile/__input-error/__input-error.css);
-
