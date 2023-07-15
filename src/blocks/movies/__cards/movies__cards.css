@@ -11,3 +11,18 @@
   align-content: center;
   list-style: none;
 }
+/* @media screen and (max-width: 992px) {
+  .movies__cards {
+    grid-template-columns: repeat(3, minmax(260px, 1fr));
+  }
+}
+@media screen and (min-width: 576px) and (max-width: 992px) {
+  .movies__cards {
+    grid-template-columns: repeat(2, minmax(260px, 1fr));
+  }
+}
+@media screen and (max-width: 576px) {
+  .movies__cards {
+    grid-template-columns: 1fr;
+  }
+} */

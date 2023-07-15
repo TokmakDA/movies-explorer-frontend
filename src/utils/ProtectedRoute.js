@@ -1,11 +1,32 @@
 import React from 'react';
-import { Navigate} from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 
-const ProtectedRoute = ({ isAuthorized, children }) => {
+export const ProtectedRoute = ({ isAuthorized, children }) => {
+  const location = useLocation();
+  const authNav = ['/profile', '/saved-movies', '/movies'].includes(
+    location.pathname,
+  );
+  const unauthNav = ['/signin', '/signup'].includes(location.pathname);
+
   if (!isAuthorized) {
-    return <Navigate to="/" replace />;
+    if (authNav) {
+      return (
+        <Navigate
+          to="/"
+          replace
+        />
+      );
+    }
+  } else {
+    if (unauthNav) {
+      return (
+        <Navigate
+          to="/movies"
+          replace
+        />
+      );
+    }
   }
+
   return children;
 };
-
-export default ProtectedRoute;

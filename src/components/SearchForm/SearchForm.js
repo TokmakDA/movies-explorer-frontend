@@ -1,10 +1,17 @@
-import React, { useEffect, useState } from 'react';
 import './SearchForm.css';
 import { FilterCheckbox } from '../FilterCheckbox/FilterCheckbox';
-import { useForm } from '../../hooks/useForm';
+import { IsPreloaderContext } from '../../contexts/IsPreloaderContext';
+import { useContext } from 'react';
 
-export const SearchForm = ({ onSubmit }) => {
-  const { values, handleChange } = useForm();
+export const SearchForm = ({
+  onSubmit,
+  checked,
+  onCheck,
+  values,
+  handleChange,
+  disabledSubmit,
+}) => {
+  const isPreloader = useContext(IsPreloaderContext);
 
   return (
     <div className="search">
@@ -22,16 +29,21 @@ export const SearchForm = ({ onSubmit }) => {
               name="search"
               required
               onChange={handleChange}
+              disabled={isPreloader}
             ></input>
             <button
               type="submit"
               className="search__find"
               placeholder="Искать"
-              disabled={values?.search === '' ? true : false}
+              disabled={disabledSubmit}
             ></button>
             <hr className="search__stick"></hr>
           </div>
-          <FilterCheckbox className="search__checkbox" />
+          <FilterCheckbox
+            className="search__checkbox"
+            checked={checked}
+            onCheck={onCheck}
+          />
         </fieldset>
       </form>
       <hr className="search__line" />

@@ -1,27 +1,21 @@
 import React from 'react';
 import './Register.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { AuthForm } from '../AuthForm/AuthForm';
 
-export const Register = () => {
-  const navigate = useNavigate();
-
+export const Register = ({ onSignUp, errMessage }) => {
   const form = {
     name: 'register',
     greeting: 'Добро пожаловать!',
     button: 'Зарегистрироваться',
   };
 
-  const handleSubmit = () => {
-    console.log('Register => handleSubmit => Я тут');
-    return navigate('/signin');
-  };
   return (
     <AuthForm
-      onSubmit={handleSubmit}
+      onSubmit={onSignUp}
       form={form}
-      errMessage="Что-то пошло не так..."
+      errMessage={errMessage}
     >
       <div className="form__link-wrapper">
         <p className="form__link-preface">Уже зарегистрированы?</p>
