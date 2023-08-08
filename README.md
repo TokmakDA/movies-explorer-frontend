@@ -1,12 +1,30 @@
-# movies-explorer-frontend
+# Diploma project - Frontend
+
+React.js
 
 ## Ссылки на проект
 
-Макет:
-[https://disk.yandex.ru/d/OWzffpJIrTRPpQ](https://disk.yandex.ru/d/OWzffpJIrTRPpQ)
+- IP: 81.200.146.157
+- [Frontend](https://diploma.1827093-cy37517.twc1.net)
+- [Backend](https://api.diploma.1827093-cy37517.twc1.net)
+- [Планер](https://www.notion.so/bbac09ef519a4a5dae81c4fd3c9ca8a0?v=b284217a977b4b4da035803a3f2c5622&pvs=4)
+- [Проект Figma](https://disk.yandex.ru/d/OWzffpJIrTRPpQ)
 
-ВМ IP: [51.250.20.233](51.250.20.233)
+## О Дипломном проекте
 
-Url: [diploma.tokmak.nomoredomains.rocks](https://diploma.tokmak.nomoredomains.rocks)
+Фронтенд сервиса, в котором можно найти фильмы по запросу и сохранить в личном
+кабинете.
 
-Url [Pull request](https://github.com/TokmakDA/movies-explorer-frontend/pull/2)
+### Основной функционал
+
+- Добавление пользователя.
+- Редактирование данных (Имя и Email).
+- Поиск фильмов.
+- Добавление и удаление карточек с понравившимися фильмами.
+- Поиск на стороне клиента.
+
+### Автор проекта
+
+**_Токмак Дмитрий Андреевич_**
+
+**_студент Яндекс Практикума 59 кагорты_**
