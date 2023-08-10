@@ -62,7 +62,7 @@ class MainApi {
 }
 
 const config = {
-  baseUrl: 'https://api.diploma.1827093-cy37517.twc1.net',
+  baseUrl: 'https://api.diploma.e-tokmak.ru',
   credentials: 'include',
   headers: {
     'Content-Type': 'application/json',
