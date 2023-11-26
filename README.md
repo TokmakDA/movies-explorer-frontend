@@ -37,6 +37,7 @@
 - [Backend](https://api.diploma.e-tokmak.ru)
 - [Планер](https://www.notion.so/bbac09ef519a4a5dae81c4fd3c9ca8a0?v=b284217a977b4b4da035803a3f2c5622&pvs=4)
 - [Макет проекта в Figma](https://disk.yandex.ru/d/OWzffpJIrTRPpQ)
+- [git Backend](https://github.com/TokmakDA/movies-explorer-api)
 
 ## Автор проекта
 

@@ -30,7 +30,7 @@ export const Portfolio = () => {
         <li className="portfolio__link-wrapper">
           <Link
             className="portfolio__link"
-            to="https://tokmak-da.mesto.nomoredomains.monster"
+            to="https://mesto.e-tokmak.ru/"
             target="_blank"
           >
             <p className="portfolio__name-link">Одностраничное приложение</p>
